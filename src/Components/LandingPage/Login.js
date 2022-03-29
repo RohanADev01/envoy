@@ -18,7 +18,7 @@ function Login() {
     return (
         <Grid container direction="row" flexGrow={1} spacing={0} alignItems="center" justifyContent="center" style={{ border: "solid 1px red" }}>
             <div style={{ display: "flex", alignItems: "center", justifyContent: "center", background: `url(${LoginImage})`, backgroundSize: "cover", backgroundRepeat: "no-repeat", height: "100vh", width: "100vw", backgroundPosition: "top" }}>
-                <Card style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "30vw", width: "25vw", borderRadius: "20px" }}>
+                <Card style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "700px", width: "500px", borderRadius: "20px", marginRight: "10vw", marginLeft: "10vw" }}>
                     <Grid container direction="column" alignItems="center" justifyContent="center">
                         <Container component="main" maxWidth="xs">
                             <img style={{ width: 120, height: "auto", marginBottom: "5vh" }} src={LogoDark} alt="Landing page logo" />

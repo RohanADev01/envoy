@@ -8,8 +8,8 @@ function App() {
         <div>
             {/* <DashboardContents/> */}
             {/* <Home/> */}
-            <SignUp/>
-            {/* <Login/> */}
+            {/* <SignUp/> */}
+            <Login/>
         </div>
     );
 }
