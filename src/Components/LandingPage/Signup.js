@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useNavigate } from "react-router-dom";
 
 import LogoDark from "../../assets/LogoDark.svg";
 import SignupImage from "../../assets/SignupImage.jpg";
@@ -6,6 +7,12 @@ import SignupImage from "../../assets/SignupImage.jpg";
 import { Card, Container, Typography, Box, Grid, Link, TextField, CssBaseline, Button } from "@mui/material";
 
 function SignUp() {
+    const navigate = useNavigate();
+
+    const handleExistingUser = () => {
+        navigate("/login");
+    };
+
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
@@ -57,7 +64,7 @@ function SignUp() {
                                     </Button>
                                     <Grid container justifyContent="flex-end">
                                         <Grid item>
-                                            <Link href="#" variant="body2">
+                                        <Link onClick={handleExistingUser} variant="body2" style={{ cursor:"pointer"}}>
                                                 Already have an account? Log in
                                             </Link>
                                         </Grid>

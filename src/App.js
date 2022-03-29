@@ -10,11 +10,10 @@ function App() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<Home />}>
-                    <Route path="signup" element={<SignUp />} />
-                    <Route path="login" element={<Login />} />
-                    <Route path="*" element={<h1>Error 404. Page not found!</h1>} />
-                </Route>
+                <Route path="/" element={<Home />} />
+                <Route path="signup" element={<SignUp />} />
+                <Route path="login" element={<Login />} />
+                {/* <Route path="*" element={<h1>Error 404. Page not found!</h1>} /> */}
             </Routes>
         </BrowserRouter>
     );
