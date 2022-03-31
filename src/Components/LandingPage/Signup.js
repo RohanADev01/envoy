@@ -1,12 +1,12 @@
-import * as React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import LogoDark from "../../assets/LogoDark.svg";
 import SignupImage from "../../assets/SignupImage.jpg";
 
-import { Card, Container, Typography, Box, Grid, Link, TextField, CssBaseline, Button } from "@mui/material";
-import axios from 'axios';
-import { backend_base_url }  from "../../Constants";
+import { Card, Container, Typography, Box, Grid, Link, TextField, CssBaseline, Button, Alert } from "@mui/material";
+import axios from "axios";
+import { backend_base_url } from "../../Constants";
 
 function SignUp() {
     const navigate = useNavigate();
@@ -14,28 +14,56 @@ function SignUp() {
     const handleExistingUser = () => {
         navigate("/login");
     };
-    
+
+    const [alertFail, setFailAlert] = useState(false);
+    const [alertSuccess, setSuccessAlert] = useState(false);
+    const [alertContent, setAlertContent] = useState("");
+
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
 
         const email = data.get("email");
         const password = data.get("password");
+
+        console.log(password);
         const firstname = data.get("firstName");
         const lastname = data.get("lastName");
 
-        let body = {email, password, firstname, lastname};
+        let body = { email, password, firstname, lastname };
 
-        const signup_url = backend_base_url + 'signup';
+        const signup_url = backend_base_url + "signup";
+
+        let response;
 
         axios({
-            method: 'POST',
+            method: "POST",
             url: signup_url,
-            data: body
+            data: body,
         })
-            .then(data=>console.log(data))
-            .catch(error=>console.log(error))
+            .then((data) => {
+                response = data.data.msg;
+                setAlertContent(response);
+                if (response == `User ${email} registered and logged in.`) {
+                    setSuccessAlert(true);
+                    console.log("success");
+                    setTimeout(function () {
+                        console.log("Signup Successful");
+                    }, 2000);
+                } else {
+                    setFailAlert(true);
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+                setAlertContent("An unknown error occured, please try again another time.");
+                setFailAlert(true);
+            });
+    };
 
+    const resetAlerts = (event) => {
+        setSuccessAlert(false);
+        setFailAlert(false);
     };
 
     return (
@@ -60,7 +88,7 @@ function SignUp() {
                                     justifyContent: "center",
                                 }}
                             >
-                                <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+                                <Box component="form" noValidate onChange={resetAlerts} onSubmit={handleSubmit} sx={{ mt: 3 }}>
                                     <Grid container spacing={2}>
                                         <Grid item xs={12} sm={6}>
                                             <TextField autoComplete="given-name" name="firstName" required fullWidth id="firstName" label="First Name" autoFocus />
@@ -75,12 +103,26 @@ function SignUp() {
                                             <TextField required fullWidth name="password" label="Password" type="password" id="password" autoComplete="new-password" />
                                         </Grid>
                                     </Grid>
+                                    {alertFail ? (
+                                        <Alert sx={{ marginTop: 2 }} severity="error">
+                                            {alertContent}
+                                        </Alert>
+                                    ) : (
+                                        <></>
+                                    )}
+                                    {alertSuccess ? (
+                                        <Alert sx={{ marginTop: 2 }} severity="success">
+                                            {alertContent}
+                                        </Alert>
+                                    ) : (
+                                        <></>
+                                    )}
                                     <Button type="submit" fullWidth variant="contained" fontFamily="Montserrat" sx={{ mt: 3, mb: 2 }}>
                                         Sign Up
                                     </Button>
                                     <Grid container justifyContent="flex-end">
                                         <Grid item>
-                                        <Link onClick={handleExistingUser} variant="body2" style={{ cursor:"pointer"}}>
+                                            <Link onClick={handleExistingUser} variant="body2" style={{ cursor: "pointer" }}>
                                                 Already have an account? Log in
                                             </Link>
                                         </Grid>
