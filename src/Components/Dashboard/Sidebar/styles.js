@@ -33,7 +33,7 @@ export const linkContent = {
 };
 
 export const activeHighlight = {
-    background: "#FFF1D9",
+    background: "#f6f5f5",
 };
 
 export const activeIcon = {
