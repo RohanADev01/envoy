@@ -5,6 +5,8 @@ import LogoDark from "../../assets/LogoDark.svg";
 import SignupImage from "../../assets/SignupImage.jpg";
 
 import { Card, Container, Typography, Box, Grid, Link, TextField, CssBaseline, Button } from "@mui/material";
+import axios from 'axios';
+import { backend_base_url }  from "../../Constants";
 
 function SignUp() {
     const navigate = useNavigate();
@@ -12,14 +14,28 @@ function SignUp() {
     const handleExistingUser = () => {
         navigate("/login");
     };
-
+    
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        console.log({
-            email: data.get("email"),
-            password: data.get("password"),
-        });
+
+        const email = data.get("email");
+        const password = data.get("password");
+        const firstname = data.get("firstName");
+        const lastname = data.get("lastName");
+
+        let body = {email, password, firstname, lastname};
+
+        const signup_url = backend_base_url + 'signup';
+
+        axios({
+            method: 'POST',
+            url: signup_url,
+            data: body
+        })
+            .then(data=>console.log(data))
+            .catch(error=>console.log(error))
+
     };
 
     return (
