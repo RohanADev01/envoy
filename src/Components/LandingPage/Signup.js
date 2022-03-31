@@ -6,6 +6,7 @@ import SignupImage from "../../assets/SignupImage.jpg";
 
 import { Card, Container, Typography, Box, Grid, Link, TextField, CssBaseline, Button } from "@mui/material";
 import axios from 'axios';
+import { backend_base_url }  from "../../Constants";
 
 function SignUp() {
     const navigate = useNavigate();
@@ -15,7 +16,6 @@ function SignUp() {
     };
     
     const handleSubmit = (event) => {
-        const signup_url = "https://seng-api-adapter.herokuapp.com/signup";
         event.preventDefault();
         const data = new FormData(event.currentTarget);
 
@@ -25,6 +25,8 @@ function SignUp() {
         const lastname = data.get("lastName");
 
         let body = {email, password, firstname, lastname};
+
+        const signup_url = backend_base_url + 'signup';
 
         axios({
             method: 'POST',
