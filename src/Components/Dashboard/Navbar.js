@@ -1,14 +1,35 @@
 import React, { useState, ChangeEvent, MouseEvent } from "react";
+import { styled, useTheme } from "@mui/material/styles";
 
 import LogoLight from "../../assets/LogoLight.svg";
 
-import { Box, AppBar, Toolbar, Menu, MenuItem, Typography, Button } from "@mui/material";
+import { Box, Toolbar, Menu, MenuItem, Typography, Button } from "@mui/material";
+import MuiAppBar from "@mui/material/AppBar";
 import { IconButton } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import Logout from "@mui/icons-material/Logout";
+
+const drawerWidth = 240;
+
+const AppBar = styled(MuiAppBar, {
+    shouldForwardProp: (prop) => prop !== "open",
+})(({ theme, open }) => ({
+    transition: theme.transitions.create(["margin", "width"], {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.leavingScreen,
+    }),
+    ...(open && {
+        width: `calc(100% - ${drawerWidth}px)`,
+        marginLeft: `${drawerWidth}px`,
+        transition: theme.transitions.create(["margin", "width"], {
+            easing: theme.transitions.easing.easeOut,
+            duration: theme.transitions.duration.enteringScreen,
+        }),
+    }),
+}));
 
 function Navbar(props) {
     const [auth, setAuth] = React.useState(true);
@@ -28,7 +49,7 @@ function Navbar(props) {
 
     return (
         <Box sx={{ flexGrow: 1 }}>
-            <AppBar style={{ zIndex: 1301 }} position="fixed">
+            <AppBar style={{ zIndex: 1301, background: "linear-gradient(0.25turn, #ff5003, #ed5f00, #f16208, orangered)" }} position="fixed">
                 <Toolbar>
                     <IconButton size="large" edge="start" color="inherit" aria-label="toggleSideBar" onClick={(event) => props.onChange()} sx={{ mr: 2 }}>
                         {props.sideBarState ? <ChevronLeftIcon /> : <MenuIcon />}
