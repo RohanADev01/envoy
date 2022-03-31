@@ -35,7 +35,7 @@ function Topbar() {
                     </Grid>
                     <Grid container xs={1} />
                     <Grid container xs={7} justifyContent="center">
-                        <img className="landingimg" src={LandingImage} alt="landing page image" />
+                        <img className="landingimg" src={LandingImage} alt="landing page" />
                     </Grid>
                 </Grid>
             </Box>
