@@ -1,8 +1,8 @@
-import React, { useState, ChangeEvent, MouseEvent } from "react";
+import React from "react";
 
 import LogoLight from "../../assets/LogoLight.svg";
 
-import { Box, AppBar, Toolbar, Menu, MenuItem, Typography, Button } from "@mui/material";
+import { Box, AppBar, Toolbar, Menu, MenuItem } from "@mui/material";
 import { IconButton } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
@@ -12,11 +12,13 @@ import Logout from "@mui/icons-material/Logout";
 
 function Navbar(props) {
     const [auth, setAuth] = React.useState(true);
+    console.log(auth);
     const [anchorEl, setAnchorEl] = React.useState(null);
 
     const handleChange = (event) => {
         setAuth(event.target.checked);
     };
+    console.log(handleChange);
 
     const handleMenu = (event) => {
         setAnchorEl(event.currentTarget);
