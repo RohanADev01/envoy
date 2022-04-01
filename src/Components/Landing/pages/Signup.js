@@ -57,7 +57,7 @@ function SignUp(props) {
                         setTimeout(function () {
                             console.log("Signup Successful");
                             // Persist user session and redirect to user dashboard
-                            auth.login(token);
+                            auth.login(token, email);
                             navigate("/dashboard");
                         }, 2000);
                     } else {

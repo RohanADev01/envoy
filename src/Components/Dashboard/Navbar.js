@@ -1,9 +1,6 @@
 import React from "react";
 import { styled } from "@mui/material/styles";
-
-import LogoLight from "../../assets/LogoLight.svg";
-
-import { Box, Toolbar, Menu, MenuItem } from "@mui/material";
+import { Box, Toolbar, Menu, MenuItem, Alert } from "@mui/material";
 import MuiAppBar from "@mui/material/AppBar";
 
 import { IconButton } from "@mui/material";
@@ -12,6 +9,14 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import Logout from "@mui/icons-material/Logout";
+
+import LogoLight from "../../assets/LogoLight.svg";
+import { useAuthDataContext } from "../Landing/userAuth";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { trackPromise } from "react-promise-tracker";
+import { backend_base_url } from "../../constants";
+import { useAlert } from "react-alert";
 
 const drawerWidth = 240;
 
@@ -33,17 +38,49 @@ const AppBar = styled(MuiAppBar, {
 }));
 
 function Navbar(props) {
-    const [auth, setAuth] = React.useState(true);
-    console.log(auth);
     const [anchorEl, setAnchorEl] = React.useState(null);
-
-    const handleChange = (event) => {
-        setAuth(event.target.checked);
-    };
-    console.log(handleChange);
 
     const handleMenu = (event) => {
         setAnchorEl(event.currentTarget);
+    };
+
+    const auth = useAuthDataContext();
+    const navigate = useNavigate();
+    // const alert = useAlert();
+    const handleLogout = () => {
+        setAnchorEl(null);
+        navigate("/");
+
+        let body = { token: auth.user, email: auth.email };
+
+        const logout_url = backend_base_url + "logout";
+
+        trackPromise(
+            axios({
+                method: "POST",
+                url: logout_url,
+                data: body,
+            })
+                .then((data) => {
+                    let msg = data.data.msg;
+
+                    if (msg == `Successfully logged out ${auth.email}`) {
+                        // alert.success(msg);
+
+                        console.log("Logout Successful");
+
+                        // Remove persistence of user session and redirect to home page
+                        auth.logout();
+                        navigate("/");
+                    } else {
+                        // alert.error(msg);
+                    }
+                })
+                .catch((error) => {
+                    console.log(error);
+                    // alert.error("An unknown error occured, please try again another time.");
+                })
+        );
     };
 
     const handleClose = () => {
@@ -82,7 +119,8 @@ function Navbar(props) {
                             onClose={handleClose}
                             style={{ zIndex: 1302 }}
                         >
-                            <MenuItem onClick={handleClose}>
+                            <MenuItem><strong>{auth.email}</strong></MenuItem>
+                            <MenuItem onClick={handleLogout}>
                                 <ListItemIcon>
                                     <Logout fontSize="small" />
                                 </ListItemIcon>

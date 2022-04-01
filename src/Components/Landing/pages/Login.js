@@ -13,7 +13,6 @@ import { backend_base_url } from "../../../constants";
 
 function Login(props) {
     const navigate = useNavigate();
-
     const handleNewUser = () => {
         navigate("/signup");
     };
@@ -56,7 +55,7 @@ function Login(props) {
                         setTimeout(function () {
                             console.log("Login Successful");
                             // Persist user session and redirect to user dashboard here
-                            auth.login(token);
+                            auth.login(token, email);
                             navigate("/dashboard");
                         }, 2000);
                     } else {

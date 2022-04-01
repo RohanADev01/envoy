@@ -1,6 +1,8 @@
 import { useState } from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Provider as AlertProvider } from "react-alert";
+import AlertTemplate from "react-alert-template-basic";
 
 import Home from "./Components/Landing/pages/Home";
 import DashboardContents from "./Components/Dashboard/Dashboard";
@@ -13,15 +15,17 @@ function App() {
     return (
         <BrowserRouter>
             <AuthDataProvider>
-                <Routes>
-                    <Route exact path="/" element={<Home />} />
-                    <Route exact path="/signup" element={<SignUp />} />
-                    <Route path="/login" element={<Login />} />
-                    <Route element={<ProtectedRoute />}>
-                        <Route exact path="/dashboard" element={<DashboardContents />} />
-                    </Route>
-                    <Route path="*" element={<h1>Error 404. Page not found!</h1>} />
-                </Routes>
+                {/* <AlertProvider template={AlertTemplate}> */}
+                    <Routes>
+                        <Route exact path="/" element={<Home />} />
+                        <Route exact path="/signup" element={<SignUp />} />
+                        <Route path="/login" element={<Login />} />
+                        <Route element={<ProtectedRoute />}>
+                            <Route exact path="/dashboard" element={<DashboardContents />} />
+                        </Route>
+                        <Route path="*" element={<h1>Error 404. Page not found!</h1>} />
+                    </Routes>
+                {/* </AlertProvider> */}
             </AuthDataProvider>
         </BrowserRouter>
     );
