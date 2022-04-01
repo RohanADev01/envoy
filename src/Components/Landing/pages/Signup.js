@@ -1,57 +1,14 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { usePromiseTracker, trackPromise } from "react-promise-tracker";
+import { trackPromise } from "react-promise-tracker";
 
 import LogoDark from "../../assets/LogoDark.svg";
 import SignupImage from "../../assets/SignupImage.jpg";
-import loadingImage from "../../assets/Loading.gif";
 
 import axios from "axios";
-import { Card, Container, Typography, Box, Grid, Link, TextField, CssBaseline, Button, Alert } from "@mui/material";
-import { backend_base_url } from "../../Constants";
-
-const FailAlert = (props) => {
-    return props.alertFail ? (
-        <Alert sx={{ marginTop: 2 }} severity="error">
-            {props.alertContent}
-        </Alert>
-    ) : (
-        <></>
-    );
-};
-
-const SuccessAlert = (props) => {
-    return props.alertSuccess ? (
-        <Alert sx={{ marginTop: 2 }} severity="success">
-            {props.alertContent}
-        </Alert>
-    ) : (
-        <></>
-    );
-};
-
-const SubmitContent = (props) => {
-    return (
-        <React.Fragment>
-            <Button type="submit" fullWidth variant="contained" fontFamily="Montserrat" sx={{ mt: 3, mb: 2 }}>
-                Sign Up
-            </Button>
-            <Grid container justifyContent="flex-end">
-                <Grid item>
-                    <Link onClick={props.handleExistingUser} variant="body2" style={{ cursor: "pointer" }}>
-                        Already have an account? Log in
-                    </Link>
-                </Grid>
-            </Grid>
-        </React.Fragment>
-    );
-};
-
-const LoadingIndicator = (props) => {
-    const { promiseInProgress } = usePromiseTracker();
-
-    return promiseInProgress ? <img src={loadingImage} style={{ position: "center", height: "100px", width: "100px" }} /> : !props.registered && <SubmitContent handleExistingUser={props.handleExistingUser} />;
-};
+import { Card, Container, Typography, Box, Grid, TextField, CssBaseline } from "@mui/material";
+import { FailAlert, SuccessAlert} from "../constants";
+import { backend_base_url } from "../../../constants";
 
 function SignUp() {
     const navigate = useNavigate();
