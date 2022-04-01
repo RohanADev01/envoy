@@ -13,7 +13,8 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="signup" element={<SignUp />} />
                 <Route path="login" element={<Login />} />
-                {/* <Route path="*" element={<h1>Error 404. Page not found!</h1>} /> */}
+                {/* <Route path="dashboard" element={<DashboardContents />} /> */}
+                <Route path="*" element={<h1>Error 404. Page not found!</h1>} />
             </Routes>
         </BrowserRouter>
     );
