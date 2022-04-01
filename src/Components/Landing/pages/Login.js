@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { trackPromise } from "react-promise-tracker";
 
-import LogoDark from "../../assets/LogoDark.svg";
-import LoginImage from "../../assets/LoginImage.jpg";
+import LogoDark from "../../../assets/LogoDark.svg";
+import LoginImage from "../../../assets/LoginImage.jpg";
 
 import axios from "axios";
 import { Card, Container, Typography, Box, Grid, TextField, CssBaseline } from "@mui/material";

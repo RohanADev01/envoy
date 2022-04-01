@@ -1,6 +1,8 @@
+import React from "react";
 import { usePromiseTracker } from "react-promise-tracker";
+import { Grid, Link, Button } from "@mui/material";
+import Alert from '@mui/material/Alert';
 import loadingImage from "../../assets/Loading.gif";
-import { Grid, Link, Button, Alert } from "@mui/material";
 
 export const FailAlert = (props) => {
     return props.alertFail ? (
@@ -40,7 +42,7 @@ const SubmitContentLogin = (props) => {
     );
 };
 
-const LoadingIndicatorLogin = (props) => {
+export const LoadingIndicatorLogin = (props) => {
     const { promiseInProgress } = usePromiseTracker();
 
     return promiseInProgress ? <img src={loadingImage} style={{ position: "center", height: "100px", width: "100px" }} /> : !props.registered && <SubmitContentLogin handleNewUser={props.handleNewUser} />;
@@ -64,7 +66,7 @@ const SubmitContentSignup = (props) => {
     );
 };
 
-const LoadingIndicatorSignup = (props) => {
+export const LoadingIndicatorSignup = (props) => {
     const { promiseInProgress } = usePromiseTracker();
 
     return promiseInProgress ? <img src={loadingImage} style={{ position: "center", height: "100px", width: "100px" }} /> : !props.registered && <SubmitContentSignup handleExistingUser={props.handleExistingUser} />;

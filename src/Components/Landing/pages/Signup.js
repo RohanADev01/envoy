@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { trackPromise } from "react-promise-tracker";
 
-import LogoDark from "../../assets/LogoDark.svg";
-import SignupImage from "../../assets/SignupImage.jpg";
+import LogoDark from "../../../assets/LogoDark.svg";
+import SignupImage from "../../../assets/SignupImage.jpg";
 
 import axios from "axios";
 import { Card, Container, Typography, Box, Grid, TextField, CssBaseline } from "@mui/material";
-import { FailAlert, SuccessAlert} from "../constants";
+import { FailAlert, LoadingIndicatorSignup, SuccessAlert} from "../constants";
 import { backend_base_url } from "../../../constants";
 
 function SignUp() {
@@ -107,7 +107,7 @@ function SignUp() {
                                     </Grid>
                                     <FailAlert alertFail={alertFail} alertContent={alertContent} />
                                     <SuccessAlert alertSuccess={alertSuccess} alertContent={alertContent} />
-                                    <LoadingIndicator handleExistingUser={handleExistingUser} registered={alertSuccess} />
+                                    <LoadingIndicatorSignup handleExistingUser={handleExistingUser} registered={alertSuccess} />
                                 </Box>
                             </Box>
                         </Container>

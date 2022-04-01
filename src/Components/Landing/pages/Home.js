@@ -1,5 +1,5 @@
 import React from "react";
-import Topbar from "./Topbar";
+import Topbar from "../Topbar";
 
 function Home() {
     return (
