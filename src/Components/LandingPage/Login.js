@@ -128,7 +128,7 @@ function Login() {
                                     justifyContent: "center",
                                 }}
                             >
-                                <Box component="form" noValidate onChange={resetAlerts} onSubmit={handleSubmit} sx={{ mt: 3 }}>
+                                <Box component="form" onChange={resetAlerts} onSubmit={handleSubmit} sx={{ mt: 3 }}>
                                     <Grid container spacing={2}>
                                         <Grid item xs={12}>
                                             <TextField required fullWidth id="email" label="Email Address" name="email" autoComplete="email" />

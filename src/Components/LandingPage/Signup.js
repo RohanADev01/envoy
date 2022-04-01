@@ -130,7 +130,7 @@ function SignUp() {
                                     justifyContent: "center",
                                 }}
                             >
-                                <Box component="form" noValidate onChange={resetAlerts} onSubmit={handleSubmit} sx={{ mt: 3 }}>
+                                <Box component="form" onChange={resetAlerts} onSubmit={handleSubmit} sx={{ mt: 3 }}>
                                     <Grid container spacing={2}>
                                         <Grid item xs={12} sm={6}>
                                             <TextField autoComplete="given-name" name="firstName" required fullWidth id="firstName" label="First Name" autoFocus />
