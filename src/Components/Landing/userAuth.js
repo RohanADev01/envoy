@@ -1,32 +1,28 @@
 import React, { useState, useEffect, useContext, useMemo, createContext } from "react";
 
-export const AuthDataContext = createContext(null);
+export const AuthDataContext = createContext({ user: null, login: () => {}, logout: () => {} });
 
 export const useAuthDataContext = () => useContext(AuthDataContext);
 
 const AuthDataProvider = (props) => {
-    const [authData, setAuthData] = useState({ user: null });
+    const [user, setUser] = useState(null);
 
-    // The first time the component is rendered, it tries to fetch the auth data from cookie/localStorage etc.
-    useEffect(() => {
-        const currentAuthData = localStorage.getItem("user");
-        if (currentAuthData) {
-            setAuthData(currentAuthData);
-        }
-    }, []);
-
-    const onLogout = () => {
-        setAuthData({ user: null });
-    };
-
-    const onLogin = (newUserToken) => {
-        setAuthData({ user: newUserToken });
-    };
-
-    // update onLogin and onLogout on each render
-    // const authDataValue = useMemo(() => { ...authData, onLogin, onLogout }, [authData]);
-
-    return <AuthDataContext.Provider value={{ ...authData, onLogin, onLogout }} {...props} />;
+    return (
+        <AuthDataContext.Provider
+            value={{
+                user: localStorage.getItem("user"),
+                login: (user) => {
+                    setUser(user);
+                    localStorage.setItem("user", user);
+                },
+                logout: () => {
+                    setUser(null);
+                    localStorage.setItem("user", "");
+                },
+            }}
+            {...props}
+        />
+    );
 };
 
 export default AuthDataProvider;

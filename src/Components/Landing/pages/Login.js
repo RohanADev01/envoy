@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { trackPromise } from "react-promise-tracker";
 import { useAuthDataContext } from "../userAuth";
 
@@ -22,9 +22,9 @@ function Login(props) {
     const [alertSuccess, setSuccessAlert] = useState(false);
     const [alertContent, setAlertContent] = useState("");
 
-    const { onLogin } = useAuthDataContext();
+    const auth = useAuthDataContext();
 
-    const handleSubmit = async (event) => {
+    const handleSubmit = (event) => {
         event.preventDefault();
         resetAlerts();
 
@@ -37,25 +37,27 @@ function Login(props) {
 
         const login_url = backend_base_url + "login";
 
-        const res = await trackPromise(
+        trackPromise(
             axios({
                 method: "POST",
                 url: login_url,
                 data: body,
             })
                 .then((data) => {
-                    let response = data.data;
-                    setAlertContent(response);
-                    if (response.msg == `${email} is now logged in`) {
+                    let msg = data.data.msg;
+                    let token = data.data.token;
+
+                    setAlertContent(msg);
+
+                    if (msg == `${email} is now logged in`) {
                         setSuccessAlert(true);
                         console.log("success");
+
                         setTimeout(function () {
                             console.log("Login Successful");
                             // Persist user session and redirect to user dashboard here
-                            localStorage.setItem("user", response.token);
-                            console.log(response.token);
-                            // Update current user_id
-                            onLogin(response.token);
+                            auth.login(token);
+                            navigate("/dashboard");
                         }, 2000);
                     } else {
                         setFailAlert(true);
