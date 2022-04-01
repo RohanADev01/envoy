@@ -5,11 +5,7 @@ import LogoLight from "../../assets/LogoLight.svg";
 
 import { Box, Toolbar, Menu, MenuItem } from "@mui/material";
 import MuiAppBar from "@mui/material/AppBar";
-import React from "react";
 
-import LogoLight from "../../assets/LogoLight.svg";
-
-import { Box, AppBar, Toolbar, Menu, MenuItem } from "@mui/material";
 import { IconButton } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
