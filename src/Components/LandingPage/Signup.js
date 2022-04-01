@@ -65,6 +65,8 @@ function SignUp() {
     const [alertContent, setAlertContent] = useState("");
 
     const handleSubmit = (event) => {
+        resetAlerts();
+
         event.preventDefault();
         const data = new FormData(event.currentTarget);
 
@@ -91,6 +93,7 @@ function SignUp() {
                         console.log("success");
                         setTimeout(function () {
                             console.log("Signup Successful");
+                            // Persist user session and redirect to user dashboard here
                         }, 2000);
                     } else {
                         setFailAlert(true);

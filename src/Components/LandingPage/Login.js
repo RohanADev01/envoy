@@ -65,6 +65,8 @@ function Login() {
     const [alertContent, setAlertContent] = useState("");
 
     const handleSubmit = (event) => {
+        resetAlerts();
+
         event.preventDefault();
         const data = new FormData(event.currentTarget);
 
@@ -89,6 +91,7 @@ function Login() {
                         console.log("success");
                         setTimeout(function () {
                             console.log("Login Successful");
+                            // Persist user session and redirect to user dashboard here
                         }, 2000);
                     } else {
                         setFailAlert(true);
