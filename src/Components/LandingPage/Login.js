@@ -58,7 +58,7 @@ function Login() {
                                     </Button>
                                     <Grid container justifyContent="flex-end">
                                         <Grid item>
-                                            <Link onClick={handleNewUser} variant="body2" style={{ cursor:"pointer"}}>
+                                            <Link onClick={handleNewUser} variant="body2" style={{ cursor: "pointer" }}>
                                                 Don't have an account? Sign Up
                                             </Link>
                                         </Grid>

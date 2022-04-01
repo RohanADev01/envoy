@@ -1,12 +1,57 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { usePromiseTracker, trackPromise } from "react-promise-tracker";
 
 import LogoDark from "../../assets/LogoDark.svg";
 import SignupImage from "../../assets/SignupImage.jpg";
+import loadingImage from "../../assets/Loading.gif";
 
 import { Card, Container, Typography, Box, Grid, Link, TextField, CssBaseline, Button, Alert } from "@mui/material";
 import axios from "axios";
 import { backend_base_url } from "../../Constants";
+
+const FailAlert = (props) => {
+    return props.alertFail ? (
+        <Alert sx={{ marginTop: 2 }} severity="error">
+            {props.alertContent}
+        </Alert>
+    ) : (
+        <></>
+    );
+};
+
+const SuccessAlert = (props) => {
+    return props.alertSuccess ? (
+        <Alert sx={{ marginTop: 2 }} severity="success">
+            {props.alertContent}
+        </Alert>
+    ) : (
+        <></>
+    );
+};
+
+const SubmitContent = (props) => {
+    return (
+        <React.Fragment>
+            <Button type="submit" fullWidth variant="contained" fontFamily="Montserrat" sx={{ mt: 3, mb: 2 }}>
+                Sign Up
+            </Button>
+            <Grid container justifyContent="flex-end">
+                <Grid item>
+                    <Link onClick={props.handleExistingUser} variant="body2" style={{ cursor: "pointer" }}>
+                        Already have an account? Log in
+                    </Link>
+                </Grid>
+            </Grid>
+        </React.Fragment>
+    );
+};
+
+const LoadingIndicator = (props) => {
+    const { promiseInProgress } = usePromiseTracker();
+
+    return promiseInProgress ? <img src={loadingImage} style={{ position: "center", height: "100px", width: "100px" }} /> : !props.registered && <SubmitContent handleExistingUser={props.handleExistingUser} />;
+};
 
 function SignUp() {
     const navigate = useNavigate();
@@ -25,8 +70,6 @@ function SignUp() {
 
         const email = data.get("email");
         const password = data.get("password");
-
-        console.log(password);
         const firstname = data.get("firstName");
         const lastname = data.get("lastName");
 
@@ -36,33 +79,34 @@ function SignUp() {
 
         let response;
 
-        axios({
-            method: "POST",
-            url: signup_url,
-            data: body,
-        })
-            .then((data) => {
-                response = data.data.msg;
-                setAlertContent(response);
-                if (response == `User ${email} registered and logged in.`) {
-                    setSuccessAlert(true);
-                    console.log("success");
-                    setTimeout(function () {
-                        console.log("Signup Successful");
-                    }, 2000);
-                } else {
-                    setFailAlert(true);
-                }
+        trackPromise(
+            axios({
+                method: "POST",
+                url: signup_url,
+                data: body,
             })
-            .catch((error) => {
-                console.log(error);
-                setAlertContent("An unknown error occured, please try again another time.");
-                setFailAlert(true);
-            });
+                .then((data) => {
+                    response = data.data.msg;
+                    setAlertContent(response);
+                    if (response == `User ${email} registered and logged in`) {
+                        setSuccessAlert(true);
+                        console.log("success");
+                        setTimeout(function () {
+                            console.log("Signup Successful");
+                        }, 2000);
+                    } else {
+                        setFailAlert(true);
+                    }
+                })
+                .catch((error) => {
+                    console.log(error);
+                    setAlertContent("An unknown error occured, please try again another time.");
+                    setFailAlert(true);
+                })
+        );
     };
 
     const resetAlerts = (event) => {
-        setSuccessAlert(false);
         setFailAlert(false);
     };
 
@@ -103,30 +147,9 @@ function SignUp() {
                                             <TextField required fullWidth name="password" label="Password" type="password" id="password" autoComplete="new-password" />
                                         </Grid>
                                     </Grid>
-                                    {alertFail ? (
-                                        <Alert sx={{ marginTop: 2 }} severity="error">
-                                            {alertContent}
-                                        </Alert>
-                                    ) : (
-                                        <></>
-                                    )}
-                                    {alertSuccess ? (
-                                        <Alert sx={{ marginTop: 2 }} severity="success">
-                                            {alertContent}
-                                        </Alert>
-                                    ) : (
-                                        <></>
-                                    )}
-                                    <Button type="submit" fullWidth variant="contained" fontFamily="Montserrat" sx={{ mt: 3, mb: 2 }}>
-                                        Sign Up
-                                    </Button>
-                                    <Grid container justifyContent="flex-end">
-                                        <Grid item>
-                                            <Link onClick={handleExistingUser} variant="body2" style={{ cursor: "pointer" }}>
-                                                Already have an account? Log in
-                                            </Link>
-                                        </Grid>
-                                    </Grid>
+                                    <FailAlert alertFail={alertFail} alertContent={alertContent} />
+                                    <SuccessAlert alertSuccess={alertSuccess} alertContent={alertContent} />
+                                    <LoadingIndicator handleExistingUser={handleExistingUser} registered={alertSuccess} />
                                 </Box>
                             </Box>
                         </Container>
