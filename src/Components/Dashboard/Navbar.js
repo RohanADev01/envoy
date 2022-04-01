@@ -16,7 +16,8 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { trackPromise } from "react-promise-tracker";
 import { backend_base_url } from "../../constants";
-import { useAlert } from "react-alert";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const drawerWidth = 240;
 
@@ -46,10 +47,8 @@ function Navbar(props) {
 
     const auth = useAuthDataContext();
     const navigate = useNavigate();
-    // const alert = useAlert();
     const handleLogout = () => {
         setAnchorEl(null);
-        navigate("/");
 
         let body = { token: auth.user, email: auth.email };
 
@@ -65,20 +64,20 @@ function Navbar(props) {
                     let msg = data.data.msg;
 
                     if (msg == `Successfully logged out ${auth.email}`) {
-                        // alert.success(msg);
-
                         console.log("Logout Successful");
 
                         // Remove persistence of user session and redirect to home page
-                        auth.logout();
-                        navigate("/");
+                        toast(msg);
+                        setTimeout(() => {
+                            console.log("done");
+                            auth.logout();
+                            navigate("/");
+                        }, 5000);
                     } else {
-                        // alert.error(msg);
                     }
                 })
                 .catch((error) => {
                     console.log(error);
-                    // alert.error("An unknown error occured, please try again another time.");
                 })
         );
     };
@@ -88,49 +87,54 @@ function Navbar(props) {
     };
 
     return (
-        <Box sx={{ flexGrow: 1 }}>
-            <AppBar style={{ zIndex: 1301, background: "linear-gradient(0.25turn, #ff5003, #ed5f00, #f16208, orangered)" }} position="fixed">
-                <Toolbar>
-                    <IconButton size="large" edge="start" color="inherit" aria-label="toggleSideBar" onClick={(event) => props.onChange()} sx={{ mr: 2 }}>
-                        {props.sideBarState ? <ChevronLeftIcon /> : <MenuIcon />}
-                    </IconButton>
-
-                    <Box noWrap sx={{ flexGrow: 1 }}>
-                        <img src={LogoLight} alt="Logo" />
-                    </Box>
-
-                    <div>
-                        <IconButton size="large" aria-label="account of current user" aria-controls="menu-appbar" aria-haspopup="true" onClick={handleMenu} color="inherit">
-                            <AccountCircle />
+        <React.Fragment>
+            <Box sx={{ flexGrow: 1 }}>
+                <AppBar style={{ zIndex: 1301, background: "linear-gradient(0.25turn, #ff5003, #ed5f00, #f16208, orangered)" }} position="fixed">
+                    <ToastContainer />
+                    <Toolbar>
+                        <IconButton size="large" edge="start" color="inherit" aria-label="toggleSideBar" onClick={(event) => props.onChange()} sx={{ mr: 2 }}>
+                            {props.sideBarState ? <ChevronLeftIcon /> : <MenuIcon />}
                         </IconButton>
-                        <Menu
-                            id="menu-appbar"
-                            anchorEl={anchorEl}
-                            anchorOrigin={{
-                                vertical: "top",
-                                horizontal: "right",
-                            }}
-                            keepMounted
-                            transformOrigin={{
-                                vertical: "top",
-                                horizontal: "right",
-                            }}
-                            open={Boolean(anchorEl)}
-                            onClose={handleClose}
-                            style={{ zIndex: 1302 }}
-                        >
-                            <MenuItem><strong>{auth.email}</strong></MenuItem>
-                            <MenuItem onClick={handleLogout}>
-                                <ListItemIcon>
-                                    <Logout fontSize="small" />
-                                </ListItemIcon>
-                                Logout
-                            </MenuItem>
-                        </Menu>
-                    </div>
-                </Toolbar>
-            </AppBar>
-        </Box>
+
+                        <Box noWrap sx={{ flexGrow: 1 }}>
+                            <img src={LogoLight} alt="Logo" />
+                        </Box>
+
+                        <div>
+                            <IconButton size="large" aria-label="account of current user" aria-controls="menu-appbar" aria-haspopup="true" onClick={handleMenu} color="inherit">
+                                <AccountCircle />
+                            </IconButton>
+                            <Menu
+                                id="menu-appbar"
+                                anchorEl={anchorEl}
+                                anchorOrigin={{
+                                    vertical: "top",
+                                    horizontal: "right",
+                                }}
+                                keepMounted
+                                transformOrigin={{
+                                    vertical: "top",
+                                    horizontal: "right",
+                                }}
+                                open={Boolean(anchorEl)}
+                                onClose={handleClose}
+                                style={{ zIndex: 1302 }}
+                            >
+                                <MenuItem>
+                                    <strong>{auth.email}</strong>
+                                </MenuItem>
+                                <MenuItem onClick={handleLogout}>
+                                    <ListItemIcon>
+                                        <Logout fontSize="small" />
+                                    </ListItemIcon>
+                                    Logout
+                                </MenuItem>
+                            </Menu>
+                        </div>
+                    </Toolbar>
+                </AppBar>
+            </Box>
+        </React.Fragment>
     );
 }
 

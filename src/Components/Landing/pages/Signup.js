@@ -59,7 +59,7 @@ function SignUp(props) {
                             // Persist user session and redirect to user dashboard
                             auth.login(token, email);
                             navigate("/dashboard");
-                        }, 2000);
+                        }, 1000);
                     } else {
                         setFailAlert(true);
                     }
