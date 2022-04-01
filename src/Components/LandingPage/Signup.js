@@ -6,8 +6,8 @@ import LogoDark from "../../assets/LogoDark.svg";
 import SignupImage from "../../assets/SignupImage.jpg";
 import loadingImage from "../../assets/Loading.gif";
 
-import { Card, Container, Typography, Box, Grid, Link, TextField, CssBaseline, Button, Alert } from "@mui/material";
 import axios from "axios";
+import { Card, Container, Typography, Box, Grid, Link, TextField, CssBaseline, Button, Alert } from "@mui/material";
 import { backend_base_url } from "../../Constants";
 
 const FailAlert = (props) => {
@@ -77,8 +77,6 @@ function SignUp() {
 
         const signup_url = backend_base_url + "signup";
 
-        let response;
-
         trackPromise(
             axios({
                 method: "POST",
@@ -86,7 +84,7 @@ function SignUp() {
                 data: body,
             })
                 .then((data) => {
-                    response = data.data.msg;
+                    let response = data.data.msg;
                     setAlertContent(response);
                     if (response == `User ${email} registered and logged in`) {
                         setSuccessAlert(true);
