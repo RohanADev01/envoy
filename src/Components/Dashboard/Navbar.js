@@ -1,10 +1,15 @@
-import React, { useState, ChangeEvent, MouseEvent } from "react";
-import { styled, useTheme } from "@mui/material/styles";
+import React from "react";
+import { styled } from "@mui/material/styles";
 
 import LogoLight from "../../assets/LogoLight.svg";
 
-import { Box, Toolbar, Menu, MenuItem, Typography, Button } from "@mui/material";
+import { Box, Toolbar, Menu, MenuItem } from "@mui/material";
 import MuiAppBar from "@mui/material/AppBar";
+import React from "react";
+
+import LogoLight from "../../assets/LogoLight.svg";
+
+import { Box, AppBar, Toolbar, Menu, MenuItem } from "@mui/material";
 import { IconButton } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
@@ -33,11 +38,13 @@ const AppBar = styled(MuiAppBar, {
 
 function Navbar(props) {
     const [auth, setAuth] = React.useState(true);
+    console.log(auth);
     const [anchorEl, setAnchorEl] = React.useState(null);
 
     const handleChange = (event) => {
         setAuth(event.target.checked);
     };
+    console.log(handleChange);
 
     const handleMenu = (event) => {
         setAnchorEl(event.currentTarget);
