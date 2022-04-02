@@ -69,7 +69,6 @@ function Navbar(props) {
                         // Remove persistence of user session and redirect to home page
                         toast(msg);
                         setTimeout(() => {
-                            console.log("done");
                             auth.logout();
                             navigate("/");
                         }, 5000);
