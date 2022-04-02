@@ -15,7 +15,7 @@ import { useAuthDataContext } from "../Landing/userAuth";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { trackPromise } from "react-promise-tracker";
-import { backend_base_url } from "../../constants";
+import { backend_base_url } from "../../Constants";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
