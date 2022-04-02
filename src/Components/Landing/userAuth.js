@@ -1,10 +1,4 @@
-import React, {
-  useState,
-  useEffect,
-  useContext,
-  useMemo,
-  createContext,
-} from 'react'
+import React, { useState, useEffect, useContext, createContext } from 'react'
 
 export const AuthDataContext = createContext({
   user: null,

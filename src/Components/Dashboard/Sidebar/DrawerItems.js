@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import {
   List,
   ListItem,
@@ -24,19 +24,19 @@ export default function DrawerList(props) {
 
   function toggleStyles(type, index) {
     if (type === 'icon') {
-      if (activeLink.objects[index] == activeLink.activeItem) {
+      if (activeLink.objects[index] === activeLink.activeItem) {
         return activeIcon
       } else {
         return linkContent
       }
     } else if (type === 'text') {
-      if (activeLink.objects[index] == activeLink.activeItem) {
+      if (activeLink.objects[index] === activeLink.activeItem) {
         return activeText
       } else {
         return linkContent
       }
     } else if (type === 'background') {
-      if (activeLink.objects[index] == activeLink.activeItem) {
+      if (activeLink.objects[index] === activeLink.activeItem) {
         return { padding: 3, ...activeHighlight }
       } else {
         return { padding: 3 }

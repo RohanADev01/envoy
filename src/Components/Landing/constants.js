@@ -59,6 +59,7 @@ export const LoadingIndicatorLogin = (props) => {
     <img
       src={loadingImage}
       style={{ position: 'center', height: '100px', width: '100px' }}
+      alt=''
     />
   ) : (
     !props.registered && (
@@ -102,6 +103,7 @@ export const LoadingIndicatorSignup = (props) => {
     <img
       src={loadingImage}
       style={{ position: 'center', height: '100px', width: '100px' }}
+      alt=''
     />
   ) : (
     !props.registered && (

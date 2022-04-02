@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Navigate, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { trackPromise } from 'react-promise-tracker'
 import { useAuthDataContext } from '../userAuth'
 
@@ -56,7 +56,7 @@ function Login(props) {
 
           setAlertContent(msg)
 
-          if (msg == `${email} is now logged in`) {
+          if (msg === `${email} is now logged in`) {
             setSuccessAlert(true)
             setTimeout(function () {
               console.log('Login Successful')

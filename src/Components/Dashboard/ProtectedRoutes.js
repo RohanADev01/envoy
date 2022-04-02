@@ -3,5 +3,5 @@ import { useAuthDataContext } from '../Landing/userAuth'
 
 export const ProtectedRoute = () => {
   const auth = useAuthDataContext()
-  return auth.user != '' ? <Outlet /> : <Navigate to='/' />
+  return auth.user !== '' ? <Outlet /> : <Navigate to='/' />
 }

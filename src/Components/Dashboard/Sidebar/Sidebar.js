@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { Typography, Drawer, Divider } from '@mui/material'
-import { Navigate, Outlet } from 'react-router-dom'
+import React, { useState } from 'react'
+import { Drawer, Divider } from '@mui/material'
 
 import IconButton from '@mui/material/IconButton'
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
@@ -58,11 +57,13 @@ function Sidebar(props) {
 
       <Main open={props.sideBarState}>
         <DrawerHeader />
-        {activeLink.activeItem.route == '/dashboard/' && <Activity />}
-        {activeLink.activeItem.route == '/dashboard/create' && (
+        {activeLink.activeItem.route === '/dashboard/' && <Activity />}
+        {activeLink.activeItem.route === '/dashboard/create' && (
           <CreateInvoice />
         )}
-        {activeLink.activeItem.route == '/dashboard/invoices' && <MyInvoices />}
+        {activeLink.activeItem.route === '/dashboard/invoices' && (
+          <MyInvoices />
+        )}
       </Main>
     </React.Fragment>
   )
