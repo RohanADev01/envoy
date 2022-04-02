@@ -8,10 +8,10 @@ import InboxIcon from '@mui/icons-material/MoveToInbox'
 import NoteAddIcon from '@mui/icons-material/NoteAdd'
 
 import DrawerList from './DrawerItems'
-import { Main, drawerWidth, DrawerHeader } from './styles'
-import { Activity } from '../pages/Activity'
-import { CreateInvoice } from '../pages/CreateInvoice'
-import { MyInvoices } from '../pages/MyInvoices'
+import { Main, drawerWidth, DrawerHeader } from './Styles'
+import { Activity } from '../Pages/Activity'
+import { CreateInvoice } from '../Pages/CreateInvoice'
+import { MyInvoices } from '../Pages/MyInvoices'
 
 function Sidebar(props) {
   const [activeLink, changeLinkState] = useState({

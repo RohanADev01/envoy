@@ -1,13 +1,13 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import Home from './Components/Landing/pages/Home'
+import Home from './Components/Landing/Pages/Home'
 import DashboardContents from './Components/Dashboard/Dashboard'
-import SignUp from './Components/Landing/pages/Signup'
-import Login from './Components/Landing/pages/Login'
-import AuthDataProvider from './Components/Landing/userAuth'
+import SignUp from './Components/Landing/Pages/Signup'
+import Login from './Components/Landing/Pages/Login'
+import AuthDataProvider from './Components/Landing/UserAuth'
 import { ProtectedRoute } from './Components/Dashboard/ProtectedRoutes'
-import { CreateInvoice } from './Components/Dashboard/pages/CreateInvoice'
-import { Activity } from './Components/Dashboard/pages/Activity'
-import { MyInvoices } from './Components/Dashboard/pages/MyInvoices'
+import { CreateInvoice } from './Components/Dashboard/Pages/CreateInvoice'
+import { Activity } from './Components/Dashboard/Pages/Activity'
+import { MyInvoices } from './Components/Dashboard/Pages/MyInvoices'
 
 function App() {
   return (

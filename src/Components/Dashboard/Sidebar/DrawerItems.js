@@ -11,7 +11,7 @@ import {
   activeIcon,
   activeText,
   linkContent,
-} from './styles.js'
+} from './Styles.js'
 import { Link } from 'react-router-dom'
 
 export default function DrawerList(props) {

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { trackPromise } from 'react-promise-tracker'
-import { useAuthDataContext } from '../userAuth'
+import { useAuthDataContext } from '../UserAuth'
 
 import LogoDark from '../../../assets/LogoDark.svg'
 import LoginImage from '../../../assets/LoginImage.jpg'
@@ -16,7 +16,7 @@ import {
   TextField,
   CssBaseline,
 } from '@mui/material'
-import { FailAlert, SuccessAlert, LoadingIndicatorLogin } from '../constants'
+import { FailAlert, SuccessAlert, LoadingIndicatorLogin } from '../Constants'
 import { backend_base_url } from '../../../Constants'
 
 function Login(props) {

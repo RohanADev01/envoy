@@ -1,6 +1,6 @@
 import React from 'react'
 import { Typography } from '@mui/material'
-import { useAuthDataContext } from '../../Landing/userAuth'
+import { useAuthDataContext } from '../../Landing/UserAuth'
 
 export const Activity = () => {
   const auth = useAuthDataContext()

@@ -11,7 +11,7 @@ import ListItemIcon from '@mui/material/ListItemIcon'
 import Logout from '@mui/icons-material/Logout'
 
 import LogoLight from '../../assets/LogoLight.svg'
-import { useAuthDataContext } from '../Landing/userAuth'
+import { useAuthDataContext } from '../Landing/UserAuth'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { trackPromise } from 'react-promise-tracker'
