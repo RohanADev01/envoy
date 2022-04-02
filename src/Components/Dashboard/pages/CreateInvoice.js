@@ -101,7 +101,7 @@ export const CreateInvoice = () => {
             InvoiceBaseQuantity
         };
 
-        const create_url = backend_base_url + "create";
+        const create_url = backend_base_url + "invoice/create";
 
         trackPromise(
             axios({
@@ -112,10 +112,9 @@ export const CreateInvoice = () => {
                 .then((data) => {
                     let msg = data.data.msg;
                     let token = data.data.token;
-
                     setAlertContent(msg);
 
-                    if (msg == `User ${email} registered and logged in`) {
+                    if (msg == `Successfully created and stored invoice for ${email}`) {
                         setSuccessAlert(true);
                     } else {
                         setFailAlert(true);
@@ -156,17 +155,137 @@ export const CreateInvoice = () => {
                             >
                                 <Box component="form" onChange={resetAlerts} onSubmit={handleSubmit} sx={{ mt: 3 }}>
                                     <Grid container spacing={2}>
-                                        <Grid item xs={12} sm={6}>
-                                            <TextField autoComplete="given-name" name="firstName" required fullWidth id="firstName" label="First Name" autoFocus />
-                                        </Grid>
-                                        <Grid item xs={12} sm={6}>
-                                            <TextField required fullWidth id="lastName" label="Last Name" name="lastName" autoComplete="family-name" />
+                                        <Grid item xs={12}>
+                                            <TextField required fullWidth name="UBLID" label="UBLID" id="UBLID" />
                                         </Grid>
                                         <Grid item xs={12}>
-                                            <TextField required fullWidth id="email" label="Email Address" name="email" autoComplete="email" />
+                                            <TextField required fullWidth name="CustomizationID" label="CustomizationID" id="CustomizationID" />
                                         </Grid>
                                         <Grid item xs={12}>
-                                            <TextField required fullWidth name="password" label="Password" type="password" id="password" autoComplete="new-password" />
+                                            <TextField required fullWidth name="ProfileID" label="ProfileID" id="ProfileID" />
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                            <TextField required fullWidth name="ID" label="ID" id="ID" />
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                            <TextField required fullWidth name="IssueDate" label="IssueDate" id="IssueDate" />
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                            <TextField required fullWidth name="InvoiceCode" label="InvoiceCode" id="InvoiceCode" />
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                            <TextField required fullWidth name="Currency" label="Currency" id="Currency" />
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                            <TextField required fullWidth name="BuyerReference" label="BuyerReference" id="BuyerReference" />
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                            <TextField required fullWidth name="AddDocReference" label="AddDocReference" id="AddDocReference" />
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                            <TextField required fullWidth name="SupplierID" label="SupplierID" id="SupplierID" />
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                            <TextField required fullWidth name="SupplierStreet" label="SupplierStreet" id="SupplierStreet" />
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                            <TextField required fullWidth name="SupplierCity" label="SupplierCity" id="SupplierCity" />
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                            <TextField required fullWidth name="SupplierPost" label="SupplierPost" id="SupplierPost" />
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                            <TextField required fullWidth name="SupplierCountry" label="SupplierCountry" id="SupplierCountry" />
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                            <TextField required fullWidth name="SupplierRegistration" label="SupplierRegistration" id="SupplierRegistration" />
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                            <TextField required fullWidth name="CustomerStreet" label="CustomerStreet" id="CustomerStreet" />
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                            <TextField required fullWidth name="CustomerAddStreet" label="CustomerAddStreet" id="CustomerAddStreet" />
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                            <TextField required fullWidth name="CustomerCity" label="CustomerCity" id="CustomerCity" />
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                            <TextField required fullWidth name="CustomerPost" label="CustomerPost" id="CustomerPost" />
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                            <TextField required fullWidth name="CustomerCountry" label="CustomerCountry" id="CustomerCountry" />
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                            <TextField required fullWidth name="CustomerRegistration" label="CustomerRegistration" id="CustomerRegistration" />
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                            <TextField required fullWidth name="PaymentType" label="PaymentType" id="PaymentType" />
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                            <TextField required fullWidth name="PaymentID" label="PaymentID" id="PaymentID" />
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                            <TextField required fullWidth name="PaymentTerms" label="PaymentTerms" id="PaymentTerms" />
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                            <TextField required fullWidth name="TaxAmount" label="TaxAmount" id="TaxAmount" />
+                                        </Grid>                  
+                                        <Grid item xs={12}>
+                                            <TextField required fullWidth name="TaxableAmount" label="TaxableAmount" id="TaxableAmount" />
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                            <TextField required fullWidth name="TaxSubtotalAmount" label="TaxSubtotalAmount" id="TaxSubtotalAmount" />
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                            <TextField required fullWidth name="TaxID" label="TaxID" id="TaxID" />
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                            <TextField required fullWidth name="TaxPercent" label="TaxPercent" id="TaxPercent" />
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                            <TextField required fullWidth name="TaxSchemeID" label="TaxSchemeID" id="TaxSchemeID" />
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                            <TextField required fullWidth name="LegalLineExtension" label="LegalLineExtension" id="LegalLineExtension" />
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                            <TextField required fullWidth name="TaxExclusiveAmount" label="TaxExclusiveAmount" id="TaxExclusiveAmount" />
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                            <TextField required fullWidth name="TaxInclusiveAmount" label="TaxInclusiveAmount" id="TaxInclusiveAmount" />
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                            <TextField required fullWidth name="PayableRoundingAmount" label="PayableRoundingAmount" id="PayableRoundingAmount" />
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                            <TextField required fullWidth name="PayableAmount" label="PayableAmount" id="PayableAmount" />
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                            <TextField required fullWidth name="InvoiceID" label="InvoiceID" id="InvoiceID" />
+                                        </Grid>                                          
+                                        <Grid item xs={12}>
+                                            <TextField required fullWidth name="InvoiceQuantity" label="InvoiceQuantity" id="InvoiceQuantity" />
+                                        </Grid>                
+                                        <Grid item xs={12}>
+                                            <TextField required fullWidth name="InvoiceLineExtension" label="InvoiceLineExtension" id="InvoiceLineExtension" />
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                            <TextField required fullWidth name="InvoiceName" label="InvoiceName" id="InvoiceName" />
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                            <TextField required fullWidth name="InvoiceTaxID" label="InvoiceTaxID" id="InvoiceTaxID" />
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                            <TextField required fullWidth name="InvoiceTaxPercent" label="InvoiceTaxPercent" id="InvoiceTaxPercent" />
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                            <TextField required fullWidth name="InvoiceTaxSchemeID" label="InvoiceTaxSchemeID" id="InvoiceTaxSchemeID" />
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                            <TextField required fullWidth name="InvoicePriceAmount" label="InvoicePriceAmount" id="InvoicePriceAmount" />
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                            <TextField required fullWidth name="InvoiceBaseQuantity" label="InvoiceBaseQuantity" id="InvoiceBaseQuantity" />
                                         </Grid>
                                     </Grid>
                                     <FailAlert alertFail={alertFail} alertContent={alertContent} />
