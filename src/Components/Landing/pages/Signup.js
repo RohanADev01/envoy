@@ -9,7 +9,7 @@ import SignupImage from "../../../assets/SignupImage.jpg";
 import axios from "axios";
 import { Card, Container, Typography, Box, Grid, TextField, CssBaseline } from "@mui/material";
 import { FailAlert, LoadingIndicatorSignup, SuccessAlert } from "../constants";
-import { backend_base_url } from "../../../constants";
+import { backend_base_url } from "../../../Constants";
 
 function SignUp(props) {
     const navigate = useNavigate();
