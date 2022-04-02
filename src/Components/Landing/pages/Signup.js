@@ -1,18 +1,18 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { trackPromise } from "react-promise-tracker";
+import { useAuthDataContext } from "../userAuth";
 
 import LogoDark from "../../../assets/LogoDark.svg";
 import SignupImage from "../../../assets/SignupImage.jpg";
 
 import axios from "axios";
 import { Card, Container, Typography, Box, Grid, TextField, CssBaseline } from "@mui/material";
-import { FailAlert, LoadingIndicatorSignup, SuccessAlert} from "../constants";
+import { FailAlert, LoadingIndicatorSignup, SuccessAlert } from "../constants";
 import { backend_base_url } from "../../../constants";
 
-function SignUp() {
+function SignUp(props) {
     const navigate = useNavigate();
-
     const handleExistingUser = () => {
         navigate("/login");
     };
@@ -21,10 +21,12 @@ function SignUp() {
     const [alertSuccess, setSuccessAlert] = useState(false);
     const [alertContent, setAlertContent] = useState("");
 
+    const auth = useAuthDataContext();
+
     const handleSubmit = (event) => {
+        event.preventDefault();
         resetAlerts();
 
-        event.preventDefault();
         const data = new FormData(event.currentTarget);
 
         const email = data.get("email");
@@ -43,15 +45,21 @@ function SignUp() {
                 data: body,
             })
                 .then((data) => {
-                    let response = data.data.msg;
-                    setAlertContent(response);
-                    if (response == `User ${email} registered and logged in`) {
+                    let msg = data.data.msg;
+                    let token = data.data.token;
+
+                    setAlertContent(msg);
+
+                    if (msg == `User ${email} registered and logged in`) {
                         setSuccessAlert(true);
                         console.log("success");
+
                         setTimeout(function () {
                             console.log("Signup Successful");
-                            // Persist user session and redirect to user dashboard here
-                        }, 2000);
+                            // Persist user session and redirect to user dashboard
+                            auth.login(token, email);
+                            navigate("/dashboard");
+                        }, 1000);
                     } else {
                         setFailAlert(true);
                     }

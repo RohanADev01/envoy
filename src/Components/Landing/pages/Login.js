@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { trackPromise } from "react-promise-tracker";
+import { useAuthDataContext } from "../userAuth";
 
 import LogoDark from "../../../assets/LogoDark.svg";
 import LoginImage from "../../../assets/LoginImage.jpg";
@@ -10,9 +11,8 @@ import { Card, Container, Typography, Box, Grid, TextField, CssBaseline } from "
 import { FailAlert, SuccessAlert, LoadingIndicatorLogin } from "../constants";
 import { backend_base_url } from "../../../constants";
 
-function Login() {
+function Login(props) {
     const navigate = useNavigate();
-
     const handleNewUser = () => {
         navigate("/signup");
     };
@@ -21,10 +21,12 @@ function Login() {
     const [alertSuccess, setSuccessAlert] = useState(false);
     const [alertContent, setAlertContent] = useState("");
 
+    const auth = useAuthDataContext();
+
     const handleSubmit = (event) => {
+        event.preventDefault();
         resetAlerts();
 
-        event.preventDefault();
         const data = new FormData(event.currentTarget);
 
         const email = data.get("email");
@@ -41,15 +43,21 @@ function Login() {
                 data: body,
             })
                 .then((data) => {
-                    let response = data.data.msg;
-                    setAlertContent(response);
-                    if (response == `${email} is now logged in`) {
+                    let msg = data.data.msg;
+                    let token = data.data.token;
+
+                    setAlertContent(msg);
+
+                    if (msg == `${email} is now logged in`) {
                         setSuccessAlert(true);
                         console.log("success");
+
                         setTimeout(function () {
                             console.log("Login Successful");
                             // Persist user session and redirect to user dashboard here
-                        }, 2000);
+                            auth.login(token, email);
+                            navigate("/dashboard");
+                        }, 1000);
                     } else {
                         setFailAlert(true);
                     }
@@ -91,7 +99,7 @@ function Login() {
                                 <Box component="form" onChange={resetAlerts} onSubmit={handleSubmit} sx={{ mt: 3 }}>
                                     <Grid container spacing={2}>
                                         <Grid item xs={12}>
-                                            <TextField required fullWidth id="email" label="Email Address" name="email" autoComplete="email" />
+                                            <TextField required fullWidth id="email" label="Email Address" name="email" autoComplete="email" autoFocus />
                                         </Grid>
                                         <Grid item xs={12}>
                                             <TextField required fullWidth name="password" label="Password" type="password" id="password" autoComplete="new-password" />
