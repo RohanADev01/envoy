@@ -1,10 +1,22 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { Box, Grid, Typography } from "@mui/material";
+
+import "./Topbar.css";
 import LogoDark from "../../assets/LogoDark.svg";
 import LandingImage from "../../assets/LandingImage.svg";
-import "./Topbar.css";
 
 function Topbar() {
+    const navigate = useNavigate();
+
+    const handleLogin = () => {
+        navigate("/login");
+    };
+
+    const handleSignup = () => {
+        navigate("/signup");
+    };
+
     return (
         <div>
             <Box className="topbarContainer">
@@ -15,10 +27,10 @@ function Topbar() {
                     </Grid>
                     <Grid xs={7} container direction="row" justifyContent="flex-end" alignItems="center">
                         <Grid item xs={2} md={2}>
-                            <button className="btn">Login</button>
+                            <button onClick={handleLogin} className="btn">Login</button>
                         </Grid>
                         <Grid item xs={2} md={2}>
-                            <button className="btn btnBorder">Signup</button>
+                            <button onClick={handleSignup} className="btn btnBorder">Signup</button>
                         </Grid>
                     </Grid>
                     <Grid container md={0.5} xs={1} />
@@ -31,7 +43,7 @@ function Topbar() {
                         <Typography fontSize="2.0vw" fontFamily="Montserrat" fontWeight="900">
                             Manage all your electronic invoices in one place
                         </Typography>
-                        <button className="btn btnOrange btnBorder">Get Started</button>
+                        <button onClick={handleSignup} className="btn btnOrange btnBorder">Get Started</button>
                     </Grid>
                     <Grid container xs={1} />
                     <Grid container xs={7} justifyContent="center">
