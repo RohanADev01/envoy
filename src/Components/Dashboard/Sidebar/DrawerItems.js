@@ -1,20 +1,11 @@
 import React, { useState } from "react";
 import { List, ListItem, ListItemText, ListItemIcon, Divider } from "@mui/material";
-import HomeIcon from "@mui/icons-material/Home";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import NoteAddIcon from "@mui/icons-material/NoteAdd";
-
 import { activeHighlight, activeIcon, activeText, linkContent } from "./styles.js";
+import { Link } from "react-router-dom";
 
-export default function DrawerList() {
-    const [activeLink, changeLinkState] = useState({
-        activeItem: { icon: <HomeIcon />, text: "Home" },
-        objects: [
-            { icon: <HomeIcon />, text: "Home" },
-            { icon: <NoteAddIcon />, text: "Create Invoice" },
-            { icon: <InboxIcon />, text: "My Invoices" },
-        ],
-    });
+export default function DrawerList(props) {
+    const activeLink = props.activeLink;
+    const changeLinkState = props.changeLinkState;
 
     function handleLinkChange(index) {
         changeLinkState({ ...activeLink, activeItem: activeLink.objects[index] });
@@ -48,10 +39,12 @@ export default function DrawerList() {
                 {activeLink.objects.map((element, index) => (
                     <React.Fragment>
                         <div key={index} onClick={() => handleLinkChange(index)}>
-                            <ListItem sx={toggleStyles("background", index)} button>
-                                <ListItemIcon sx={toggleStyles("icon", index)}>{element.icon}</ListItemIcon>
-                                <ListItemText primary={element.text} sx={toggleStyles("text", index)} />
-                            </ListItem>
+                            <Link to={element.route}>
+                                <ListItem sx={toggleStyles("background", index)} button>
+                                    <ListItemIcon sx={toggleStyles("icon", index)}>{element.icon}</ListItemIcon>
+                                    <ListItemText primary={element.text} sx={toggleStyles("text", index)} />
+                                </ListItem>
+                            </Link>
                         </div>
                         {index === 0 && <Divider />}
                     </React.Fragment>
