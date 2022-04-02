@@ -1,13 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Typography, Drawer, Divider } from "@mui/material";
+import { Navigate, Outlet } from "react-router-dom";
 
 import IconButton from "@mui/material/IconButton";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import DrawerList from "./DrawerItems";
+import HomeIcon from "@mui/icons-material/Home";
+import InboxIcon from "@mui/icons-material/MoveToInbox";
+import NoteAddIcon from "@mui/icons-material/NoteAdd";
 
+import DrawerList from "./DrawerItems";
 import { Main, drawerWidth, DrawerHeader } from "./styles";
+import { Activity } from "../pages/Activity";
+import { CreateInvoice } from "../pages/CreateInvoice";
+import { MyInvoices } from "../pages/MyInvoices";
 
 function Sidebar(props) {
+    const [activeLink, changeLinkState] = useState({
+        activeItem: { icon: <HomeIcon />, text: "Home", route: "/dashboard/" },
+        objects: [
+            { icon: <HomeIcon />, text: "Home", route: "/dashboard/" },
+            { icon: <NoteAddIcon />, text: "Create Invoice", route: "/dashboard/create" },
+            { icon: <InboxIcon />, text: "My Invoices", route: "/dashboard/invoices" },
+        ],
+    });
+
     return (
         <React.Fragment>
             <Drawer
@@ -29,21 +45,14 @@ function Sidebar(props) {
                     </IconButton>
                 </DrawerHeader>
                 <Divider />
-                <DrawerList />
+                <DrawerList activeLink={activeLink} changeLinkState={changeLinkState} />
             </Drawer>
 
             <Main open={props.sideBarState}>
                 <DrawerHeader />
-                <Typography paragraph>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Rhoncus dolor purus non enim praesent elementum facilisis leo vel. Risus at ultrices mi tempus imperdiet. Semper risus in hendrerit gravida rutrum quisque
-                    non tellus. Convallis convallis tellus id interdum velit laoreet id donec ultrices. Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit adipiscing bibendum est ultricies integer quis. Cursus euismod quis viverra nibh cras. Metus vulputate eu scelerisque felis
-                    imperdiet proin fermentum leo. Mauris commodo quis imperdiet massa tincidunt. Cras tincidunt lobortis feugiat vivamus at augue. At augue eget arcu dictum varius duis at consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem donec massa sapien faucibus et molestie ac.
-                </Typography>
-                <Typography paragraph>
-                    Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper eget nulla facilisi etiam dignissim diam. Pulvinar elementum integer enim neque volutpat ac tincidunt. Ornare suspendisse sed nisi lacus sed viverra tellus. Purus sit amet volutpat consequat mauris.
-                    Elementum eu facilisis sed odio morbi. Euismod lacinia at quis risus sed vulputate odio. Morbi tincidunt ornare massa eget egestas purus viverra accumsan in. In hendrerit gravida rutrum quisque non tellus orci ac. Pellentesque nec nam aliquam sem et tortor. Habitant morbi
-                    tristique senectus et. Adipiscing elit duis tristique sollicitudin nibh sit. Ornare aenean euismod elementum nisi quis eleifend. Commodo viverra maecenas accumsan lacus vel facilisis. Nulla posuere sollicitudin aliquam ultrices sagittis orci a.
-                </Typography>
+                {activeLink.activeItem.route == "/dashboard/" && <Activity />}
+                {activeLink.activeItem.route == "/dashboard/create" && <CreateInvoice />}
+                {activeLink.activeItem.route == "/dashboard/invoices" && <MyInvoices />}
             </Main>
         </React.Fragment>
     );
