@@ -18,21 +18,19 @@ function App() {
     return (
         <BrowserRouter>
             <AuthDataProvider>
-                {/* <AlertProvider template={AlertTemplate}> */}
-                    <Routes>
-                        <Route exact path="/" element={<Home />} />
-                        <Route exact path="/signup" element={<SignUp />} />
-                        <Route path="/login" element={<Login />} />
-                        <Route element={<ProtectedRoute />}>
-                            <Route path="/dashboard" element={<DashboardContents />}>
-                                <Route path="/dashboard/" element={<Activity/>}/>
-                                <Route path="/dashboard/create" element={<CreateInvoice/>} />
-                                <Route path="/dashboard/invoices" element={<MyInvoices/>} />
-                            </Route>
+                <Routes>
+                    <Route exact path="/" element={<Home />} />
+                    <Route exact path="/signup" element={<SignUp />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route element={<ProtectedRoute />}>
+                        <Route path="/dashboard" element={<DashboardContents />}>
+                            <Route path="/dashboard/" element={<Activity />} />
+                            <Route path="/dashboard/create" element={<CreateInvoice />} />
+                            <Route path="/dashboard/invoices" element={<MyInvoices />} />
                         </Route>
-                        <Route path="*" element={<h1>Error 404. Page not found!</h1>} />
-                    </Routes>
-                {/* </AlertProvider> */}
+                    </Route>
+                    <Route path="*" element={<h1>Error 404. Page not found!</h1>} />
+                </Routes>
             </AuthDataProvider>
         </BrowserRouter>
     );

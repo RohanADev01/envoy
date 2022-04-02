@@ -52,8 +52,6 @@ function SignUp(props) {
 
                     if (msg == `User ${email} registered and logged in`) {
                         setSuccessAlert(true);
-                        console.log("success");
-
                         setTimeout(function () {
                             console.log("Signup Successful");
                             // Persist user session and redirect to user dashboard

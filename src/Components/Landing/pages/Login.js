@@ -50,8 +50,6 @@ function Login(props) {
 
                     if (msg == `${email} is now logged in`) {
                         setSuccessAlert(true);
-                        console.log("success");
-
                         setTimeout(function () {
                             console.log("Login Successful");
                             // Persist user session and redirect to user dashboard here
@@ -105,7 +103,6 @@ function Login(props) {
                                             <TextField required fullWidth name="password" label="Password" type="password" id="password" autoComplete="new-password" />
                                         </Grid>
                                     </Grid>
-                                    {/*  */}
                                     <FailAlert alertFail={alertFail} alertContent={alertContent} />
                                     <SuccessAlert alertSuccess={alertSuccess} alertContent={alertContent} />
                                     <LoadingIndicatorLogin handleNewUser={handleNewUser} registered={alertSuccess} />
