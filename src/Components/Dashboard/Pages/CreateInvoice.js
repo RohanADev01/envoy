@@ -10,27 +10,49 @@ import { LoadingIndicatorCreateInvoice } from '../constants'
 import { dummyData } from '../CreateInvoiceDummyData'
 
 export const CreateInvoice = () => {
-    const [alertFail, setFailAlert] = useState(false)
-    const [alertSuccess, setSuccessAlert] = useState(false)
-    const [alertContent, setAlertContent] = useState('')
+    const [alertFail, setFailAlert] = useState(false);
+    const [alertSuccess, setSuccessAlert] = useState(false);
+    const [alertContent, setAlertContent] = useState('');
 
-    const auth = useAuthDataContext()
+    const auth = useAuthDataContext();
 
     const handleSubmit = (event) => {
-        event.preventDefault()
-        resetAlerts()
+        event.preventDefault();
+        resetAlerts();
 
         const data = new FormData(event.currentTarget);
 
-        // TO BE UNCOMMENTED WHEN NOT USING DUMMY DATA
-
-        // let body_details = {};
-        // createInvoiceFieldsList.forEach((field) => {
-        //     body_deets[field] = data.get(field)
-        // })
-
-        let body_details = {"token": auth.user, "invoice_data": dummyData};
-        console.log(body_details);
+        let body_details = {
+            "token": auth.user,
+            "invoice_data": {}
+        };
+        
+        createInvoiceFieldsList.forEach((field) => {
+            body_details["invoice_data"][field] = data.get(field)
+        });
+        
+        body_details["invoice_data"]["UBLID"] = Number(body_details["invoice_data"]["UBLID"]);
+        body_details["invoice_data"]["InvoiceCode"] = Number(body_details["invoice_data"]["InvoiceCode"]);
+        body_details["invoice_data"]["SupplierID"] = Number(body_details["invoice_data"]["SupplierID"]);        
+        body_details["invoice_data"]["SupplierPost"] = Number(body_details["invoice_data"]["SupplierPost"]);   
+        body_details["invoice_data"]["PaymentType"] = Number(body_details["invoice_data"]["PaymentType"]); 
+        body_details["invoice_data"]["TaxAmount"] = Number(body_details["invoice_data"]["TaxAmount"]); 
+        body_details["invoice_data"]["TaxableAmount"] = Number(body_details["invoice_data"]["TaxableAmount"]); 
+        body_details["invoice_data"]["TaxSubtotalAmount"] = Number(body_details["invoice_data"]["TaxSubtotalAmount"]);
+        body_details["invoice_data"]["TaxPercent"] = Number(body_details["invoice_data"]["TaxPercent"]);
+        body_details["invoice_data"]["LegalLineExtension"] = Number(body_details["invoice_data"]["LegalLineExtension"]);
+        body_details["invoice_data"]["TaxExclusiveAmount"] = Number(body_details["invoice_data"]["TaxExclusiveAmount"]);
+        body_details["invoice_data"]["TaxInclusiveAmount"] = Number(body_details["invoice_data"]["TaxInclusiveAmount"]);
+        body_details["invoice_data"]["TaxPercent"] = Number(body_details["invoice_data"]["TaxPercent"]);
+        body_details["invoice_data"]["PayableRoundingAmount"] = Number(body_details["invoice_data"]["PayableRoundingAmount"]);
+        body_details["invoice_data"]["PayableAmount"] = Number(body_details["invoice_data"]["PayableAmount"]);
+        body_details["invoice_data"]["InvoiceQuantity"] = Number(body_details["invoice_data"]["InvoiceQuantity"]);
+        body_details["invoice_data"]["InvoiceLineExtension"] = Number(body_details["invoice_data"]["InvoiceLineExtension"]);
+        body_details["invoice_data"]["InvoiceTaxID"] = Number(body_details["invoice_data"]["InvoiceTaxID"]);
+        body_details["invoice_data"]["InvoiceTaxPercent"] = Number(body_details["invoice_data"]["InvoiceTaxPercent"]);
+        body_details["invoice_data"]["InvoicePriceAmount"] = Number(body_details["invoice_data"]["InvoicePriceAmount"]);
+        body_details["invoice_data"]["InvoiceBaseQuantity"] = Number(body_details["invoice_data"]["InvoiceBaseQuantity"]);
+        
 
         const create_url = backend_base_url + 'invoice/create'
 
@@ -41,8 +63,6 @@ export const CreateInvoice = () => {
                 data: body_details,
             })
                 .then((data) => {
-                    console.log(data)
-
                     let msg = data.data.msg
                     setAlertContent(msg)
 
