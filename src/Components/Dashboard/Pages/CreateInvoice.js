@@ -29,9 +29,7 @@ export const CreateInvoice = () => {
         //     body_deets[field] = data.get(field)
         // })
 
-        // NOTE for Winnie: update format of body details in CreateInvoiceDummyData.js
-
-        let body_details = dummyData;
+        let body_details = {"token": auth.user, "invoice_data": dummyData};
         console.log(body_details);
 
         const create_url = backend_base_url + 'invoice/create'
@@ -45,7 +43,7 @@ export const CreateInvoice = () => {
                 .then((data) => {
                     console.log(data)
 
-                    // NOTE for Winnie: then uncomment the relevant lines!!!
+                    // Uncomment the relevant lines once invoice creation api is working!!!
 
                     // let msg = data.data.msg
                     // let token = data.data.token
