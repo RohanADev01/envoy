@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Typography, Box } from '@mui/material'
+import { Typography, Box, Button } from '@mui/material'
 import { trackPromise } from 'react-promise-tracker'
 import axios from 'axios'
 import { backend_base_url } from '../../../Constants'
@@ -7,6 +7,7 @@ import { CreateInvoiceItems, createInvoiceFieldsList } from '../CreateInvoiceIte
 import { useAuthDataContext } from '../../Landing/UserAuth'
 import { FailAlert, SuccessAlert } from '../../Landing/Constants'
 import { LoadingIndicatorCreateInvoice } from '../constants'
+import { dummyData } from '../CreateInvoiceDummyData'
 
 export const CreateInvoice = () => {
     const [alertFail, setFailAlert] = useState(false)
@@ -16,16 +17,22 @@ export const CreateInvoice = () => {
     const auth = useAuthDataContext()
 
     const handleSubmit = (event) => {
-        // if using a form for example
+        event.preventDefault()
+        resetAlerts()
+
         const data = new FormData(event.currentTarget);
 
-        let body_deets = {};
+        // TO BE UNCOMMENTED WHEN NOT USING DUMMY DATA
 
-        createInvoiceFieldsList.forEach((field) => {
-            body_deets[field] = data.get(field)
-        })
+        // let body_details = {};
+        // createInvoiceFieldsList.forEach((field) => {
+        //     body_deets[field] = data.get(field)
+        // })
 
-        console.log(body_deets);
+        // NOTE for Winnie: update format of body details in CreateInvoiceDummyData.js
+
+        let body_details = dummyData;
+        console.log(body_details);
 
         const create_url = backend_base_url + 'invoice/create'
 
@@ -33,18 +40,22 @@ export const CreateInvoice = () => {
             axios({
                 method: 'POST',
                 url: create_url,
-                data: body_deets,
+                data: body_details,
             })
                 .then((data) => {
-                    let msg = data.data.msg
-                    let token = data.data.token
-                    setAlertContent(msg)
+                    console.log(data)
 
-                    if (msg == `Successfully created and stored invoice for ${auth.email}`) {
-                        setSuccessAlert(true)
-                    } else {
-                        setFailAlert(true)
-                    }
+                    // NOTE for Winnie: then uncomment the relevant lines!!!
+
+                    // let msg = data.data.msg
+                    // let token = data.data.token
+                    // setAlertContent(msg)
+
+                    // if (msg == `Successfully created and stored invoice for ${auth.email}`) {
+                    //     setSuccessAlert(true)
+                    // } else {
+                    //     setFailAlert(true)
+                    // }
                 })
                 .catch((error) => {
                     console.log(error)

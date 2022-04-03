@@ -54,7 +54,7 @@ export const CreateInvoiceItems = () => {
             <Grid container spacing={2}>
                 {createInvoiceFieldsList.map((field) => (
                     <Grid item xs={6} sm={3}>
-                        <TextField required noValidate fullWidth name={field} label={field} id={field} />
+                        <TextField noValidate fullWidth name={field} label={field} id={field} />
                     </Grid>
                 ))}
             </Grid>

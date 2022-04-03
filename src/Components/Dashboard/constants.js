@@ -2,6 +2,7 @@ import React from "react"
 import { Button } from '@mui/material'
 import { usePromiseTracker } from "react-promise-tracker"
 import loadingImage from '../../assets/Loading.gif'
+import { toast } from "react-toastify"
 
 // Login functions
 const SubmitContentCreateInvoice = (props) => {
@@ -14,7 +15,7 @@ const SubmitContentCreateInvoice = (props) => {
                 fontFamily='Montserrat'
                 sx={{ mt: 3, mb: 2 }}
             >
-                Create Invoice
+                {"--> Create Invoice with DUMMY DATA <--"}
             </Button>
         </React.Fragment>
     )
@@ -30,6 +31,10 @@ export const LoadingIndicatorCreateInvoice = (props) => {
             alt=''
         />
     ) : (
-        !props.success && <SubmitContentCreateInvoice/>
+        <div>
+            <SubmitContentCreateInvoice />
+            {props.success && toast("Successfully created invoice")}
+        </div>
+
     )
 }
