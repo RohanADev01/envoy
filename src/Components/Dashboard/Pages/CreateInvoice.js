@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import { Typography, Box, Button } from '@mui/material'
+import { Typography, Box } from '@mui/material'
 import { trackPromise } from 'react-promise-tracker'
 import axios from 'axios'
 import { backend_base_url } from '../../../Constants'
-import { CreateInvoiceItems, createInvoiceFieldsList } from '../CreateInvoiceItems'
+import { CreateInvoiceItems } from '../CreateInvoiceItems'
 import { useAuthDataContext } from '../../Landing/UserAuth'
 import { FailAlert, SuccessAlert } from '../../Landing/Constants'
 import { LoadingIndicatorCreateInvoice } from '../constants'
@@ -20,14 +20,16 @@ export const CreateInvoice = () => {
         event.preventDefault();
         resetAlerts();
 
-        const data = new FormData(event.currentTarget);
+        // const data = new FormData(event.currentTarget);
         
         let body_details = {
             "token": auth.user,
             "invoice_data": dummyData
         };
         
-        // NOTE: UNCOMMENT AND CHANGE "invoice_data" FIELD TO {} IF YOU WANT TO MANUALLY ENTER DATA
+        // NOTE: UNCOMMENT AND CHANGE "invoice_data" FIELD TO {} IF YOU WANT TO MANUALLY ENTER DATA 
+        // AND ADD THE 'required' field to line 57 in CreateInvoiceItems.js
+
         // createInvoiceFieldsList.forEach((field) => {
         //     body_details["invoice_data"][field] = data.get(field)
         // });
@@ -66,7 +68,7 @@ export const CreateInvoice = () => {
                     let msg = data.data.msg
                     setAlertContent(msg)
 
-                    if (msg == `Successfully created and stored invoice for ${auth.email}`) {
+                    if (msg === `Successfully created and stored invoice for ${auth.email}`) {
                         setSuccessAlert(true)
                     } else {
                         setFailAlert(true)
