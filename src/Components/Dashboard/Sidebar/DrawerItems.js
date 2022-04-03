@@ -50,7 +50,7 @@ export default function DrawerList(props) {
         {activeLink.objects.map((element, index) => (
           <React.Fragment>
             <div key={index} onClick={() => handleLinkChange(index)}>
-              <Link to={element.route}>
+              <Link style={{ textDecoration: 'none' }} to={element.route}>
                 <ListItem sx={toggleStyles('background', index)} button>
                   <ListItemIcon sx={toggleStyles('icon', index)}>
                     {element.icon}
