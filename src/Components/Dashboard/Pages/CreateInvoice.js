@@ -43,17 +43,14 @@ export const CreateInvoice = () => {
                 .then((data) => {
                     console.log(data)
 
-                    // Uncomment the relevant lines once invoice creation api is working!!!
+                    let msg = data.data.msg
+                    setAlertContent(msg)
 
-                    // let msg = data.data.msg
-                    // let token = data.data.token
-                    // setAlertContent(msg)
-
-                    // if (msg == `Successfully created and stored invoice for ${auth.email}`) {
-                    //     setSuccessAlert(true)
-                    // } else {
-                    //     setFailAlert(true)
-                    // }
+                    if (msg == `Successfully created and stored invoice for ${auth.email}`) {
+                        setSuccessAlert(true)
+                    } else {
+                        setFailAlert(true)
+                    }
                 })
                 .catch((error) => {
                     console.log(error)
