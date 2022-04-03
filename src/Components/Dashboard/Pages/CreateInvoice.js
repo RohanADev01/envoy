@@ -21,15 +21,15 @@ export const CreateInvoice = () => {
         resetAlerts();
 
         const data = new FormData(event.currentTarget);
-
+        
         let body_details = {
             "token": auth.user,
-            "invoice_data": {}
+            "invoice_data": dummyData
         };
         
-        createInvoiceFieldsList.forEach((field) => {
-            body_details["invoice_data"][field] = data.get(field)
-        });
+        // createInvoiceFieldsList.forEach((field) => {
+        //     body_details["invoice_data"][field] = data.get(field)
+        // });
         
         body_details["invoice_data"]["UBLID"] = Number(body_details["invoice_data"]["UBLID"]);
         body_details["invoice_data"]["InvoiceCode"] = Number(body_details["invoice_data"]["InvoiceCode"]);
@@ -53,6 +53,7 @@ export const CreateInvoice = () => {
         body_details["invoice_data"]["InvoicePriceAmount"] = Number(body_details["invoice_data"]["InvoicePriceAmount"]);
         body_details["invoice_data"]["InvoiceBaseQuantity"] = Number(body_details["invoice_data"]["InvoiceBaseQuantity"]);
         
+        console.log(body_details)
 
         const create_url = backend_base_url + 'invoice/create'
 
