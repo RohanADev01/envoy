@@ -13,13 +13,12 @@ export const MyInvoices = () => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        "token": auth.user,
+        "token": auth.user
       },
     })
       .then((res) => res.json())
       .then((data) => setInvoiceList(data.invoices))
   }, [])
-  console.log(invoices)
 
   return (
     <>

@@ -15,7 +15,7 @@ const SubmitContentCreateInvoice = (props) => {
                 fontFamily='Montserrat'
                 sx={{ mt: 3, mb: 2 }}
             >
-                {"--> Create Invoice with DUMMY DATA <--"}
+                Create Invoice
             </Button>
         </React.Fragment>
     )

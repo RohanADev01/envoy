@@ -27,6 +27,7 @@ export const CreateInvoice = () => {
             "invoice_data": dummyData
         };
         
+        // NOTE: UNCOMMENT AND CHANGE "invoice_data" FIELD TO {} IF YOU WANT TO MANUALLY ENTER DATA
         // createInvoiceFieldsList.forEach((field) => {
         //     body_details["invoice_data"][field] = data.get(field)
         // });
@@ -53,8 +54,6 @@ export const CreateInvoice = () => {
         body_details["invoice_data"]["InvoicePriceAmount"] = Number(body_details["invoice_data"]["InvoicePriceAmount"]);
         body_details["invoice_data"]["InvoiceBaseQuantity"] = Number(body_details["invoice_data"]["InvoiceBaseQuantity"]);
         
-        console.log(body_details)
-
         const create_url = backend_base_url + 'invoice/create'
 
         trackPromise(
