@@ -2,15 +2,18 @@ import React from 'react'
 import { Typography } from '@mui/material'
 import { backend_base_url } from '../../../Constants'
 import Invoice from '../Invoice'
+import { useAuthDataContext } from '../../Landing/UserAuth'
 
 export const MyInvoices = () => {
+  const auth = useAuthDataContext();
+
   const [invoices, setInvoiceList] = React.useState([])
   React.useEffect(() => {
     fetch(backend_base_url + 'invoice/list', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        token: window.localStorage.getItem('user'),
+        token: auth.user,
       },
     })
       .then((res) => res.json())
