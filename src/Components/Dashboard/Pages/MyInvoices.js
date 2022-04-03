@@ -5,16 +5,16 @@ import Invoice from '../Invoice'
 import { useAuthDataContext } from '../../Landing/UserAuth'
 
 export const MyInvoices = () => {
-
   const [invoices, setInvoiceList] = React.useState([])
+  const auth = useAuthDataContext();
+  const token = auth.user
+
   React.useEffect(() => {
-    const auth = useAuthDataContext();
-    
     fetch(backend_base_url + 'invoice/list', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        "token": auth.user
+        "token": token
       },
     })
       .then((res) => res.json())
