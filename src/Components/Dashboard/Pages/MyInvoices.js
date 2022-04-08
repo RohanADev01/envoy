@@ -1,8 +1,11 @@
 import React from 'react'
-import { Typography } from '@mui/material'
+import { Card, Grid, Typography } from '@mui/material'
 import { backend_base_url } from '../../../Constants'
-import Invoice from '../Invoice'
+import InvoiceOptions from '../InvoiceOptions'
 import { useAuthDataContext } from '../../Landing/UserAuth'
+import { pageTitle } from '../styles'
+import { InvoicesTable } from '../InvoicesTable'
+import { InvoiceDataTable } from '../InvoiceDataTable'
 
 export const MyInvoices = () => {
   const [invoices, setInvoiceList] = React.useState([])
@@ -21,24 +24,16 @@ export const MyInvoices = () => {
       .then((data) => setInvoiceList(data.invoices))
   }, [])
 
+  console.log(invoices)
+
   return (
     <>
-      <Typography component='h1' fontSize='1.8rem' fontFamily='Montserrat'>
+      <Typography component='h1' fontSize='1.8rem' fontFamily='Montserrat' sx={pageTitle}>
         My Invoices
       </Typography>
-      {invoices.map(({ customer_name, timestamp, size, content }, idx) => {
-        return (
-          <div key={idx}>
-            <Invoice
-              customerName={customer_name}
-              timestamp={timestamp}
-              size={size}
-              content={content}
-            />
-            <hr />
-          </div>
-        )
-      })}
+      <InvoiceDataTable tableData={invoices}/>
+      {/* <InvoicesTable/> */}
+      {/* <UserStats/> */}
     </>
   )
 }
