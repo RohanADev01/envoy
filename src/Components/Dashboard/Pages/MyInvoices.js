@@ -4,7 +4,6 @@ import { backend_base_url } from '../../../Constants'
 import InvoiceOptions from '../InvoiceOptions'
 import { useAuthDataContext } from '../../Landing/UserAuth'
 import { pageTitle } from '../styles'
-import { InvoicesTable } from '../InvoicesTable'
 import { InvoiceDataTable } from '../InvoiceDataTable'
 
 export const MyInvoices = () => {
@@ -32,8 +31,6 @@ export const MyInvoices = () => {
         My Invoices
       </Typography>
       <InvoiceDataTable tableData={invoices}/>
-      {/* <InvoicesTable/> */}
-      {/* <UserStats/> */}
     </>
   )
 }
