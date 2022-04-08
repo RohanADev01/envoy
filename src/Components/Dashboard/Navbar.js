@@ -92,7 +92,7 @@ function Navbar(props) {
           style={{
             zIndex: 1301,
             background:
-              'linear-gradient(0.25turn, #ff5003, #ed5f00, #f16208, orangered)',
+              '#2A9D8F'
           }}
           position='fixed'
         >

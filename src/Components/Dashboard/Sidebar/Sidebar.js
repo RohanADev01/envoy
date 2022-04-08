@@ -3,9 +3,9 @@ import { Drawer, Divider } from '@mui/material'
 
 import IconButton from '@mui/material/IconButton'
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
-import HomeIcon from '@mui/icons-material/Home'
 import InboxIcon from '@mui/icons-material/MoveToInbox'
 import NoteAddIcon from '@mui/icons-material/NoteAdd'
+import { Dashboard } from '@mui/icons-material'
 
 import DrawerList from './DrawerItems'
 import { Main, drawerWidth, DrawerHeader } from './Styles'
@@ -15,9 +15,9 @@ import { MyInvoices } from '../Pages/MyInvoices'
 
 function Sidebar(props) {
   const [activeLink, changeLinkState] = useState({
-    activeItem: { icon: <HomeIcon />, text: 'Home', route: '/dashboard/' },
+    activeItem: { icon: <Dashboard/>, text: 'Dashboard', route: '/dashboard/' },
     objects: [
-      { icon: <HomeIcon />, text: 'Home', route: '/dashboard/' },
+      { icon: <Dashboard/>, text: 'Dashboard', route: '/dashboard/' },
       {
         icon: <NoteAddIcon />,
         text: 'Create Invoice',
@@ -51,7 +51,6 @@ function Sidebar(props) {
             <ChevronLeftIcon />
           </IconButton>
         </DrawerHeader>
-        <Divider />
         <DrawerList activeLink={activeLink} changeLinkState={changeLinkState} />
       </Drawer>
 
