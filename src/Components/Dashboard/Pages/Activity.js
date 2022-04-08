@@ -7,8 +7,6 @@ import { ResponsiveContainer, ComposedChart, AreaChart, LineChart, Line, Area, P
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import AdfScannerOutlinedIcon from '@mui/icons-material/AdfScannerOutlined';
 import CallReceivedIcon from '@mui/icons-material/CallReceived';
-// styles
-import '../Stats.css'
 
 export const Activity = () => {
   const auth = useAuthDataContext()
