@@ -109,7 +109,7 @@ function Login(props) {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            height: '700px',
+            height: '600px',
             width: '550px',
             borderRadius: '20px',
             marginRight: '10vw',
