@@ -41,24 +41,15 @@ export const linkContentText = {
 }
 
 export const activeHighlight = {
-  // background: '#ffefd5',
-  // background: '#fcf0cc',
-  // background: '#fce0d7',
-  // background: '#ffe8e0',
-  // background: '#fff7f5',
   background: '#F3FFFE'
 }
 
 export const activeIcon = {
-  // color: 'orangered',
   color: '#2A9D8F',
   paddingLeft:2
 }
 
 export const activeText = {
-  // color: '#36454F',
-  // color: '#d95023',
-  // color: 'orangered',
   color: '#2A9D8F',
 }
 
