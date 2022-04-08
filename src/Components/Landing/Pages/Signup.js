@@ -92,7 +92,6 @@ function SignUp(props) {
       spacing={0}
       alignItems='center'
       justifyContent='center'
-      style={{ border: 'solid 1px red' }}
     >
       <div
         style={{
