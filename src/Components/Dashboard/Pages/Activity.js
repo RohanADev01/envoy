@@ -7,6 +7,7 @@ import { ResponsiveContainer, ComposedChart, AreaChart, LineChart, Line, Area, P
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import AdfScannerOutlinedIcon from '@mui/icons-material/AdfScannerOutlined';
 import CallReceivedIcon from '@mui/icons-material/CallReceived';
+import CallMadeIcon from '@mui/icons-material/CallMade';
 
 export const Activity = () => {
   const auth = useAuthDataContext()
@@ -19,7 +20,7 @@ export const Activity = () => {
       <Grid container spacing={5}>
         {/* Montly Earnings */}
         <Grid item lg={4} md={6} xs={12}>
-          <Widget title="Monthly Earnings" upperTitle bodyClass={fullHeightBody} className={card} icon={<AttachMoneyIcon fontSize='medium'/>}>
+          <Widget title="Monthly Earnings" upperTitle bodyClass={fullHeightBody} className={card} icon={<AttachMoneyIcon fontSize='medium' />}>
             <div style={visitsNumberContainer}>
               <Grid container item alignItems="center">
                 <Grid item xs={6}>
@@ -52,7 +53,7 @@ export const Activity = () => {
         </Grid>
         {/* Annual Earning */}
         <Grid item lg={4} md={6} xs={12}>
-          <Widget title="Annual Earnings" upperTitle bodyClass={fullHeightBody} className={card} icon={<AttachMoneyIcon fontSize='medium'/>}>
+          <Widget title="Annual Earnings" upperTitle bodyClass={fullHeightBody} className={card} icon={<AttachMoneyIcon fontSize='medium' />}>
             <div style={visitsNumberContainer}>
               <Grid container item alignItems="center">
                 <Grid item xs={6}>
@@ -85,7 +86,7 @@ export const Activity = () => {
         </Grid>
         {/* Invoices Created */}
         <Grid item lg={4} md={6} xs={12}>
-          <Widget title="Total Invoices Created" upperTitle bodyClass={fullHeightBody} className={card} icon={<AdfScannerOutlinedIcon fontSize='medium'/>}>
+          <Widget title="Total Invoices Created" upperTitle bodyClass={fullHeightBody} className={card} icon={<AdfScannerOutlinedIcon fontSize='medium' />}>
             <div style={visitsNumberContainer}>
               <Grid container item alignItems="center">
                 <Grid item xs={6}>
@@ -104,7 +105,26 @@ export const Activity = () => {
         </Grid>
         {/* Invoices Received */}
         <Grid item lg={4} md={6} xs={12}>
-          <Widget title="Total Invoices Received" upperTitle bodyClass={fullHeightBody} className={card} icon={<CallReceivedIcon fontSize='medium'/>}>
+          <Widget title="Total Invoices Received" upperTitle bodyClass={fullHeightBody} className={card} icon={<CallReceivedIcon fontSize='medium' />}>
+            <div style={visitsNumberContainer}>
+              <Grid container item alignItems="center">
+                <Grid item xs={6}>
+                  <Typography size="xl" weight="medium" noWrap sx={statsBig}>
+                    12
+                  </Typography>
+                </Grid>
+                <Grid item xs={6}>
+                  <LineChart width={100} height={30} data={[{ value: 10 }, { value: 15 }, { value: 10 }, { value: 17 }, { value: 18 }]}>
+                    <Line type="natural" dataKey="value" stroke={success.backgroundColor} strokeWidth={2} dot={true} />
+                  </LineChart>
+                </Grid>
+              </Grid>
+            </div>
+          </Widget>
+        </Grid>
+        {/* Invoices Sent */}
+        <Grid item lg={4} md={6} xs={12}>
+          <Widget title="Total Invoices Sent" upperTitle bodyClass={fullHeightBody} className={card} icon={<CallMadeIcon fontSize='medium' />}>
             <div style={visitsNumberContainer}>
               <Grid container item alignItems="center">
                 <Grid item xs={6}>
