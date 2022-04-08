@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Navbar from './Navbar'
 import Sidebar from './Sidebar/Sidebar'
 
@@ -8,12 +8,17 @@ function DashboardContents() {
     setOpen(!open)
   }
 
+  useEffect(()=>{
+    document.body.style.backgroundColor = "#F8FFFE"
+  }, [])
+  
   return (
     <div>
       <Navbar onChange={toggleSidebar} sideBarState={open} />
       <Sidebar onChange={toggleSidebar} sideBarState={open} />
     </div>
   )
+  
 }
 
 export default DashboardContents
