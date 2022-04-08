@@ -1,61 +1,71 @@
 import React from 'react'
-import { Grid, TextField } from '@mui/material'
+import { Divider, Grid, TextField } from '@mui/material'
 
 export const createInvoiceFieldsList = [
-    'UBLID',
-    'CustomizationID',
-    'ProfileID',
-    'ID',
-    'IssueDate',
-    'InvoiceCode',
-    'Currency',
-    'BuyerReference',
-    'AddDocReference',
-    'SupplierID',
-    'SupplierStreet',
-    'SupplierCity',
-    'SupplierPost',
-    'SupplierCountry',
-    'SupplierRegistration',
-    'CustomerStreet',
-    'CustomerAddStreet',
-    'CustomerCity',
-    'CustomerPost',
-    'CustomerCountry',
-    'CustomerRegistration',
-    'PaymentType',
-    'PaymentID',
-    'PaymentTerms',
-    'TaxAmount',
-    'TaxableAmount',
-    'TaxSubtotalAmount',
-    'TaxID',
-    'TaxPercent',
-    'TaxSchemeID',
-    'LegalLineExtension',
-    'TaxExclusiveAmount',
-    'TaxInclusiveAmount',
-    'PayableRoundingAmount',
-    'PayableAmount',
-    'InvoiceID',
-    'InvoiceQuantity',
-    'InvoiceLineExtension',
-    'InvoiceName',
-    'InvoiceTaxID',
-    'InvoiceTaxPercent',
-    'InvoiceTaxSchemeID',
-    'InvoicePriceAmount',
-    'InvoiceBaseQuantity',
+    { defaultValue: "", field: 'UBLID' },
+    { defaultValue: "", field: 'CustomizationID' },
+    { defaultValue: "", field: 'ProfileID' },
+    { defaultValue: "", field: 'ID' },
+    { defaultValue: "", field: 'IssueDate' },
+    { defaultValue: "", field: 'InvoiceCode' },
+    { defaultValue: "", field: 'Currency' },
+    { defaultValue: "", field: 'BuyerReference' },
+    { defaultValue: "", field: 'AddDocReference' },
+    { defaultValue: "", field: 'SupplierID' },
+    { defaultValue: "", field: 'SupplierStreet' },
+    { defaultValue: "", field: 'SupplierCity' },
+    { defaultValue: "", field: 'SupplierPost' },
+    { defaultValue: "", field: 'SupplierCountry' },
+    { defaultValue: "", field: 'SupplierRegistration' },
+    { defaultValue: "", field: 'CustomerStreet' },
+    { defaultValue: "", field: 'CustomerAddStreet' },
+    { defaultValue: "", field: 'CustomerCity' },
+    { defaultValue: "", field: 'CustomerPost' },
+    { defaultValue: "", field: 'CustomerCountry' },
+    { defaultValue: "", field: 'CustomerRegistration' },
+    { defaultValue: "", field: 'PaymentType' },
+    { defaultValue: "", field: 'PaymentID' },
+    { defaultValue: "", field: 'PaymentTerms' },
+    { defaultValue: "", field: 'TaxAmount' },
+    { defaultValue: "", field: 'TaxableAmount' },
+    { defaultValue: "", field: 'TaxSubtotalAmount' },
+    { defaultValue: "", field: 'TaxID' },
+    { defaultValue: "", field: 'TaxPercent' },
+    { defaultValue: "", field: 'TaxSchemeID' },
+    { defaultValue: "", field: 'LegalLineExtension' },
+    { defaultValue: "", field: 'TaxExclusiveAmount' },
+    { defaultValue: "", field: 'TaxInclusiveAmount' },
+    { defaultValue: "", field: 'PayableRoundingAmount' },
+    { defaultValue: "", field: 'PayableAmount' },
+    { defaultValue: "", field: 'InvoiceID' },
+    { defaultValue: "", field: 'InvoiceQuantity' },
+    { defaultValue: "", field: 'InvoiceLineExtension' },
+    { defaultValue: "", field: 'InvoiceName' },
+    { defaultValue: "", field: 'InvoiceTaxID' },
+    { defaultValue: "", field: 'InvoiceTaxPercent' },
+    { defaultValue: "", field: 'InvoiceTaxSchemeID' },
+    { defaultValue: "", field: 'InvoicePriceAmount' },
+    { defaultValue: "", field: 'InvoiceBaseQuantity' },
 ]
 
 export const CreateInvoiceItems = () => {
     return (
         <div>
             <Grid container spacing={2}>
-                {createInvoiceFieldsList.map((field, idx) => (
-                    <Grid item xs={6} sm={3} key={idx}>
-                        <TextField noValidate fullWidth name={field} label={field} id={field} />
-                    </Grid>
+                {createInvoiceFieldsList.map((form_obj, idx) => (
+                    <>
+                        {form_obj.newSection === "" ? <></> : (
+                            <div>
+                                <Grid item xs={2}>
+                                    <Divider orientation="vertical" flexItem />
+                                </Grid>
+                                <h1>{form_obj.newSection}</h1>
+                            </div>
+                        )}
+                        <Grid item xs={6} sm={3} key={idx}>
+                            <TextField fullWidth name={form_obj.field} label={form_obj.field} id={form_obj.field} />
+                        </Grid>
+                    </>
                 ))}
             </Grid>
         </div>

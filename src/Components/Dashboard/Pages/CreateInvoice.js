@@ -8,6 +8,7 @@ import { useAuthDataContext } from '../../Landing/UserAuth'
 import { FailAlert, SuccessAlert } from '../../Landing/Constants'
 import { LoadingIndicatorCreateInvoice } from '../constants'
 import { dummyData } from '../CreateInvoiceDummyData'
+import { pageTitle } from '../styles'
 
 export const CreateInvoice = () => {
     const [alertFail, setFailAlert] = useState(false);
@@ -90,7 +91,7 @@ export const CreateInvoice = () => {
 
     return (
         <>
-            <Typography component="h1" variant="h5" fontFamily="Montserrat" fontWeight="700" alignItems="flex-start" marginBottom="10px">
+            <Typography component="h1" variant="h5" fontFamily="Montserrat" fontWeight="700" alignItems="flex-start" marginBottom="10px" sx={pageTitle}>
                 Create Invoice
             </Typography>
             <Box component="form" onChange={resetAlerts} onSubmit={handleSubmit} sx={{ mt: 3 }}>
