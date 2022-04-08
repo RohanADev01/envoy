@@ -6,7 +6,7 @@ import { Container, Grid, IconButton, Typography } from '@mui/material'
 import { pageTitle, statsSmall } from './styles'
 import FileDownloadIcon from '@mui/icons-material/FileDownload';
 
-export default function InvoicePopUp(props) {
+export default function InvoicePopUpRaw(props) {
   const { onClose, open, name, content } = props
 
   const downloadTxtFile = () => {
