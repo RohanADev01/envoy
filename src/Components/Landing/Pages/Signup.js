@@ -4,7 +4,6 @@ import { trackPromise } from 'react-promise-tracker'
 import { useAuthDataContext } from '../UserAuth'
 
 import LogoDark from '../../../assets/LogoDark.svg'
-import SignupImage from '../../../assets/SignupImage.jpg'
 
 import axios from 'axios'
 import {
@@ -18,6 +17,7 @@ import {
 } from '@mui/material'
 import { FailAlert, LoadingIndicatorSignup, SuccessAlert } from '../Constants'
 import { backend_base_url } from '../../../Constants'
+import { backgroundDivSignup, boxFlex, cardDimensions, logoDarkDimensions } from '../styles'
 
 function SignUp(props) {
   const navigate = useNavigate()
@@ -93,31 +93,8 @@ function SignUp(props) {
       alignItems='center'
       justifyContent='center'
     >
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          background: `url(${SignupImage})`,
-          backgroundSize: 'cover',
-          backgroundRepeat: 'no-repeat',
-          height: '100vh',
-          width: '100vw',
-          backgroundPosition: 'top',
-        }}
-      >
-        <Card
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            height: '600px',
-            width: '550px',
-            borderRadius: '20px',
-            marginRight: '10vw',
-            marginLeft: '10vw',
-          }}
-        >
+      <div style={backgroundDivSignup}>
+        <Card style={cardDimensions}>
           <Grid
             container
             height='100vh'
@@ -127,7 +104,7 @@ function SignUp(props) {
           >
             <Container component='main' maxWidth='xs'>
               <img
-                style={{ width: 120, height: 'auto', marginBottom: '5vh' }}
+                style={logoDarkDimensions}
                 src={LogoDark}
                 alt='Landing page logo'
               />
@@ -145,14 +122,7 @@ function SignUp(props) {
               >
                 Sign up
               </Typography>
-              <Box
-                sx={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}
-              >
+              <Box sx={boxFlex}>
                 <Box
                   component='form'
                   onChange={resetAlerts}
