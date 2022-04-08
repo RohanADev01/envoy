@@ -27,7 +27,7 @@ export const LoadingIndicatorCreateInvoice = (props) => {
     return promiseInProgress ? (
         <img
             src={loadingImage}
-            style={{ position: 'center', height: '100px', width: '100px' }}
+            style={{ position: 'center', height: '100px', width: '133px' }}
             alt=''
         />
     ) : (
