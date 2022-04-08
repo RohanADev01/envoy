@@ -18,7 +18,7 @@ export const Activity = () => {
       </Typography>
       <Grid container spacing={5}>
         {/* Montly Earnings */}
-        <Grid item lg={3} md={4} sm={6} xs={12}>
+        <Grid item lg={4} md={6} xs={12}>
           <Widget title="Monthly Earnings" upperTitle bodyClass={fullHeightBody} className={card} icon={<AttachMoneyIcon fontSize='medium'/>}>
             <div style={visitsNumberContainer}>
               <Grid container item alignItems="center">
@@ -51,7 +51,7 @@ export const Activity = () => {
           </Widget>
         </Grid>
         {/* Annual Earning */}
-        <Grid item lg={3} md={4} sm={6} xs={12}>
+        <Grid item lg={4} md={6} xs={12}>
           <Widget title="Annual Earnings" upperTitle bodyClass={fullHeightBody} className={card} icon={<AttachMoneyIcon fontSize='medium'/>}>
             <div style={visitsNumberContainer}>
               <Grid container item alignItems="center">
@@ -84,7 +84,7 @@ export const Activity = () => {
           </Widget>
         </Grid>
         {/* Invoices Created */}
-        <Grid item lg={3} md={4} sm={6} xs={12}>
+        <Grid item lg={4} md={6} xs={12}>
           <Widget title="Total Invoices Created" upperTitle bodyClass={fullHeightBody} className={card} icon={<AdfScannerOutlinedIcon fontSize='medium'/>}>
             <div style={visitsNumberContainer}>
               <Grid container item alignItems="center">
@@ -103,7 +103,7 @@ export const Activity = () => {
           </Widget>
         </Grid>
         {/* Invoices Received */}
-        <Grid item lg={3} md={4} sm={6} xs={12}>
+        <Grid item lg={4} md={6} xs={12}>
           <Widget title="Total Invoices Received" upperTitle bodyClass={fullHeightBody} className={card} icon={<CallReceivedIcon fontSize='medium'/>}>
             <div style={visitsNumberContainer}>
               <Grid container item alignItems="center">

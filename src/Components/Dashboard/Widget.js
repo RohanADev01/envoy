@@ -16,6 +16,7 @@ export default function Widget({
     style,
     noWidgetShadow,
     icon,
+    minWidth,
     ...props
 }) {
 
