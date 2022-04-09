@@ -1,71 +1,115 @@
 import React from 'react'
-import { Divider, Grid, TextField } from '@mui/material'
+import {
+    Accordion,
+    AccordionDetails,
+    AccordionSummary,
+    Divider,
+    Grid,
+    TextField,
+    Typography,
+} from '@mui/material'
+import { ExpandMore } from '@mui/icons-material'
+import { statsSmall } from './styles'
 
-export const createInvoiceFieldsList = [
-    { defaultValue: "", field: 'UBLID' },
-    { defaultValue: "", field: 'CustomizationID' },
-    { defaultValue: "", field: 'ProfileID' },
-    { defaultValue: "", field: 'ID' },
-    { defaultValue: "", field: 'IssueDate' },
-    { defaultValue: "", field: 'InvoiceCode' },
-    { defaultValue: "", field: 'Currency' },
-    { defaultValue: "", field: 'BuyerReference' },
-    { defaultValue: "", field: 'AddDocReference' },
-    { defaultValue: "", field: 'SupplierID' },
-    { defaultValue: "", field: 'SupplierStreet' },
-    { defaultValue: "", field: 'SupplierCity' },
-    { defaultValue: "", field: 'SupplierPost' },
-    { defaultValue: "", field: 'SupplierCountry' },
-    { defaultValue: "", field: 'SupplierRegistration' },
-    { defaultValue: "", field: 'CustomerStreet' },
-    { defaultValue: "", field: 'CustomerAddStreet' },
-    { defaultValue: "", field: 'CustomerCity' },
-    { defaultValue: "", field: 'CustomerPost' },
-    { defaultValue: "", field: 'CustomerCountry' },
-    { defaultValue: "", field: 'CustomerRegistration' },
-    { defaultValue: "", field: 'PaymentType' },
-    { defaultValue: "", field: 'PaymentID' },
-    { defaultValue: "", field: 'PaymentTerms' },
-    { defaultValue: "", field: 'TaxAmount' },
-    { defaultValue: "", field: 'TaxableAmount' },
-    { defaultValue: "", field: 'TaxSubtotalAmount' },
-    { defaultValue: "", field: 'TaxID' },
-    { defaultValue: "", field: 'TaxPercent' },
-    { defaultValue: "", field: 'TaxSchemeID' },
-    { defaultValue: "", field: 'LegalLineExtension' },
-    { defaultValue: "", field: 'TaxExclusiveAmount' },
-    { defaultValue: "", field: 'TaxInclusiveAmount' },
-    { defaultValue: "", field: 'PayableRoundingAmount' },
-    { defaultValue: "", field: 'PayableAmount' },
-    { defaultValue: "", field: 'InvoiceID' },
-    { defaultValue: "", field: 'InvoiceQuantity' },
-    { defaultValue: "", field: 'InvoiceLineExtension' },
-    { defaultValue: "", field: 'InvoiceName' },
-    { defaultValue: "", field: 'InvoiceTaxID' },
-    { defaultValue: "", field: 'InvoiceTaxPercent' },
-    { defaultValue: "", field: 'InvoiceTaxSchemeID' },
-    { defaultValue: "", field: 'InvoicePriceAmount' },
-    { defaultValue: "", field: 'InvoiceBaseQuantity' },
+export const createInvoiceFieldDetails = [
+    {
+        title: 'Invoice Identification',
+        fields: [
+            { fieldSize: 2, defaultValue: '', field: 'InvoiceID' },
+            { fieldSize: 2, defaultValue: '', field: 'ID' },
+            { fieldSize: 2, defaultValue: '', field: 'InvoiceTaxSchemeID' },
+            { fieldSize: 12, defaultValue: '', field: 'InvoiceName' },
+            { fieldSize: 12, defaultValue: '', field: 'IssueDate' },
+        ],
+    },
+    {
+        title: 'Payment Details and Costs',
+        fields: [
+            { fieldSize: 2, defaultValue: '', field: 'PayableAmount' },
+            { fieldSize: 2, defaultValue: '', field: 'InvoicePriceAmount' },
+            { fieldSize: 2, defaultValue: '', field: 'InvoiceLineExtension' },
+            { fieldSize: 2, defaultValue: '', field: 'LegalLineExtension' },
+            { fieldSize: 2, defaultValue: '', field: 'InvoiceQuantity' },
+            { fieldSize: 2, defaultValue: '', field: 'InvoiceBaseQuantity' },
+            { fieldSize: 2, defaultValue: '', field: 'Currency' },
+            { fieldSize: 4, defaultValue: '', field: 'PaymentTerms' },
+        ],
+    },
+    {
+        title: 'Tax Details',
+        fields: [
+            { fieldSize: 2, defaultValue: '', field: 'TaxAmount' },
+            { fieldSize: 2, defaultValue: '', field: 'TaxableAmount' },
+            { fieldSize: 2, defaultValue: '', field: 'TaxID' },
+            { fieldSize: 2, defaultValue: '', field: 'TaxExclusiveAmount' },
+            { fieldSize: 2, defaultValue: '', field: 'TaxInclusiveAmount' },
+            { fieldSize: 2, defaultValue: '', field: 'TaxSchemeID' },
+        ],
+    },
+    {
+        title: 'Supplier Details',
+        fields: [
+            { fieldSize: 12, defaultValue: '', field: 'SupplierRegistration' },
+            { fieldSize: 12, defaultValue: '', field: 'SupplierStreet' },
+            { fieldSize: 12, defaultValue: '', field: 'SupplierCity' },
+            { fieldSize: 12, defaultValue: '', field: 'SupplierPost' },
+            { fieldSize: 12, defaultValue: '', field: 'SupplierCountry' },
+        ],
+    },
+    {
+        title: 'Customer Details',
+        fields: [
+            { fieldSize: 12, defaultValue: '', field: 'CustomerRegistration' },
+            { fieldSize: 12, defaultValue: '', field: 'CustomerStreet' },
+            { fieldSize: 12, defaultValue: '', field: 'CustomerCity' },
+            { fieldSize: 12, defaultValue: '', field: 'CustomerPost' },
+            { fieldSize: 12, defaultValue: '', field: 'CustomerCountry' },
+        ],
+    },
+    // {
+    //     title: 'Optional',
+    //     fields: [
+    //         { fieldSize: 12, defaultValue: '', field: 'UBLID' }, ,
+    //         { fieldSize: 12, defaultValue: '', field: 'CustomizationID' },
+    //         { fieldSize: 12, defaultValue: '', field: 'ProfileID' },
+    //         { fieldSize: 12, defaultValue: '', field: 'InvoiceTaxID' },
+    //         { fieldSize: 12, defaultValue: '', field: 'InvoiceCode' },
+    //         { fieldSize: 12, defaultValue: '', field: 'AddDocReference' },
+    //         { fieldSize: 12, defaultValue: '', field: 'PaymentType' },
+    //         { fieldSize: 12, defaultValue: '', field: 'PaymentID' }
+    //     ],
+    // },
+
+    // { fieldSize: 12, defaultValue: '', field: 'SupplierID' },
+    // { fieldSize: 12, defaultValue: '', field: 'BuyerReference' },
 ]
 
 export const CreateInvoiceItems = () => {
     return (
         <div>
             <Grid container spacing={2}>
-                {createInvoiceFieldsList.map((form_obj, idx) => (
-                    <>
-                        {form_obj.newSection === "" ? <></> : (
-                            <div>
-                                <Grid item xs={2}>
-                                    <Divider orientation="vertical" flexItem />
+                {createInvoiceFieldDetails.map((sectionObj, idx) => (
+                    <Grid item xs={12} key={`header-${idx}`}>
+                        <Accordion sx={{ width: '100%', margin: "0.25rem" }}>
+                            <AccordionSummary expandIcon={<ExpandMore />}>
+                                <Typography variant='h5' sx={{...statsSmall, fontWeight:"400"}}>{sectionObj.title}</Typography>
+                            </AccordionSummary>
+                            <AccordionDetails>
+                                <Grid container justifyContent="left" alignItems="left" spacing={4}>
+                                    {sectionObj.fields.map((field_obj, field_idx) => (
+                                        <React.Fragment>
+                                            <Grid item style={{ margin: "0.2rem" }} sm={(field_obj.fieldSize === 12 ? field_obj.fieldSize : field_obj.fieldSize + 4)} md={(field_obj.fieldSize)} key={`grid-item-${idx}-${field_idx}`}>
+                                                {field_obj.defaultValue === '' ?
+                                                    // <TextField required fullWidth variant="standard" name={field_obj.field} label={field_obj.field} id={field_obj.field} />
+                                                    <TextField fullWidth variant="standard" name={field_obj.field} label={field_obj.field} id={field_obj.field} />
+                                                    : <TextField fullWidth variant="standard" name={field_obj.field} label={field_obj.field} id={field_obj.field} />}
+                                            </Grid>
+                                        </React.Fragment>
+                                    ))}
                                 </Grid>
-                                <h1>{form_obj.newSection}</h1>
-                            </div>
-                        )}
-                        <Grid item xs={6} sm={3} key={idx}>
-                            <TextField fullWidth name={form_obj.field} label={form_obj.field} id={form_obj.field} />
-                        </Grid>
-                    </>
+                            </AccordionDetails>
+                        </Accordion>
+                    </Grid>
                 ))}
             </Grid>
         </div>
