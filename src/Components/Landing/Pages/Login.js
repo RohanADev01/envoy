@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { Navigate, useNavigate } from 'react-router-dom'
 import { trackPromise } from 'react-promise-tracker'
 import { useAuthDataContext } from '../UserAuth'
 
@@ -24,6 +24,12 @@ function Login(props) {
   const handleNewUser = () => {
     navigate('/signup')
   }
+
+  useEffect(() => {
+    if (localStorage.getItem('user')) {
+      navigate('/dashboard')
+    }
+  }, [])
 
   const [alertFail, setFailAlert] = useState(false)
   const [alertSuccess, setSuccessAlert] = useState(false)
@@ -61,9 +67,11 @@ function Login(props) {
             setTimeout(function () {
               console.log('Login Successful')
               // Persist user session and redirect to user dashboard here
+              localStorage.setItem('user', token)
+              localStorage.setItem('email', email)
               auth.login(token, email)
               navigate('/dashboard')
-            }, 1000)
+            }, 500)
           } else {
             setFailAlert(true)
           }
@@ -83,92 +91,94 @@ function Login(props) {
   }
 
   return (
-    <Grid
-      container
-      direction='row'
-      flexGrow={1}
-      spacing={0}
-      alignItems='center'
-      justifyContent='center'
-    >
-      <div style={backgroundDivLogin}>
-        <Card style={cardDimensions}>
-          <Grid
-            container
-            direction='column'
-            alignItems='center'
-            justifyContent='center'
-          >
-            <Container component='main' maxWidth='xs'>
-              <img
-                style={logoDarkDimensions}
-                src={LogoDark}
-                alt='Landing page logo'
-              />
-            </Container>
+    <>
+      <Grid
+        container
+        direction='row'
+        flexGrow={1}
+        spacing={0}
+        alignItems='center'
+        justifyContent='center'
+      >
+        <div style={backgroundDivLogin}>
+          <Card style={cardDimensions}>
+            <Grid
+              container
+              direction='column'
+              alignItems='center'
+              justifyContent='center'
+            >
+              <Container component='main' maxWidth='xs'>
+                <img
+                  style={logoDarkDimensions}
+                  src={LogoDark}
+                  alt='Landing page logo'
+                />
+              </Container>
 
-            <Container component='main' maxWidth='xs'>
-              <CssBaseline />
-              <Typography
-                component='h1'
-                variant='h5'
-                fontFamily='Montserrat'
-                fontWeight='700'
-                alignItems='flex-start'
-                marginBottom='10px'
-              >
-                Login
-              </Typography>
-              <Box sx={boxFlex}>
-                <Box
-                  component='form'
-                  onChange={resetAlerts}
-                  onSubmit={handleSubmit}
-                  sx={{ mt: 3 }}
+              <Container component='main' maxWidth='xs'>
+                <CssBaseline />
+                <Typography
+                  component='h1'
+                  variant='h5'
+                  fontFamily='Montserrat'
+                  fontWeight='700'
+                  alignItems='flex-start'
+                  marginBottom='10px'
                 >
-                  <Grid container spacing={2}>
-                    <Grid item xs={12}>
-                      <TextField
-                        required
-                        fullWidth
-                        id='email'
-                        label='Email Address'
-                        name='email'
-                        autoComplete='email'
-                        autoFocus
-                      />
+                  Login
+                </Typography>
+                <Box sx={boxFlex}>
+                  <Box
+                    component='form'
+                    onChange={resetAlerts}
+                    onSubmit={handleSubmit}
+                    sx={{ mt: 3 }}
+                  >
+                    <Grid container spacing={2}>
+                      <Grid item xs={12}>
+                        <TextField
+                          required
+                          fullWidth
+                          id='email'
+                          label='Email Address'
+                          name='email'
+                          autoComplete='email'
+                          autoFocus
+                        />
+                      </Grid>
+                      <Grid item xs={12}>
+                        <TextField
+                          required
+                          fullWidth
+                          name='password'
+                          label='Password'
+                          type='password'
+                          id='password'
+                          autoComplete='new-password'
+                        />
+                      </Grid>
                     </Grid>
-                    <Grid item xs={12}>
-                      <TextField
-                        required
-                        fullWidth
-                        name='password'
-                        label='Password'
-                        type='password'
-                        id='password'
-                        autoComplete='new-password'
-                      />
-                    </Grid>
-                  </Grid>
-                  <FailAlert
-                    alertFail={alertFail}
-                    alertContent={alertContent}
-                  />
-                  <SuccessAlert
-                    alertSuccess={alertSuccess}
-                    alertContent={alertContent}
-                  />
-                  <LoadingIndicatorLogin
-                    handleNewUser={handleNewUser}
-                    registered={alertSuccess}
-                  />
+                    <FailAlert
+                      alertFail={alertFail}
+                      alertContent={alertContent}
+                    />
+                    <SuccessAlert
+                      alertSuccess={alertSuccess}
+                      alertContent={alertContent}
+                    />
+                    <LoadingIndicatorLogin
+                      handleNewUser={handleNewUser}
+                      registered={alertSuccess}
+                    />
+                  </Box>
                 </Box>
-              </Box>
-            </Container>
-          </Grid>
-        </Card>
-      </div>
-    </Grid>
+              </Container>
+            </Grid>
+          </Card>
+        </div>
+      </Grid>
+    </>
   )
 }
 

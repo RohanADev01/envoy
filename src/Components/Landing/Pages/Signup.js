@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { Navigate, useNavigate } from 'react-router-dom'
 import { trackPromise } from 'react-promise-tracker'
 import { useAuthDataContext } from '../UserAuth'
 
@@ -24,6 +24,12 @@ function SignUp(props) {
   const handleExistingUser = () => {
     navigate('/login')
   }
+
+  useEffect(() => {
+    if (localStorage.getItem('user')) {
+      navigate('/dashboard')
+    }
+  }, [])
 
   const [alertFail, setFailAlert] = useState(false)
   const [alertSuccess, setSuccessAlert] = useState(false)
@@ -63,9 +69,13 @@ function SignUp(props) {
             setTimeout(function () {
               console.log('Signup Successful')
               // Persist user session and redirect to user dashboard
-              auth.login(token, email)
+              localStorage.setItem('user', token)
+              localStorage.setItem('email', email)
+              localStorage.setItem('firstname', firstname)
+              localStorage.setItem('lastname', lastname)
+              auth.register(token, email, firstname, lastname)
               navigate('/dashboard')
-            }, 1000)
+            }, 500)
           } else {
             setFailAlert(true)
           }
@@ -85,113 +95,115 @@ function SignUp(props) {
   }
 
   return (
-    <Grid
-      container
-      direction='row'
-      flexGrow={1}
-      spacing={0}
-      alignItems='center'
-      justifyContent='center'
-    >
-      <div style={backgroundDivSignup}>
-        <Card style={cardDimensions}>
-          <Grid
-            container
-            height='100vh'
-            direction='column'
-            alignItems='center'
-            justifyContent='center'
-          >
-            <Container component='main' maxWidth='xs'>
-              <img
-                style={logoDarkDimensions}
-                src={LogoDark}
-                alt='Landing page logo'
-              />
-            </Container>
+    <>
+      <Grid
+        container
+        direction='row'
+        flexGrow={1}
+        spacing={0}
+        alignItems='center'
+        justifyContent='center'
+      >
+        <div style={backgroundDivSignup}>
+          <Card style={cardDimensions}>
+            <Grid
+              container
+              height='100vh'
+              direction='column'
+              alignItems='center'
+              justifyContent='center'
+            >
+              <Container component='main' maxWidth='xs'>
+                <img
+                  style={logoDarkDimensions}
+                  src={LogoDark}
+                  alt='Landing page logo'
+                />
+              </Container>
 
-            <Container component='main' maxWidth='xs'>
-              <CssBaseline />
-              <Typography
-                component='h1'
-                variant='h5'
-                fontFamily='Montserrat'
-                fontWeight='700'
-                alignItems='flex-start'
-                marginBottom='10px'
-              >
-                Sign up
-              </Typography>
-              <Box sx={boxFlex}>
-                <Box
-                  component='form'
-                  onChange={resetAlerts}
-                  onSubmit={handleSubmit}
-                  sx={{ mt: 3 }}
+              <Container component='main' maxWidth='xs'>
+                <CssBaseline />
+                <Typography
+                  component='h1'
+                  variant='h5'
+                  fontFamily='Montserrat'
+                  fontWeight='700'
+                  alignItems='flex-start'
+                  marginBottom='10px'
                 >
-                  <Grid container spacing={2}>
-                    <Grid item xs={12} sm={6}>
-                      <TextField
-                        autoComplete='given-name'
-                        name='firstName'
-                        required
-                        fullWidth
-                        id='firstName'
-                        label='First Name'
-                        autoFocus
-                      />
+                  Sign up
+                </Typography>
+                <Box sx={boxFlex}>
+                  <Box
+                    component='form'
+                    onChange={resetAlerts}
+                    onSubmit={handleSubmit}
+                    sx={{ mt: 3 }}
+                  >
+                    <Grid container spacing={2}>
+                      <Grid item xs={12} sm={6}>
+                        <TextField
+                          autoComplete='given-name'
+                          name='firstName'
+                          required
+                          fullWidth
+                          id='firstName'
+                          label='First Name'
+                          autoFocus
+                        />
+                      </Grid>
+                      <Grid item xs={12} sm={6}>
+                        <TextField
+                          required
+                          fullWidth
+                          id='lastName'
+                          label='Last Name'
+                          name='lastName'
+                          autoComplete='family-name'
+                        />
+                      </Grid>
+                      <Grid item xs={12}>
+                        <TextField
+                          required
+                          fullWidth
+                          id='email'
+                          label='Email Address'
+                          name='email'
+                          autoComplete='email'
+                        />
+                      </Grid>
+                      <Grid item xs={12}>
+                        <TextField
+                          required
+                          fullWidth
+                          name='password'
+                          label='Password'
+                          type='password'
+                          id='password'
+                          autoComplete='new-password'
+                        />
+                      </Grid>
                     </Grid>
-                    <Grid item xs={12} sm={6}>
-                      <TextField
-                        required
-                        fullWidth
-                        id='lastName'
-                        label='Last Name'
-                        name='lastName'
-                        autoComplete='family-name'
-                      />
-                    </Grid>
-                    <Grid item xs={12}>
-                      <TextField
-                        required
-                        fullWidth
-                        id='email'
-                        label='Email Address'
-                        name='email'
-                        autoComplete='email'
-                      />
-                    </Grid>
-                    <Grid item xs={12}>
-                      <TextField
-                        required
-                        fullWidth
-                        name='password'
-                        label='Password'
-                        type='password'
-                        id='password'
-                        autoComplete='new-password'
-                      />
-                    </Grid>
-                  </Grid>
-                  <FailAlert
-                    alertFail={alertFail}
-                    alertContent={alertContent}
-                  />
-                  <SuccessAlert
-                    alertSuccess={alertSuccess}
-                    alertContent={alertContent}
-                  />
-                  <LoadingIndicatorSignup
-                    handleExistingUser={handleExistingUser}
-                    registered={alertSuccess}
-                  />
+                    <FailAlert
+                      alertFail={alertFail}
+                      alertContent={alertContent}
+                    />
+                    <SuccessAlert
+                      alertSuccess={alertSuccess}
+                      alertContent={alertContent}
+                    />
+                    <LoadingIndicatorSignup
+                      handleExistingUser={handleExistingUser}
+                      registered={alertSuccess}
+                    />
+                  </Box>
                 </Box>
-              </Box>
-            </Container>
-          </Grid>
-        </Card>
-      </div>
-    </Grid>
+              </Container>
+            </Grid>
+          </Card>
+        </div>
+      </Grid>
+    </>
   )
 }
 

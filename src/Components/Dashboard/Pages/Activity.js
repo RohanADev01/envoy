@@ -14,7 +14,8 @@ export const Activity = () => {
   return (
     <div>
       <Typography component='h1' fontSize='1.8rem' fontFamily='Montserrat' sx={pageTitle}>
-        Welcome {auth.email}
+        {/* Temporary, can change to show just name once route added to backend for getting name on login */}
+        {auth.firstname === '' ? `Welcome ${auth.email}` : `Welcome ${auth.firstname}`}
       </Typography>
       <Grid container spacing={5}>
         {/* Montly Earnings */}

@@ -69,9 +69,10 @@ function Navbar(props) {
             // Remove persistence of user session and redirect to home page
             toast(msg)
             setTimeout(() => {
-              auth.logout()
+              localStorage.removeItem('user')
+              localStorage.removeItem('email')
               navigate('/')
-            }, 5000)
+            }, 1000)
           } else {
           }
         })
