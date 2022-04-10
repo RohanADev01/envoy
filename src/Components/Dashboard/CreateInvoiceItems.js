@@ -26,8 +26,6 @@ export const createInvoiceFieldDetails = [
         title: 'Invoice Identification',
         fields: [
             { helperText: '', fieldSize: 2, defaultValue: '', field: 'Invoice ID' },
-            // ID = InvoiceID
-            // { helperText:'', fieldSize: 2, defaultValue: '', field: 'ID' },
             { helperText: 'e.g. GST, VAT', fieldSize: 2, defaultValue: 'GST', field: 'Invoice Tax Scheme ID' },
             { helperText: '', fieldSize: 12, defaultValue: '', field: 'Invoice Name' },
             { helperText: `e.g. ${today_date}`, fieldSize: 12, defaultValue: today_date, field: 'Issue Date' },
@@ -37,13 +35,7 @@ export const createInvoiceFieldDetails = [
         title: 'Payment Details and Costs',
         fields: [
             { helperText: '', fieldSize: 2, defaultValue: '', field: 'Payable Amount' },
-            // Same as payable amount
-            // { helperText: '', fieldSize: 2, defaultValue: '', field: 'Invoice Price Amount' },
-            // { helperText: '', fieldSize: 2, defaultValue: '', field: 'Invoice Line Extension' },
-            // { helperText: '', fieldSize: 2, defaultValue: '', field: 'Legal Line Extension' },
             { helperText: 'The quantity (of items) on this invoice line', fieldSize: 2, defaultValue: '0', field: 'Invoice Quantity' },
-            // Same as invoiceQuantity
-            // { helperText: '', fieldSize: 2, defaultValue: '', field: 'InvoiceBaseQuantity' },
             { helperText: 'e.g. AUD, USD', fieldSize: 2, defaultValue: 'AUD', field: 'Currency' },
             { helperText: 'Note regarding payment', fieldSize: 4, defaultValue: 'None', field: 'Payment Terms' },
         ],
@@ -78,19 +70,6 @@ export const createInvoiceFieldDetails = [
             { helperText: '', fieldSize: 12, defaultValue: 'Australia', field: 'Customer Country' },
         ],
     },
-    // {
-    //     title: 'Optional',
-    //     fields: [
-    //         { fieldSize: 12, defaultValue: '', field: 'UBLID' }, ,
-    //         { fieldSize: 12, defaultValue: '', field: 'CustomizationID' },
-    //         { fieldSize: 12, defaultValue: '', field: 'ProfileID' },
-    //         { fieldSize: 12, defaultValue: '', field: 'InvoiceTaxID' },
-    //         { fieldSize: 12, defaultValue: '', field: 'InvoiceCode' },
-    //         { fieldSize: 12, defaultValue: '', field: 'AddDocReference' },
-    //         { fieldSize: 12, defaultValue: '', field: 'PaymentType' },
-    //         { fieldSize: 12, defaultValue: '', field: 'PaymentID' }
-    //     ],
-    // },
 ]
 
 export const CreateInvoiceItems = () => {
@@ -121,10 +100,6 @@ export const CreateInvoiceItems = () => {
                                     {sectionObj.fields.map((field_obj, field_idx) => (
                                         <React.Fragment>
                                             <Grid item style={{ margin: "0.2rem" }} sm={(field_obj.fieldSize === 12 ? field_obj.fieldSize : field_obj.fieldSize + 4)} md={(field_obj.fieldSize)} key={`grid-item-${idx}-${field_idx}`}>
-                                                {/* {field_obj.defaultValue === '' ?
-                                                    // <TextField required fullWidth variant="standard" name={field_obj.field} label={field_obj.field} id={field_obj.field} />
-                                                    <TextField helperText={field_obj.helperText} fullWidth required variant="standard" name={field_obj.field} label={field_obj.field} id={field_obj.field} />
-                                                    : <TextField helperText={field_obj.helperText} fullWidth defaultValue={field_obj.defaultValue} variant="standard" name={field_obj.field} label={field_obj.field} id={field_obj.field} />} */}
                                                 <TextField required helperText={field_obj.helperText} defaultValue={field_obj.defaultValue} fullWidth variant="standard" name={field_obj.field.replace(/\s+/g, '')} label={field_obj.field} id={field_obj.field.replace(/\s+/g, '')} />
                                             </Grid>
                                         </React.Fragment>
