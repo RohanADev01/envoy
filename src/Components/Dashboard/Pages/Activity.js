@@ -37,13 +37,13 @@ export const Activity = () => {
             </div>
             <Grid container direction="row" alignItems="center">
               <Grid item xs={4}>
-                <Typography color="text" colorBrightness="secondary" noWrap sx={statsSmallHeader}>
+                <Typography color="text" noWrap sx={statsSmallHeader}>
                   Amount
                 </Typography>
                 <Typography size="md" sx={statsSmall}>860</Typography>
               </Grid>
               <Grid item xs={4}>
-                <Typography color="text" colorBrightness="secondary" noWrap sx={statsSmallHeader}>
+                <Typography color="text" noWrap sx={statsSmallHeader}>
                   Growth Rate
                 </Typography>
                 <Typography size="md" sx={statsSmall}>3.25%</Typography>
@@ -70,13 +70,13 @@ export const Activity = () => {
             </div>
             <Grid container direction="row" alignItems="center">
               <Grid item xs={4}>
-                <Typography color="text" colorBrightness="secondary" noWrap sx={statsSmallHeader}>
+                <Typography color="text" noWrap sx={statsSmallHeader}>
                   Amount
                 </Typography>
                 <Typography size="md" sx={statsSmall}>860</Typography>
               </Grid>
               <Grid item xs={4}>
-                <Typography color="text" colorBrightness="secondary" noWrap sx={statsSmallHeader}>
+                <Typography color="text" noWrap sx={statsSmallHeader}>
                   Growth Rate
                 </Typography>
                 <Typography size="md" sx={statsSmall}>3.25%</Typography>
