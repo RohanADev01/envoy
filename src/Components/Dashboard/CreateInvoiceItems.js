@@ -101,7 +101,7 @@ export const CreateInvoiceItems = () => {
                                             <Grid item style={{ margin: "0.2rem" }} sm={(field_obj.fieldSize === 12 ? field_obj.fieldSize : field_obj.fieldSize + 4)} md={(field_obj.fieldSize)} key={`grid-item-${idx}-${field_idx}`}>
                                                 {field_obj.defaultValue === '' ?
                                                     // <TextField required fullWidth variant="standard" name={field_obj.field} label={field_obj.field} id={field_obj.field} />
-                                                    <TextField fullWidth variant="standard" name={field_obj.field} label={field_obj.field} id={field_obj.field} />
+                                                    <TextField fullWidth required variant="standard" name={field_obj.field} label={field_obj.field} id={field_obj.field} />
                                                     : <TextField fullWidth variant="standard" name={field_obj.field} label={field_obj.field} id={field_obj.field} />}
                                             </Grid>
                                         </React.Fragment>
