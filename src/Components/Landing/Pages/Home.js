@@ -1,14 +1,17 @@
 import React, { useEffect } from 'react'
-import Topbar from '../Topbar'
+import { Navigate } from 'react-router-dom'
+import HomeContents from '../HomeContents'
 
 function Home() {
-  useEffect(()=>{
+  useEffect(() => {
     document.body.style.backgroundColor = "#fff"
   }, [])
 
+  const loggedIn = localStorage.getItem('user')
+
   return (
     <div>
-      <Topbar />
+      {loggedIn ? <Navigate to="/dashboard" /> : <HomeContents />}
     </div>
   )
 }

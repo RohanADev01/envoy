@@ -15,7 +15,8 @@ export const Activity = () => {
   return (
     <div>
       <Typography component='h1' fontSize='1.8rem' fontFamily='Montserrat' sx={pageTitle}>
-        Welcome {auth.email}
+        {/* Temporary, can change to show just name once route added to backend for getting name on login */}
+        {auth.firstname === '' ? `Welcome ${auth.email}` : `Welcome ${auth.firstname}`}
       </Typography>
       <Grid container spacing={5}>
         {/* Montly Earnings */}
@@ -37,13 +38,13 @@ export const Activity = () => {
             </div>
             <Grid container direction="row" alignItems="center">
               <Grid item xs={4}>
-                <Typography color="text" colorBrightness="secondary" noWrap sx={statsSmallHeader}>
+                <Typography color="text" noWrap sx={statsSmallHeader}>
                   Amount
                 </Typography>
                 <Typography size="md" sx={statsSmall}>860</Typography>
               </Grid>
               <Grid item xs={4}>
-                <Typography color="text" colorBrightness="secondary" noWrap sx={statsSmallHeader}>
+                <Typography color="text" noWrap sx={statsSmallHeader}>
                   Growth Rate
                 </Typography>
                 <Typography size="md" sx={statsSmall}>3.25%</Typography>
@@ -70,13 +71,13 @@ export const Activity = () => {
             </div>
             <Grid container direction="row" alignItems="center">
               <Grid item xs={4}>
-                <Typography color="text" colorBrightness="secondary" noWrap sx={statsSmallHeader}>
+                <Typography color="text" noWrap sx={statsSmallHeader}>
                   Amount
                 </Typography>
                 <Typography size="md" sx={statsSmall}>860</Typography>
               </Grid>
               <Grid item xs={4}>
-                <Typography color="text" colorBrightness="secondary" noWrap sx={statsSmallHeader}>
+                <Typography color="text" noWrap sx={statsSmallHeader}>
                   Growth Rate
                 </Typography>
                 <Typography size="md" sx={statsSmall}>3.25%</Typography>
