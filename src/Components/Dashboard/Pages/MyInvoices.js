@@ -17,22 +17,23 @@ export const MyInvoices = (props) => {
   const token = auth.user
 
   React.useEffect(() => {
+    let isMounted = true
     setFinishedLoading(false)
     fetch(backend_base_url + 'invoice/list', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        token: token,
+        "token": token,
       },
     })
-      .then((res) => {
-        res.json()
-        setFinishedLoading(true)
-      })
+      .then((res) => res.json())
       .then((data) => {
-        setInvoiceList(data.invoices)
-        setFinishedLoading(true)
+        if (isMounted) {
+          setInvoiceList(data.invoices)
+          setFinishedLoading(true)
+        }
       })
+    return () => { isMounted = false };
   }, [])
 
   const navigate = useNavigate()
@@ -40,8 +41,6 @@ export const MyInvoices = (props) => {
     props.changeLinkState({ ...props.activeLink, activeItem: props.item })
     navigate('/dashboard/create')
   }
-
-  console.log(invoices)
 
   return (
     <>
@@ -54,21 +53,18 @@ export const MyInvoices = (props) => {
       >
         My Invoices
       </Typography>
-      {!finishedLoading && <img src={Loading} style={{height:"100px", width:"133px"}}></img>}
+      {!finishedLoading && <img src={Loading} style={{ height: "100px", width: "133px" }}></img>}
       {finishedLoading && (invoices.length == 0 ? (
-          <React.Fragment>
-            <Typography variant='h3' sx={cardHeader}>
-              No invoices to display yet. Try creating one.
-            </Typography>
-            <Button variant="contained" onClick={handleLinkChange} sx={{ textTransform: "none", color: "#F3FFFE", backgroundColor: "#2A9D8F", '&:hover': { backgroundColor: '#2A9D8F' } }}>Create Invoice</Button>
-          </React.Fragment>
-        ) : (
-          <InvoiceDataTable tableData={invoices} />
-        ))
+        <React.Fragment>
+          <Typography variant='h3' sx={cardHeader}>
+            No invoices to display yet. Try creating one.
+          </Typography>
+          <Button variant="contained" onClick={handleLinkChange} sx={{ textTransform: "none", color: "#F3FFFE", backgroundColor: "#2A9D8F", '&:hover': { backgroundColor: '#2A9D8F' } }}>Create Invoice</Button>
+        </React.Fragment>
+      ) : (
+        <InvoiceDataTable tableData={invoices} />
+      ))
       }
-
-      {/* <InvoicesTable/> */}
-      {/* <UserStats/> */}
     </>
   )
 }
