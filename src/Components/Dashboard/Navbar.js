@@ -77,6 +77,7 @@ function Navbar(props) {
               localStorage.removeItem('email')
               localStorage.removeItem('firstname')
               localStorage.removeItem('lastname')
+              localStorage.removeItem('hex_color')
               localStorage.removeItem('registered')
               navigate('/')
             }, 1000)
