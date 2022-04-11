@@ -129,7 +129,7 @@ function Navbar(props) {
                 onClick={handleMenu}
                 color='inherit'
               >
-                <UserAvatar />
+                <UserAvatar profileColorState={props.profileColorState} />
               </IconButton>
               <Menu
                 id='menu-appbar'

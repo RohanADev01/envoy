@@ -1,6 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Home from './Components/Landing/Pages/Home'
-import DashboardContents from './Components/Dashboard/Dashboard'
 import SignUp from './Components/Landing/Pages/Signup'
 import Login from './Components/Landing/Pages/Login'
 import AuthDataProvider from './Components/Landing/UserAuth'
@@ -9,6 +8,7 @@ import { CreateInvoice } from './Components/Dashboard/Pages/CreateInvoice'
 import { Activity } from './Components/Dashboard/Pages/Activity'
 import { MyInvoices } from './Components/Dashboard/Pages/MyInvoices'
 import Profile from './Components/Dashboard/Pages/Profile'
+import DashboardContents from './Components/Dashboard/Pages/Dashboard'
 
 function App() {
   return (

@@ -81,7 +81,7 @@ function Sidebar(props) {
         )}
 
         {activeLink.activeItem.route === '/dashboard/profile' && (
-          <Profile />
+          <Profile profileColorState={props.profileColorState} />
         )}
       </Main>
     </React.Fragment>

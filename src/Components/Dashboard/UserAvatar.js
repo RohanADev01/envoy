@@ -7,12 +7,12 @@ const UserAvatar = (props) => {
     userDetails.firstname && userDetails.lastname
       ? `${userDetails.firstname[0].toUpperCase()}${userDetails.lastname[0].toUpperCase()}`
       : `${userDetails.email[0].toUpperCase()}`
-  const AvatarColor = userDetails.hex_color
-    ? { backgroundColor: userDetails.hex_color }
+  const AvatarColor = props.profileColorState['profileColor']
+    ? { backgroundColor: props.profileColorState['profileColor'] }
     : { backgroundColor: '#1ABC9C' }
 
   return (
-    <Avatar sx={{ ...AvatarColor, width: props.width, height: props.height }}>
+    <Avatar sx={{ ...AvatarColor, width: props.width, height: props.height, fontSize: props.fontSize }}>
       {AvatarInitials}
     </Avatar>
   )

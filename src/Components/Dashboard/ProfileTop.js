@@ -1,0 +1,16 @@
+import React from 'react'
+import './ProfileTop.css'
+import UserAvatar from './UserAvatar'
+
+const ProfileTop = (props) => {
+    const AvatarSize = "14vh"
+    return (
+        <div className='profile'>
+            <div className='profileCover'>
+                <UserAvatar fontSize={"8vh"} width={AvatarSize} height={AvatarSize} profileColorState={props.profileColorState} />
+            </div>
+        </div>
+    )
+}
+
+export default ProfileTop
