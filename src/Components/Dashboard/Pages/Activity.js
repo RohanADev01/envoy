@@ -8,19 +8,16 @@ import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import AdfScannerOutlinedIcon from '@mui/icons-material/AdfScannerOutlined';
 import CallReceivedIcon from '@mui/icons-material/CallReceived';
 import CallMadeIcon from '@mui/icons-material/CallMade';
+import { userDetails } from '../UserDetails'
 
 export const Activity = () => {
   const auth = useAuthDataContext()
-  let firstname = localStorage.getItem('firstname')
-  let lastname = localStorage.getItem('lastname')
-  let email = localStorage.getItem('email')
-  let registered = localStorage.getItem('registered')
 
   return (
     <div>
       <Typography component='h1' fontSize='1.8rem' fontFamily='Montserrat' sx={pageTitle}>
         {/* Temporary, can change to show just name once route added to backend for getting name on login */}
-        {'Welcome' + (registered ? ' to Envoy, ' : ' back, ') + ((firstname && lastname) ? `${firstname} ${lastname}` : `${email}`)}
+        {'Welcome' + (userDetails.registered ? ' to Envoy, ' : ' back, ') + ((userDetails.firstname && userDetails.lastname) ? `${userDetails.firstname} ${userDetails.lastname}` : `${userDetails.email}`)}
       </Typography>
       <Grid container spacing={5}>
         {/* Montly Earnings */}

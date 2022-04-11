@@ -19,6 +19,9 @@ import { backend_base_url } from '../../Constants'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
+import UserAvatar from './UserAvatar'
+import { userDetails } from './UserDetails'
+
 const drawerWidth = 240
 
 const AppBar = styled(MuiAppBar, {
@@ -46,17 +49,6 @@ function Navbar(props) {
   }
 
   const auth = useAuthDataContext()
-
-  let firstname = localStorage.getItem('firstname')
-  let lastname = localStorage.getItem('lastname')
-  let email = localStorage.getItem('email')
-  let hex_color = localStorage.getItem('hex_color')
-  const AvatarInitials = (
-    (firstname && lastname) ? `${firstname[0].toUpperCase()}${lastname[0].toUpperCase()}` : `${email[0].toUpperCase()}`
-  )
-  const AvatarColor = (
-    (hex_color) ? { backgroundColor: hex_color } : { backgroundColor: "#1ABC9C" }
-  )
 
   const navigate = useNavigate()
   const handleLogout = () => {
@@ -107,8 +99,7 @@ function Navbar(props) {
         <AppBar
           style={{
             zIndex: 1301,
-            background:
-              '#2A9D8F'
+            background: '#2A9D8F',
           }}
           position='fixed'
         >
@@ -138,7 +129,7 @@ function Navbar(props) {
                 onClick={handleMenu}
                 color='inherit'
               >
-                <Avatar sx={AvatarColor}>{AvatarInitials}</Avatar>
+                <UserAvatar />
               </IconButton>
               <Menu
                 id='menu-appbar'
@@ -157,7 +148,9 @@ function Navbar(props) {
                 style={{ zIndex: 1302 }}
               >
                 <MenuItem>
-                  {(firstname && lastname) ? `Logged in as ${firstname} ${lastname}` : `Logged in as ${email}`}
+                  {userDetails.firstname && userDetails.lastname
+                    ? `Logged in as ${userDetails.firstname} ${userDetails.lastname}`
+                    : `Logged in as ${userDetails.email}`}
                 </MenuItem>
                 <MenuItem onClick={handleLogout}>
                   <ListItemIcon>
