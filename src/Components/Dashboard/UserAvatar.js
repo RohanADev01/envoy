@@ -1,6 +1,5 @@
 import { Avatar } from '@mui/material'
 import React from 'react'
-import { userDetails } from './UserDetails'
 
 const UserAvatar = (props) => {
   const AvatarInitials =

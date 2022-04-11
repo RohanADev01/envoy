@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Navbar from '../Navbar'
 import Sidebar from '../Sidebar/Sidebar'
-import { userDetails } from '../UserDetails'
 
 function DashboardContents() {
   const [open, setOpen] = useState(true)
@@ -9,12 +8,12 @@ function DashboardContents() {
     setOpen(!open)
   }
 
-  const [profileColor, setProfileColor] = useState(userDetails.hex_colour)
+  const [profileColor, setProfileColor] = useState(localStorage.getItem('hex_colour'))
   const [profileFirstName, setProfileFirstName] = useState(
-    userDetails.firstname
+    localStorage.getItem('firstname')
   )
-  const [profileLastName, setProfileLastName] = useState(userDetails.lastname)
-  const [profileEmail, setProfileEmail] = useState(userDetails.email)
+  const [profileLastName, setProfileLastName] = useState(localStorage.getItem('lastname'))
+  const [profileEmail, setProfileEmail] = useState(localStorage.getItem('email'))
 
   const userProfileDetails = {
     profileColor,

@@ -1,8 +1,8 @@
 import { Card, Box, Grid, Typography, TextField, Button } from '@mui/material'
 import React, { useState } from 'react'
 import { HexColorPicker } from 'react-colorful'
+import { toast } from 'react-toastify'
 import ProfileTop from '../ProfileTop'
-import { userDetails } from '../UserDetails'
 
 const Profile = (props) => {
     const [localColor, setLocalColor] = useState(props.userProfileState['profileColor'] ? props.userProfileState['profileColor'] : "#1ABC9C");
@@ -13,6 +13,7 @@ const Profile = (props) => {
         const newFirst = data.get("newFirst")
         localStorage.setItem("firstname", newFirst)
         props.userProfileState['setProfileFirstName'](newFirst)
+        toast(`Name updated to ${newFirst} ${props.userProfileState['profileLastName']}`)
     }
 
     const handleLastnameChange = (event) => {
@@ -21,11 +22,13 @@ const Profile = (props) => {
         const newLast = data.get("newLast")
         localStorage.setItem("lastname", newLast)
         props.userProfileState['setProfileLastName'](newLast)
+        toast(`Name updated to ${props.userProfileState['profileFirstName']} ${newLast}`)
     }
 
     const handleAvatarColorChange = () => {
         localStorage.setItem("hex_color", localColor)
         props.userProfileState['setProfileColor'](localColor)
+        toast("Profile colour updated!")
     }
 
     return (
@@ -68,7 +71,7 @@ const Profile = (props) => {
                         </Grid>
                         <Grid item xs={6}>
                             <Typography variant='h5'>
-                                {`Color Picker value: ${localColor}`}
+                                {`Chosen Colour: ${localColor}`}
                             </Typography>
                         </Grid>
                         <Grid item xs={6}>

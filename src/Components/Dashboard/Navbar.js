@@ -20,7 +20,6 @@ import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
 import UserAvatar from './UserAvatar'
-import { userDetails } from './UserDetails'
 
 const drawerWidth = 240
 

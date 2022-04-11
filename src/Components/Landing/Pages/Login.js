@@ -69,6 +69,9 @@ function Login(props) {
               // Persist user session and redirect to user dashboard here
               localStorage.setItem('user', token)
               localStorage.setItem('email', email)
+              // TEMPORARY
+              localStorage.setItem('firstname', 'X')
+              localStorage.setItem('lastname', 'X')
               auth.login(token, email)
               navigate('/dashboard')
             }, 500)

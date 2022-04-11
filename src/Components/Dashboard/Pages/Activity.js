@@ -29,7 +29,6 @@ import AttachMoneyIcon from '@mui/icons-material/AttachMoney'
 import AdfScannerOutlinedIcon from '@mui/icons-material/AdfScannerOutlined'
 import CallReceivedIcon from '@mui/icons-material/CallReceived'
 import CallMadeIcon from '@mui/icons-material/CallMade'
-import { userDetails } from '../UserDetails'
 
 export const Activity = (props) => {
   const auth = useAuthDataContext()
@@ -44,7 +43,7 @@ export const Activity = (props) => {
       >
         {/* Temporary, can change to show just name once route added to backend for getting name on login */}
         {'Welcome' +
-          (userDetails.registered ? ' to Envoy, ' : ' back, ') +
+          (localStorage.getItem('registered') ? ' to Envoy, ' : ' back, ') +
           (props.userProfileState['profileFirstName'] &&
           props.userProfileState['profileLastName']
             ? `${props.userProfileState['profileFirstName']} ${props.userProfileState['profileLastName']}`
