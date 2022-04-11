@@ -8,6 +8,7 @@ import { ProtectedRoute } from './Components/Dashboard/ProtectedRoutes'
 import { CreateInvoice } from './Components/Dashboard/Pages/CreateInvoice'
 import { Activity } from './Components/Dashboard/Pages/Activity'
 import { MyInvoices } from './Components/Dashboard/Pages/MyInvoices'
+import Profile from './Components/Dashboard/Pages/Profile'
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
               <Route path='/dashboard/' element={<Activity />} />
               <Route path='/dashboard/create' element={<CreateInvoice />} />
               <Route path='/dashboard/invoices' element={<MyInvoices />} />
+              <Route path='/dashboard/profile' element={<Profile />} />
             </Route>
           </Route>
           <Route path='*' element={<h1>Error 404. Page not found!</h1>} />
