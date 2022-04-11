@@ -10,18 +10,41 @@ function DashboardContents() {
   }
 
   const [profileColor, setProfileColor] = useState(userDetails.hex_colour)
+  const [profileFirstName, setProfileFirstName] = useState(
+    userDetails.firstname
+  )
+  const [profileLastName, setProfileLastName] = useState(userDetails.lastname)
+  const [profileEmail, setProfileEmail] = useState(userDetails.email)
+
+  const userProfileDetails = {
+    profileColor,
+    setProfileColor,
+    profileFirstName,
+    setProfileFirstName,
+    profileLastName,
+    setProfileLastName,
+    profileEmail,
+    setProfileEmail,
+  }
 
   useEffect(() => {
-    document.body.style.backgroundColor = "#F8FFFE"
+    document.body.style.backgroundColor = '#F8FFFE'
   }, [])
 
   return (
     <div>
-      <Navbar onChange={toggleSidebar} sideBarState={open} profileColorState={{ profileColor, setProfileColor }} />
-      <Sidebar onChange={toggleSidebar} sideBarState={open} profileColorState={{ profileColor, setProfileColor }} />
+      <Navbar
+        onChange={toggleSidebar}
+        sideBarState={open}
+        userProfileState={userProfileDetails}
+      />
+      <Sidebar
+        onChange={toggleSidebar}
+        sideBarState={open}
+        userProfileState={userProfileDetails}
+      />
     </div>
   )
-
 }
 
 export default DashboardContents

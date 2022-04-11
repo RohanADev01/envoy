@@ -66,7 +66,7 @@ function Sidebar(props) {
 
       <Main open={props.sideBarState}>
         <DrawerHeader />
-        {activeLink.activeItem.route === '/dashboard/' && <Activity />}
+        {activeLink.activeItem.route === '/dashboard/' && <Activity userProfileState={props.userProfileState} />}
 
         {activeLink.activeItem.route === '/dashboard/create' && (
           <CreateInvoice />
@@ -81,7 +81,7 @@ function Sidebar(props) {
         )}
 
         {activeLink.activeItem.route === '/dashboard/profile' && (
-          <Profile profileColorState={props.profileColorState} />
+          <Profile userProfileState={props.userProfileState} />
         )}
       </Main>
     </React.Fragment>

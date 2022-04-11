@@ -4,11 +4,11 @@ import { userDetails } from './UserDetails'
 
 const UserAvatar = (props) => {
   const AvatarInitials =
-    userDetails.firstname && userDetails.lastname
-      ? `${userDetails.firstname[0].toUpperCase()}${userDetails.lastname[0].toUpperCase()}`
-      : `${userDetails.email[0].toUpperCase()}`
-  const AvatarColor = props.profileColorState['profileColor']
-    ? { backgroundColor: props.profileColorState['profileColor'] }
+    props.userProfileState['profileFirstName'] && props.userProfileState['profileLastName']
+      ? `${props.userProfileState['profileFirstName'][0].toUpperCase()}${props.userProfileState['profileLastName'][0].toUpperCase()}`
+      : `${props.userProfileState['profileEmail'][0].toUpperCase()}`
+  const AvatarColor = props.userProfileState['profileColor']
+    ? { backgroundColor: props.userProfileState['profileColor'] }
     : { backgroundColor: '#1ABC9C' }
 
   return (

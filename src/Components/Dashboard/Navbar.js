@@ -129,7 +129,7 @@ function Navbar(props) {
                 onClick={handleMenu}
                 color='inherit'
               >
-                <UserAvatar profileColorState={props.profileColorState} />
+                <UserAvatar userProfileState={props.userProfileState} />
               </IconButton>
               <Menu
                 id='menu-appbar'
@@ -148,9 +148,9 @@ function Navbar(props) {
                 style={{ zIndex: 1302 }}
               >
                 <MenuItem>
-                  {userDetails.firstname && userDetails.lastname
-                    ? `Logged in as ${userDetails.firstname} ${userDetails.lastname}`
-                    : `Logged in as ${userDetails.email}`}
+                  {props.userProfileState['profileFirstName'] && props.userProfileState['profileLastName']
+                    ? `Logged in as ${props.userProfileState['profileFirstName']} ${props.userProfileState['profileLastName']}`
+                    : `Logged in as ${props.userProfileState['profileEmail']}`}
                 </MenuItem>
                 <MenuItem onClick={handleLogout}>
                   <ListItemIcon>

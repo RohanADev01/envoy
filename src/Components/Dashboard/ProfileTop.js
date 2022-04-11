@@ -7,7 +7,7 @@ const ProfileTop = (props) => {
     return (
         <div className='profile'>
             <div className='profileCover'>
-                <UserAvatar fontSize={"8vh"} width={AvatarSize} height={AvatarSize} profileColorState={props.profileColorState} />
+                <UserAvatar fontSize={"8vh"} width={AvatarSize} height={AvatarSize} userProfileState={props.userProfileState} />
             </div>
         </div>
     )
