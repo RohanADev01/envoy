@@ -5,7 +5,7 @@ import { userDetails } from '../UserDetails'
 
 function DashboardContents() {
   const [open, setOpen] = useState(true)
-  const toggleSidebar = () => {s
+  const toggleSidebar = () => {
     setOpen(!open)
   }
 
