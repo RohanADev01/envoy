@@ -37,7 +37,7 @@ const Profile = (props) => {
                     <Grid container justifyContent="center" alignItems='center' flexDirection="column" spacing={3}>
                         <Grid item xs={6}>
                             <Typography variant='h5'>
-                                {`Profile Colour: ${userDetails.hex_colour}`}
+                                {`Profile Colour: ${props.profileColorState['profileColor']}`}
                             </Typography>
                             <HexColorPicker color={localColor} onChange={setLocalColor} />
                             <Typography variant='h5'>
