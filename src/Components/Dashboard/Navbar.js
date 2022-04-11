@@ -52,7 +52,7 @@ function Navbar(props) {
   let email = localStorage.getItem('email')
   let hex_color = localStorage.getItem('hex_color')
   const AvatarInitials = (
-    (firstname && lastname) ? `${firstname[0]}${lastname[0]}` : `${email[0]}`
+    (firstname && lastname) ? `${firstname[0].toUpperCase()}${lastname[0].toUpperCase()}` : `${email[0].toUpperCase()}`
   )
   const AvatarColor = (
     (hex_color) ? { backgroundColor: hex_color } : { backgroundColor: "#1ABC9C" }
