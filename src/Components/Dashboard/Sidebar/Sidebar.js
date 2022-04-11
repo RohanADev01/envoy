@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Drawer, Divider } from '@mui/material'
+import { Drawer, Divider, Typography } from '@mui/material'
 
 import IconButton from '@mui/material/IconButton'
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
@@ -9,7 +9,7 @@ import { Dashboard } from '@mui/icons-material'
 import PersonIcon from '@mui/icons-material/Person';
 
 import DrawerList from './DrawerItems'
-import { Main, drawerWidth, DrawerHeader } from './Styles'
+import { Main, drawerWidth, DrawerHeader, SidebarHeader } from './Styles'
 import { Activity } from '../Pages/Activity'
 import { CreateInvoice } from '../Pages/CreateInvoice'
 import { MyInvoices } from '../Pages/MyInvoices'
@@ -17,9 +17,9 @@ import Profile from '../Pages/Profile'
 
 function Sidebar(props) {
   const [activeLink, changeLinkState] = useState({
-    activeItem: { icon: <Dashboard />, text: 'Dashboard', route: '/dashboard/' },
+    activeItem: { icon: <Dashboard />, text: 'Activity', route: '/dashboard/' },
     objects: [
-      { icon: <Dashboard />, text: 'Dashboard', route: '/dashboard/' },
+      { icon: <Dashboard />, text: 'Activity', route: '/dashboard/' },
       {
         icon: <NoteAddIcon />,
         text: 'Create Invoice',
@@ -58,12 +58,14 @@ function Sidebar(props) {
             <ChevronLeftIcon />
           </IconButton>
         </DrawerHeader>
+
+        <Typography variant='h5' sx={SidebarHeader}>DASHBOARD</Typography>
+
         <DrawerList activeLink={activeLink} changeLinkState={changeLinkState} />
       </Drawer>
 
       <Main open={props.sideBarState}>
         <DrawerHeader />
-
         {activeLink.activeItem.route === '/dashboard/' && <Activity />}
 
         {activeLink.activeItem.route === '/dashboard/create' && (

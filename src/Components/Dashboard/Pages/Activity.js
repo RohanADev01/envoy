@@ -11,12 +11,16 @@ import CallMadeIcon from '@mui/icons-material/CallMade';
 
 export const Activity = () => {
   const auth = useAuthDataContext()
+  let firstname = localStorage.getItem('firstname')
+  let lastname = localStorage.getItem('lastname')
+  let email = localStorage.getItem('email')
+  let registered = localStorage.getItem('registered')
 
   return (
     <div>
       <Typography component='h1' fontSize='1.8rem' fontFamily='Montserrat' sx={pageTitle}>
         {/* Temporary, can change to show just name once route added to backend for getting name on login */}
-        {auth.firstname === '' ? `Welcome ${auth.email}` : `Welcome ${auth.firstname}`}
+        {'Welcome' + (registered ? ' to Envoy, ' : ' back, ') + ((firstname && lastname) ? `${firstname} ${lastname}` : `${email}`)}
       </Typography>
       <Grid container spacing={5}>
         {/* Montly Earnings */}

@@ -73,6 +73,7 @@ function SignUp(props) {
               localStorage.setItem('email', email)
               localStorage.setItem('firstname', firstname)
               localStorage.setItem('lastname', lastname)
+              localStorage.setItem('registered', 'true')
               auth.register(token, email, firstname, lastname)
               navigate('/dashboard')
             }, 500)

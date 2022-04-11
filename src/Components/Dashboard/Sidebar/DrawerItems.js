@@ -5,6 +5,7 @@ import {
   ListItemText,
   ListItemIcon,
   Divider,
+  Typography,
 } from '@mui/material'
 import {
   activeHighlight,
@@ -13,6 +14,7 @@ import {
   linkContentIcon,
   linkContentText,
   linkPadding,
+  SidebarHeader,
 } from './Styles.js'
 import { Link } from 'react-router-dom'
 import './DrawerItems.css'
@@ -42,7 +44,7 @@ export default function DrawerList(props) {
       if (activeLink.objects[index] === activeLink.activeItem) {
         return { ...activeHighlight }
       } else {
-        return { }
+        return {}
       }
     }
   }
@@ -64,8 +66,13 @@ export default function DrawerList(props) {
                   />
                 </ListItem>
               </Link>
-            </div>
-            {/* {index === 0 && <Divider />} */}
+            </div>  
+            {index === 2 &&
+              <React.Fragment>
+                <Divider sx={{marginTop:2}}/>
+                <Typography variant='h5' sx={SidebarHeader}>USER</Typography>
+              </React.Fragment>
+            }
           </React.Fragment>
         ))}
       </List>

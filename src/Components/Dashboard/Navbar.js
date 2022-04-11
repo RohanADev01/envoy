@@ -1,6 +1,6 @@
 import React from 'react'
 import { styled } from '@mui/material/styles'
-import { Box, Toolbar, Menu, MenuItem } from '@mui/material'
+import { Box, Toolbar, Menu, MenuItem, Avatar } from '@mui/material'
 import MuiAppBar from '@mui/material/AppBar'
 
 import { IconButton } from '@mui/material'
@@ -46,6 +46,18 @@ function Navbar(props) {
   }
 
   const auth = useAuthDataContext()
+
+  let firstname = localStorage.getItem('firstname')
+  let lastname = localStorage.getItem('lastname')
+  let email = localStorage.getItem('email')
+  let hex_color = localStorage.getItem('hex_color')
+  const AvatarInitials = (
+    (firstname && lastname) ? `${firstname[0]}${lastname[0]}` : `${email[0]}`
+  )
+  const AvatarColor = (
+    (hex_color) ? { backgroundColor: hex_color } : { backgroundColor: "#1ABC9C" }
+  )
+
   const navigate = useNavigate()
   const handleLogout = () => {
     setAnchorEl(null)
@@ -71,6 +83,9 @@ function Navbar(props) {
             setTimeout(() => {
               localStorage.removeItem('user')
               localStorage.removeItem('email')
+              localStorage.removeItem('firstname')
+              localStorage.removeItem('lastname')
+              localStorage.removeItem('registered')
               navigate('/')
             }, 1000)
           } else {
@@ -123,7 +138,7 @@ function Navbar(props) {
                 onClick={handleMenu}
                 color='inherit'
               >
-                <AccountCircle />
+                <Avatar sx={AvatarColor}>{AvatarInitials}</Avatar>
               </IconButton>
               <Menu
                 id='menu-appbar'
@@ -142,7 +157,7 @@ function Navbar(props) {
                 style={{ zIndex: 1302 }}
               >
                 <MenuItem>
-                  <strong>{auth.email}</strong>
+                  {(firstname && lastname) ? `Logged in as ${firstname} ${lastname}` : `Logged in as ${email}`}
                 </MenuItem>
                 <MenuItem onClick={handleLogout}>
                   <ListItemIcon>
