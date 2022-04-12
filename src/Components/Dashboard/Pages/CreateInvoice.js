@@ -10,6 +10,7 @@ import { LoadingIndicatorCreateInvoice } from '../constants'
 import { dummyData } from '../CreateInvoiceDummyData'
 import { pageTitle } from '../styles'
 import { Expand } from '@mui/icons-material'
+import { CreateInvoiceInputFields, CreateInvoiceBodyPreFilled } from '../CreateInvoiceFields'
 
 export const CreateInvoice = () => {
     const [alertFail, setFailAlert] = useState(false);
@@ -22,42 +23,45 @@ export const CreateInvoice = () => {
         event.preventDefault();
         resetAlerts();
 
-        // const data = new FormData(event.currentTarget);
-        
+        const data = new FormData(event.currentTarget);
+
         let body_details = {
             "token": auth.user,
-            "invoice_data": dummyData
+            "invoice_data": CreateInvoiceBodyPreFilled
         };
-        
-        // NOTE: UNCOMMENT AND CHANGE "invoice_data" FIELD TO {} IF YOU WANT TO MANUALLY ENTER DATA 
-        // AND ADD THE 'required' field to line 57 in CreateInvoiceItems.js
 
-        // createInvoiceFieldsList.forEach((field) => {
-        //     body_details["invoice_data"][field] = data.get(field)
-        // });
-        
-        body_details["invoice_data"]["UBLID"] = Number(body_details["invoice_data"]["UBLID"]);
-        body_details["invoice_data"]["InvoiceCode"] = Number(body_details["invoice_data"]["InvoiceCode"]);
-        body_details["invoice_data"]["SupplierID"] = Number(body_details["invoice_data"]["SupplierID"]);        
-        body_details["invoice_data"]["SupplierPost"] = Number(body_details["invoice_data"]["SupplierPost"]);   
-        body_details["invoice_data"]["PaymentType"] = Number(body_details["invoice_data"]["PaymentType"]); 
-        body_details["invoice_data"]["TaxAmount"] = Number(body_details["invoice_data"]["TaxAmount"]); 
-        body_details["invoice_data"]["TaxableAmount"] = Number(body_details["invoice_data"]["TaxableAmount"]); 
-        body_details["invoice_data"]["TaxSubtotalAmount"] = Number(body_details["invoice_data"]["TaxSubtotalAmount"]);
-        body_details["invoice_data"]["TaxPercent"] = Number(body_details["invoice_data"]["TaxPercent"]);
+        // get all input from form
+        CreateInvoiceInputFields.forEach((field) => {
+            body_details["invoice_data"][field] = data.get(field)
+        });
+
+        // fields with same values as other fields
+        body_details["invoice_data"]["ID"] = Number(body_details["invoice_data"]["InvoiceID"])
+
+        body_details["invoice_data"]["InvoicePriceAmount"] = Number(body_details["invoice_data"]["PayableAmount"])
+        body_details["invoice_data"]["InvoiceLineExtension"] = Number(body_details["invoice_data"]["PayableAmount"])
+        body_details["invoice_data"]["LegalLineExtension"] = Number(body_details["invoice_data"]["PayableAmount"])
+
+        body_details["invoice_data"]["InvoiceBaseQuantity"] = Number(body_details["invoice_data"]["InvoiceQuantity"])
+
+        // ensure these fields are numerical
+        body_details["invoice_data"]["InvoiceID"] = Number(body_details["invoice_data"]["InvoiceID"]);
+        body_details["invoice_data"]["TaxID"] = Number(body_details["invoice_data"]["TaxID"]);
+        body_details["invoice_data"]["SupplierPost"] = Number(body_details["invoice_data"]["SupplierPost"]);
+        body_details["invoice_data"]["CustomerPost"] = Number(body_details["invoice_data"]["CustomerPost"]);
+        body_details["invoice_data"]["TaxAmount"] = Number(body_details["invoice_data"]["TaxAmount"]);
+        body_details["invoice_data"]["TaxableAmount"] = Number(body_details["invoice_data"]["TaxableAmount"]);
         body_details["invoice_data"]["LegalLineExtension"] = Number(body_details["invoice_data"]["LegalLineExtension"]);
         body_details["invoice_data"]["TaxExclusiveAmount"] = Number(body_details["invoice_data"]["TaxExclusiveAmount"]);
         body_details["invoice_data"]["TaxInclusiveAmount"] = Number(body_details["invoice_data"]["TaxInclusiveAmount"]);
-        body_details["invoice_data"]["TaxPercent"] = Number(body_details["invoice_data"]["TaxPercent"]);
-        body_details["invoice_data"]["PayableRoundingAmount"] = Number(body_details["invoice_data"]["PayableRoundingAmount"]);
         body_details["invoice_data"]["PayableAmount"] = Number(body_details["invoice_data"]["PayableAmount"]);
         body_details["invoice_data"]["InvoiceQuantity"] = Number(body_details["invoice_data"]["InvoiceQuantity"]);
         body_details["invoice_data"]["InvoiceLineExtension"] = Number(body_details["invoice_data"]["InvoiceLineExtension"]);
-        body_details["invoice_data"]["InvoiceTaxID"] = Number(body_details["invoice_data"]["InvoiceTaxID"]);
-        body_details["invoice_data"]["InvoiceTaxPercent"] = Number(body_details["invoice_data"]["InvoiceTaxPercent"]);
         body_details["invoice_data"]["InvoicePriceAmount"] = Number(body_details["invoice_data"]["InvoicePriceAmount"]);
         body_details["invoice_data"]["InvoiceBaseQuantity"] = Number(body_details["invoice_data"]["InvoiceBaseQuantity"]);
-        
+
+        // console.log(body_details["invoice_data"])
+
         const create_url = backend_base_url + 'invoice/create'
 
         trackPromise(
@@ -100,7 +104,7 @@ export const CreateInvoice = () => {
 
                 <FailAlert alertFail={alertFail} alertContent={alertContent} />
                 <SuccessAlert alertSuccess={alertSuccess} alertContent={alertContent} />
-                <LoadingIndicatorCreateInvoice success={alertSuccess}/>
+                <LoadingIndicatorCreateInvoice success={alertSuccess} />
             </Box>
         </>
     )
