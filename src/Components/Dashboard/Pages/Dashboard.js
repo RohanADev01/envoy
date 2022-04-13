@@ -8,7 +8,7 @@ function DashboardContents() {
     setOpen(!open)
   }
 
-  const [profileColor, setProfileColor] = useState(localStorage.getItem('hex_colour'))
+  const [profileColor, setProfileColor] = useState(localStorage.getItem('hex_color'))
   const [profileFirstName, setProfileFirstName] = useState(
     localStorage.getItem('firstname')
   )
