@@ -103,14 +103,42 @@ const Profile = (props) => {
         )
     }
 
-    const resetAlerts = (event) => {
-        setFailAlert(false)
+    const handleAvatarColorChange = () => {
+        let new_color = localColor
+
+        // send data to server
+        const update_color_url = backend_base_url + 'user/update/color'
+        const body = { "email": props.userProfileState['profileEmail'], new_color }
+
+        trackPromise(
+            axios({
+                method: 'POST',
+                url: update_color_url,
+                data: body,
+            })
+                .then((data) => {
+                    let msg = data.data.msg
+                    setAlertContent(msg)
+
+                    if (msg === "profile colour successfully updated") {
+                        localStorage.setItem("hex_color", localColor)
+                        props.userProfileState['setProfileColor'](localColor)
+                        toast("Profile colour updated!")
+                    } else {
+                        setFailAlert(true)
+                    }
+                })
+                .catch((error) => {
+                    setAlertContent(
+                        'An unknown error occured, please try again another time.'
+                    )
+                    setFailAlert(true)
+                })
+        )
     }
 
-    const handleAvatarColorChange = () => {
-        localStorage.setItem("hex_color", localColor)
-        props.userProfileState['setProfileColor'](localColor)
-        toast("Profile colour updated!")
+    const resetAlerts = (event) => {
+        setFailAlert(false)
     }
 
     return (
