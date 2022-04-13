@@ -15,12 +15,10 @@ const Profile = (props) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         const newFirst = data.get("newFirst")
-        localStorage.setItem("firstname", newFirst)
 
         // send data to server
         const update_firstname_url = backend_base_url + 'user/update/firstname'
         const body = { "email": props.userProfileState['profileEmail'], "new_firstname": newFirst }
-        console.log("hello")
         trackPromise(
             axios({
                 method: 'POST',
@@ -28,23 +26,20 @@ const Profile = (props) => {
                 data: body,
             })
                 .then((data) => {
-                    console.log(data)
+                    localStorage.setItem("firstname", newFirst)
+                    props.userProfileState['setProfileFirstName'](newFirst)
                     toast(`Name updated to ${newFirst} ${props.userProfileState['profileLastName']}`)
                 })
                 .catch((error) => {
                     toast(error)
                 })
         )
-        console.log("going?")
-        props.userProfileState['setProfileFirstName'](newFirst)
     }
 
     const handleLastnameChange = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         const newLast = data.get("newLast")
-        localStorage.setItem("lastname", newLast)
-        props.userProfileState['setProfileLastName'](newLast)
 
         // send data to server
         const update_lastname_url = backend_base_url + 'user/update/lastname'
@@ -57,6 +52,8 @@ const Profile = (props) => {
                 data: body,
             })
                 .then((data) => {
+                    localStorage.setItem("lastname", newLast)
+                    props.userProfileState['setProfileLastName'](newLast)
                     toast(`Name updated to ${props.userProfileState['profileFirstName']} ${newLast}`)
                 })
                 .catch((error) => {

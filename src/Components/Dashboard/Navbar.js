@@ -67,8 +67,6 @@ function Navbar(props) {
           let msg = data.data.msg
 
           if (msg === `Successfully logged out ${auth.email}`) {
-            console.log('Logout Successful')
-
             // Remove persistence of user session and redirect to home page
             toast(msg)
             setTimeout(() => {
