@@ -71,7 +71,7 @@ export const createInvoiceFieldDetails = [
     },
 ]
 
-export const CreateInvoiceItems = () => {
+export const CreateInvoiceItems = (props) => {
     const helpDocLink = "https://docs.google.com/document/d/1WfJrTTRJeruLsx5I3j196V5kC6ypWAOCQ6h2ayyQqxM/edit?usp=sharing"
 
     return (
@@ -109,7 +109,7 @@ export const CreateInvoiceItems = () => {
                     </Grid >
                 ))}
                 <Grid item xs={12} md={6}>
-                    <WarningAlert alertWarning="true" alertContent="Please make sure to fill in all required fields of the form" />
+                    <WarningAlert alertWarning={!props.alertSuccess} alertContent="Please make sure to fill in all required fields of the form" />
                 </Grid>
             </Grid >
         </div >

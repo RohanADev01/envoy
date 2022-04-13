@@ -90,6 +90,7 @@ export const CreateInvoice = () => {
 
     const resetAlerts = (event) => {
         setFailAlert(false)
+        setSuccessAlert(false)
     }
 
     return (
@@ -98,7 +99,7 @@ export const CreateInvoice = () => {
                 Create Invoice
             </Typography>
             <Box component="form" onChange={resetAlerts} onSubmit={handleSubmit} sx={{ mt: 3 }}>
-                <CreateInvoiceItems />
+                <CreateInvoiceItems alertSuccess={alertSuccess}/>
 
                 <FailAlert alertFail={alertFail} alertContent={alertContent} />
                 <SuccessAlert alertSuccess={alertSuccess} alertContent={alertContent} />
