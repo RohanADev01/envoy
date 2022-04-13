@@ -14,6 +14,16 @@ export const FailAlert = (props) => {
   )
 }
 
+export const WarningAlert = (props) => {
+  return props.alertWarning ? (
+    <Alert sx={{ marginTop: 2 }} severity='warning'>
+      {props.alertContent}
+    </Alert>
+  ) : (
+    <></>
+  )
+}
+
 export const SuccessAlert = (props) => {
   return props.alertSuccess ? (
     <Alert sx={{ marginTop: 2 }} severity='success'>
