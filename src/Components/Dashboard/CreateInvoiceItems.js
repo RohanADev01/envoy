@@ -3,16 +3,15 @@ import {
     Accordion,
     AccordionDetails,
     AccordionSummary,
-    Divider,
     Grid,
     TextField,
     Typography,
-    Button,
     IconButton
 } from '@mui/material'
 import { ExpandMore } from '@mui/icons-material'
 import { statsSmall } from './styles'
 import HelpIcon from '@mui/icons-material/Help';
+import { WarningAlert } from '../Landing/Constants';
 
 let newDate = new Date()
 let date = newDate.getDate();
@@ -109,6 +108,9 @@ export const CreateInvoiceItems = () => {
                         </Accordion>
                     </Grid >
                 ))}
+                <Grid item xs={12} md={6}>
+                    <WarningAlert alertWarning="true" alertContent="Please make sure to fill in all required fields of the form" />
+                </Grid>
             </Grid >
         </div >
     )
