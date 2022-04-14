@@ -1,6 +1,5 @@
-import React, { useState } from 'react'
-import { Paper, IconButton, Menu, MenuItem, Typography, Grid } from '@mui/material'
-import { MoreVert as MoreIcon } from '@mui/icons-material'
+import React from 'react'
+import { Paper, Typography, Grid } from '@mui/material'
 import { cardHeader } from './styles'
 // styles
 import './Widget.css'
