@@ -1,10 +1,9 @@
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { Navigate, useNavigate } from 'react-router-dom'
 import { trackPromise } from 'react-promise-tracker'
 import { useAuthDataContext } from '../UserAuth'
 
 import LogoDark from '../../../assets/LogoDark.svg'
-import LoginImage from '../../../assets/LoginImage.jpg'
 
 import axios from 'axios'
 import {
@@ -18,12 +17,19 @@ import {
 } from '@mui/material'
 import { FailAlert, SuccessAlert, LoadingIndicatorLogin } from '../Constants'
 import { backend_base_url } from '../../../Constants'
+import { backgroundDivLogin, boxFlex, cardDimensions, logoDarkDimensions } from '../styles'
 
 function Login(props) {
   const navigate = useNavigate()
   const handleNewUser = () => {
     navigate('/signup')
   }
+
+  useEffect(() => {
+    if (localStorage.getItem('user')) {
+      navigate('/dashboard')
+    }
+  }, [])
 
   const [alertFail, setFailAlert] = useState(false)
   const [alertSuccess, setSuccessAlert] = useState(false)
@@ -61,9 +67,11 @@ function Login(props) {
             setTimeout(function () {
               console.log('Login Successful')
               // Persist user session and redirect to user dashboard here
+              localStorage.setItem('user', token)
+              localStorage.setItem('email', email)
               auth.login(token, email)
               navigate('/dashboard')
-            }, 1000)
+            }, 500)
           } else {
             setFailAlert(true)
           }
@@ -83,123 +91,94 @@ function Login(props) {
   }
 
   return (
-    <Grid
-      container
-      direction='row'
-      flexGrow={1}
-      spacing={0}
-      alignItems='center'
-      justifyContent='center'
-      style={{ border: 'solid 1px red' }}
-    >
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          background: `url(${LoginImage})`,
-          backgroundSize: 'cover',
-          backgroundRepeat: 'no-repeat',
-          height: '100vh',
-          width: '100vw',
-          backgroundPosition: 'top',
-        }}
+    <>
+      <Grid
+        container
+        direction='row'
+        flexGrow={1}
+        spacing={0}
+        alignItems='center'
+        justifyContent='center'
       >
-        <Card
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            height: '700px',
-            width: '550px',
-            borderRadius: '20px',
-            marginRight: '10vw',
-            marginLeft: '10vw',
-          }}
-        >
-          <Grid
-            container
-            direction='column'
-            alignItems='center'
-            justifyContent='center'
-          >
-            <Container component='main' maxWidth='xs'>
-              <img
-                style={{ width: 120, height: 'auto', marginBottom: '5vh' }}
-                src={LogoDark}
-                alt='Landing page logo'
-              />
-            </Container>
+        <div style={backgroundDivLogin}>
+          <Card style={cardDimensions}>
+            <Grid
+              container
+              direction='column'
+              alignItems='center'
+              justifyContent='center'
+            >
+              <Container component='main' maxWidth='xs'>
+                <img
+                  style={logoDarkDimensions}
+                  src={LogoDark}
+                  alt='Landing page logo'
+                />
+              </Container>
 
-            <Container component='main' maxWidth='xs'>
-              <CssBaseline />
-              <Typography
-                component='h1'
-                variant='h5'
-                fontFamily='Montserrat'
-                fontWeight='700'
-                alignItems='flex-start'
-                marginBottom='10px'
-              >
-                Login
-              </Typography>
-              <Box
-                sx={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}
-              >
-                <Box
-                  component='form'
-                  onChange={resetAlerts}
-                  onSubmit={handleSubmit}
-                  sx={{ mt: 3 }}
+              <Container component='main' maxWidth='xs'>
+                <CssBaseline />
+                <Typography
+                  component='h1'
+                  variant='h5'
+                  fontFamily='Montserrat'
+                  fontWeight='700'
+                  alignItems='flex-start'
+                  marginBottom='10px'
                 >
-                  <Grid container spacing={2}>
-                    <Grid item xs={12}>
-                      <TextField
-                        required
-                        fullWidth
-                        id='email'
-                        label='Email Address'
-                        name='email'
-                        autoComplete='email'
-                        autoFocus
-                      />
+                  Login
+                </Typography>
+                <Box sx={boxFlex}>
+                  <Box
+                    component='form'
+                    onChange={resetAlerts}
+                    onSubmit={handleSubmit}
+                    sx={{ mt: 3 }}
+                  >
+                    <Grid container spacing={2}>
+                      <Grid item xs={12}>
+                        <TextField
+                          required
+                          fullWidth
+                          id='email'
+                          label='Email Address'
+                          name='email'
+                          autoComplete='email'
+                          autoFocus
+                        />
+                      </Grid>
+                      <Grid item xs={12}>
+                        <TextField
+                          required
+                          fullWidth
+                          name='password'
+                          label='Password'
+                          type='password'
+                          id='password'
+                          autoComplete='new-password'
+                        />
+                      </Grid>
                     </Grid>
-                    <Grid item xs={12}>
-                      <TextField
-                        required
-                        fullWidth
-                        name='password'
-                        label='Password'
-                        type='password'
-                        id='password'
-                        autoComplete='new-password'
-                      />
-                    </Grid>
-                  </Grid>
-                  <FailAlert
-                    alertFail={alertFail}
-                    alertContent={alertContent}
-                  />
-                  <SuccessAlert
-                    alertSuccess={alertSuccess}
-                    alertContent={alertContent}
-                  />
-                  <LoadingIndicatorLogin
-                    handleNewUser={handleNewUser}
-                    registered={alertSuccess}
-                  />
+                    <FailAlert
+                      alertFail={alertFail}
+                      alertContent={alertContent}
+                    />
+                    <SuccessAlert
+                      alertSuccess={alertSuccess}
+                      alertContent={alertContent}
+                    />
+                    <LoadingIndicatorLogin
+                      handleNewUser={handleNewUser}
+                      registered={alertSuccess}
+                    />
+                  </Box>
                 </Box>
-              </Box>
-            </Container>
-          </Grid>
-        </Card>
-      </div>
-    </Grid>
+              </Container>
+            </Grid>
+          </Card>
+        </div>
+      </Grid>
+    </>
   )
 }
 

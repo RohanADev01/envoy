@@ -2,11 +2,11 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Box, Grid, Typography } from '@mui/material'
 
-import './Topbar.css'
+import './HomeContents.css'
 import LogoDark from '../../assets/LogoDark.svg'
 import LandingImage from '../../assets/LandingImage.svg'
 
-function Topbar() {
+function HomeContents() {
   const navigate = useNavigate()
 
   const handleLogin = () => {
@@ -87,4 +87,4 @@ function Topbar() {
   )
 }
 
-export default Topbar
+export default HomeContents

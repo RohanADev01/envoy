@@ -28,20 +28,32 @@ export const DrawerHeader = styled('div')(({ theme }) => ({
   // necessary for content to be below app bar
   ...theme.mixins.toolbar,
   justifyContent: 'flex-end',
+  marginBottom: "1.75vw"
 }))
 
-export const linkContent = {
+export const linkContentIcon = {
+  color: '#6E6E6ECC',
+  paddingLeft:2
+}
+
+export const linkContentText = {
   color: '#6E6E6ECC',
 }
 
 export const activeHighlight = {
-  background: '#f6f5f5',
+  background: '#F3FFFE'
 }
 
 export const activeIcon = {
-  color: 'orangered',
+  color: '#2A9D8F',
+  paddingLeft:2
 }
 
 export const activeText = {
-  color: '#36454F',
+  color: '#2A9D8F',
+}
+
+export const linkPadding = {
+  paddingTop:"0.2rem",
+  paddingBottom:"0.2rem",
 }

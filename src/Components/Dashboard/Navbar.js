@@ -69,9 +69,10 @@ function Navbar(props) {
             // Remove persistence of user session and redirect to home page
             toast(msg)
             setTimeout(() => {
-              auth.logout()
+              localStorage.removeItem('user')
+              localStorage.removeItem('email')
               navigate('/')
-            }, 5000)
+            }, 1000)
           } else {
           }
         })
@@ -92,7 +93,7 @@ function Navbar(props) {
           style={{
             zIndex: 1301,
             background:
-              'linear-gradient(0.25turn, #ff5003, #ed5f00, #f16208, orangered)',
+              '#2A9D8F'
           }}
           position='fixed'
         >

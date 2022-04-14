@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   List,
   ListItem,
@@ -10,9 +10,12 @@ import {
   activeHighlight,
   activeIcon,
   activeText,
-  linkContent,
+  linkContentIcon,
+  linkContentText,
+  linkPadding,
 } from './Styles.js'
 import { Link } from 'react-router-dom'
+import './DrawerItems.css'
 
 export default function DrawerList(props) {
   const activeLink = props.activeLink
@@ -27,19 +30,19 @@ export default function DrawerList(props) {
       if (activeLink.objects[index] === activeLink.activeItem) {
         return activeIcon
       } else {
-        return linkContent
+        return linkContentIcon
       }
     } else if (type === 'text') {
       if (activeLink.objects[index] === activeLink.activeItem) {
         return activeText
       } else {
-        return linkContent
+        return linkContentText
       }
     } else if (type === 'background') {
       if (activeLink.objects[index] === activeLink.activeItem) {
-        return { padding: 3, ...activeHighlight }
+        return { ...activeHighlight }
       } else {
-        return { padding: 3 }
+        return { }
       }
     }
   }
@@ -49,7 +52,7 @@ export default function DrawerList(props) {
       <List>
         {activeLink.objects.map((element, index) => (
           <React.Fragment>
-            <div key={index} onClick={() => handleLinkChange(index)}>
+            <div key={index} onClick={() => handleLinkChange(index)} style={linkPadding}>
               <Link style={{ textDecoration: 'none' }} to={element.route}>
                 <ListItem sx={toggleStyles('background', index)} button>
                   <ListItemIcon sx={toggleStyles('icon', index)}>
@@ -62,7 +65,7 @@ export default function DrawerList(props) {
                 </ListItem>
               </Link>
             </div>
-            {index === 0 && <Divider />}
+            {/* {index === 0 && <Divider />} */}
           </React.Fragment>
         ))}
       </List>

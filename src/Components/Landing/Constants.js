@@ -58,7 +58,7 @@ export const LoadingIndicatorLogin = (props) => {
   return promiseInProgress ? (
     <img
       src={loadingImage}
-      style={{ position: 'center', height: '100px', width: '100px' }}
+      style={{ position: 'center', height: '100px', width: '133px' }}
       alt=''
     />
   ) : (
@@ -102,7 +102,7 @@ export const LoadingIndicatorSignup = (props) => {
   return promiseInProgress ? (
     <img
       src={loadingImage}
-      style={{ position: 'center', height: '100px', width: '100px' }}
+      style={{ position: 'center', height: '100px', width: '133px' }}
       alt=''
     />
   ) : (
