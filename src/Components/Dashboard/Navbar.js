@@ -11,7 +11,6 @@ import ListItemIcon from '@mui/material/ListItemIcon'
 import Logout from '@mui/icons-material/Logout'
 
 import LogoLight from '../../assets/LogoLight.svg'
-import { useAuthDataContext } from '../Landing/UserAuth'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { trackPromise } from 'react-promise-tracker'
@@ -47,13 +46,14 @@ function Navbar(props) {
     setAnchorEl(event.currentTarget)
   }
 
-  const auth = useAuthDataContext()
-
   const navigate = useNavigate()
   const handleLogout = () => {
     setAnchorEl(null)
 
-    let body = { token: auth.user, email: auth.email }
+    const token = localStorage.getItem('user')
+    const email = localStorage.getItem('email')
+
+    let body = { token, email }
 
     const logout_url = backend_base_url + 'logout'
 
@@ -66,7 +66,7 @@ function Navbar(props) {
         .then((data) => {
           let msg = data.data.msg
 
-          if (msg === `Successfully logged out ${auth.email}`) {
+          if (msg === `Successfully logged out ${email}`) {
             // Remove persistence of user session and redirect to home page
             toast(msg)
             setTimeout(() => {

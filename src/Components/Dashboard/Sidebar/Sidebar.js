@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { Drawer, Divider, Typography } from '@mui/material'
+import React, { useState } from 'react'
+import { Drawer, Typography } from '@mui/material'
 import { useLocation } from 'react-router-dom'
 
 import IconButton from '@mui/material/IconButton'
