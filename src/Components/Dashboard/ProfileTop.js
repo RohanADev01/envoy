@@ -3,7 +3,7 @@ import './ProfileTop.css'
 import UserAvatar from './UserAvatar'
 
 const ProfileTop = (props) => {
-    const AvatarSize = "14vh"
+    const AvatarSize = "15vh"
     return (
         <div className='profile'>
             <div className='profileCover'>
