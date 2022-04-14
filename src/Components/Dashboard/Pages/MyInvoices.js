@@ -27,7 +27,7 @@ export const MyInvoices = (props) => {
       .then((res) => res.json())
       .then((data) => {
         if (isMounted) {
-          setInvoiceList({"created": data.created_invoices, "received": data.created_invoices})
+          setInvoiceList({"created": data.created_invoices, "received": data.received_invoices})
           setFinishedLoading(true)
         }
       })
