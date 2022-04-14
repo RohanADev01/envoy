@@ -8,6 +8,7 @@ import InboxIcon from '@mui/icons-material/MoveToInbox'
 import NoteAddIcon from '@mui/icons-material/NoteAdd'
 import { Dashboard } from '@mui/icons-material'
 import PersonIcon from '@mui/icons-material/Person';
+import GroupsIcon from '@mui/icons-material/Groups';
 
 import DrawerList from './DrawerItems'
 import { Main, drawerWidth, DrawerHeader, SidebarHeader } from './Styles'
@@ -38,7 +39,7 @@ function Sidebar(props) {
         route: '/dashboard/profile'
       },
       {
-        icon: <PersonIcon />,
+        icon: <GroupsIcon />,
         text: 'My Teams',
         route: '/dashboard/team'
       }
