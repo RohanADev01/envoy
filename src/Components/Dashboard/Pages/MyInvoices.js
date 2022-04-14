@@ -25,7 +25,7 @@ export const MyInvoices = (props) => {
       .then((res) => res.json())
       .then((data) => {
         if (isMounted) {
-          setInvoiceList({ "created": data.created_invoices, "received": data.created_invoices })
+          setInvoiceList({ "created": data.created_invoices, "received": data.received_invoices })
           setFinishedLoading(true)
         }
       })
@@ -40,7 +40,6 @@ export const MyInvoices = (props) => {
 
   return (
     <>
-      {props.activeLink.activeItem.route === '/dashboard/create' && <Navigate to='/dashboard/create' />}
       <Typography
         component='h1'
         fontSize='1.8rem'
