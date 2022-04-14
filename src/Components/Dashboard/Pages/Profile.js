@@ -7,6 +7,7 @@ import { backend_base_url } from '../../../Constants'
 import ProfileTop from '../ProfileTop'
 import axios from 'axios'
 import { FailAlert } from '../../Landing/Constants'
+import { btnStyle } from '../styles'
 
 const Profile = (props) => {
     const [localColor, setLocalColor] = useState(props.userProfileState['profileColor'] ? props.userProfileState['profileColor'] : "#1ABC9C");
@@ -154,14 +155,14 @@ const Profile = (props) => {
                             <Grid item>
                                 <TextField required label="enter new firstname" name="newFirst" id="newFirst" variant="filled">Change username</TextField>
                             </Grid>
-                            <Button type='submit' variant='contained'>Change firstname</Button>
+                            <Button type='submit' variant='contained' sx={btnStyle}>Change firstname</Button>
                         </Box>
 
                         <Box component='form' onSubmit={handleLastnameChange} sx={{ margin: 2 }}>
                             <Grid item>
                                 <TextField required label="enter new lastname" name="newLast" id="newLast" variant="filled">Change username</TextField>
                             </Grid>
-                            <Button type='submit' variant='contained'>Change lastname</Button>
+                            <Button type='submit' variant='contained' sx={btnStyle}>Change lastname</Button>
                         </Box>
 
                         <Grid item xs={6}>
@@ -177,7 +178,7 @@ const Profile = (props) => {
                             <Grid item>
                                 <TextField required type="password" label="enter new password" name="newpass" id="newpass" variant="filled">New password</TextField>
                             </Grid>
-                            <Button type='submit' variant='contained'>Reset Password</Button>
+                            <Button type='submit' variant='contained' sx={btnStyle}>Reset Password</Button>
                         </Box>
                         <FailAlert
                             alertFail={alertFail}
@@ -201,7 +202,7 @@ const Profile = (props) => {
                             </Typography>
                         </Grid>
                         <Grid item xs={6}>
-                            <Button onClick={handleAvatarColorChange}>set avatar color</Button>
+                            <Button onClick={handleAvatarColorChange} sx={btnStyle} variant="contained">Set avatar color</Button>
                         </Grid>
                     </Grid>
                 </Grid>
