@@ -32,7 +32,7 @@ export const InvoiceDataTable = (props) => {
 
 
 function InvoiceTableComponent({ data }) {
-    var keys = ["CUSTOMER NAME", "SIZE", "TIME CREATED", "SOURCE", "delete"]
+    var keys = ["CUSTOMER", "SIZE", "TIME CREATED", "SOURCE", "delete"]
 
     return (
         <>
