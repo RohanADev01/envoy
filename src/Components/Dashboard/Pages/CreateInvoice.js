@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Typography, Box, Accordion, AccordionSummary } from '@mui/material'
+import { Typography, Box } from '@mui/material'
 import { trackPromise } from 'react-promise-tracker'
 import axios from 'axios'
 import { backend_base_url } from '../../../Constants'
@@ -7,9 +7,7 @@ import { CreateInvoiceItems } from '../CreateInvoiceItems'
 import { useAuthDataContext } from '../../Landing/UserAuth'
 import { FailAlert, SuccessAlert } from '../../Landing/Constants'
 import { LoadingIndicatorCreateInvoice } from '../constants'
-import { dummyData } from '../CreateInvoiceDummyData'
 import { pageTitle } from '../styles'
-import { Expand } from '@mui/icons-material'
 import { CreateInvoiceInputFields, CreateInvoiceBodyPreFilled } from '../CreateInvoiceFields'
 
 export const CreateInvoice = () => {
@@ -92,6 +90,7 @@ export const CreateInvoice = () => {
 
     const resetAlerts = (event) => {
         setFailAlert(false)
+        setSuccessAlert(false)
     }
 
     return (
@@ -100,7 +99,7 @@ export const CreateInvoice = () => {
                 Create Invoice
             </Typography>
             <Box component="form" onChange={resetAlerts} onSubmit={handleSubmit} sx={{ mt: 3 }}>
-                <CreateInvoiceItems />
+                <CreateInvoiceItems alertSuccess={alertSuccess}/>
 
                 <FailAlert alertFail={alertFail} alertContent={alertContent} />
                 <SuccessAlert alertSuccess={alertSuccess} alertContent={alertContent} />

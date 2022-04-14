@@ -1,4 +1,5 @@
 import { styled } from '@mui/material/styles'
+import { statsSmall } from '../styles'
 
 export const drawerWidth = 240
 
@@ -33,7 +34,7 @@ export const DrawerHeader = styled('div')(({ theme }) => ({
 
 export const linkContentIcon = {
   color: '#6E6E6ECC',
-  paddingLeft:2
+  paddingLeft: 2
 }
 
 export const linkContentText = {
@@ -46,7 +47,7 @@ export const activeHighlight = {
 
 export const activeIcon = {
   color: '#2A9D8F',
-  paddingLeft:2
+  paddingLeft: 2
 }
 
 export const activeText = {
@@ -54,6 +55,8 @@ export const activeText = {
 }
 
 export const linkPadding = {
-  paddingTop:"0.2rem",
-  paddingBottom:"0.2rem",
+  paddingTop: "0.2rem",
+  paddingBottom: "0.2rem",
 }
+
+export const SidebarHeader = { ...statsSmall, fontSize: "15px", fontWeight: "400", margin: "24px 0 16px 36px", color: "#6E6E6ECC" }

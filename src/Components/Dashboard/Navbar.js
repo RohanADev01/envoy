@@ -1,6 +1,6 @@
 import React from 'react'
 import { styled } from '@mui/material/styles'
-import { Box, Toolbar, Menu, MenuItem } from '@mui/material'
+import { Box, Toolbar, Menu, MenuItem, Avatar } from '@mui/material'
 import MuiAppBar from '@mui/material/AppBar'
 
 import { IconButton } from '@mui/material'
@@ -18,6 +18,8 @@ import { trackPromise } from 'react-promise-tracker'
 import { backend_base_url } from '../../Constants'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+
+import UserAvatar from './UserAvatar'
 
 const drawerWidth = 240
 
@@ -46,6 +48,7 @@ function Navbar(props) {
   }
 
   const auth = useAuthDataContext()
+
   const navigate = useNavigate()
   const handleLogout = () => {
     setAnchorEl(null)
@@ -64,13 +67,15 @@ function Navbar(props) {
           let msg = data.data.msg
 
           if (msg === `Successfully logged out ${auth.email}`) {
-            console.log('Logout Successful')
-
             // Remove persistence of user session and redirect to home page
             toast(msg)
             setTimeout(() => {
               localStorage.removeItem('user')
               localStorage.removeItem('email')
+              localStorage.removeItem('firstname')
+              localStorage.removeItem('lastname')
+              localStorage.removeItem('hex_color')
+              localStorage.removeItem('registered')
               navigate('/')
             }, 1000)
           } else {
@@ -92,8 +97,7 @@ function Navbar(props) {
         <AppBar
           style={{
             zIndex: 1301,
-            background:
-              '#2A9D8F'
+            background: '#2A9D8F',
           }}
           position='fixed'
         >
@@ -123,7 +127,7 @@ function Navbar(props) {
                 onClick={handleMenu}
                 color='inherit'
               >
-                <AccountCircle />
+                <UserAvatar userProfileState={props.userProfileState} />
               </IconButton>
               <Menu
                 id='menu-appbar'
@@ -142,7 +146,9 @@ function Navbar(props) {
                 style={{ zIndex: 1302 }}
               >
                 <MenuItem>
-                  <strong>{auth.email}</strong>
+                  {props.userProfileState['profileFirstName'] && props.userProfileState['profileLastName']
+                    ? `Logged in as ${props.userProfileState['profileFirstName']} ${props.userProfileState['profileLastName']}`
+                    : `Logged in as ${props.userProfileState['profileEmail']}`}
                 </MenuItem>
                 <MenuItem onClick={handleLogout}>
                   <ListItemIcon>

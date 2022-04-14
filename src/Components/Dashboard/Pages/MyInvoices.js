@@ -1,22 +1,20 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Card, Grid, Typography } from '@mui/material'
+import { Button, Typography } from '@mui/material'
 import { backend_base_url } from '../../../Constants'
-import InvoiceOptions from '../InvoiceOptions'
 import { useAuthDataContext } from '../../Landing/UserAuth'
-import { cardHeader, pageTitle, statsBig } from '../styles'
-import { InvoicesTable } from '../InvoicesTable'
+import { cardHeader, pageTitle } from '../styles'
 import { InvoiceDataTable } from '../InvoiceDataTable'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { Navigate } from 'react-router'
 import Loading from '../../../assets/Loading.gif'
 
 export const MyInvoices = (props) => {
-  const [invoices, setInvoiceList] = React.useState([])
+  const [invoices, setInvoiceList] = useState({"created": [], "received": []})
   const [finishedLoading, setFinishedLoading] = useState(true)
   const auth = useAuthDataContext()
   const token = auth.user
 
-  React.useEffect(() => {
+  useEffect(() => {
     let isMounted = true
     setFinishedLoading(false)
     fetch(backend_base_url + 'invoice/list', {
@@ -29,7 +27,7 @@ export const MyInvoices = (props) => {
       .then((res) => res.json())
       .then((data) => {
         if (isMounted) {
-          setInvoiceList(data.invoices)
+          setInvoiceList({"created": data.created_invoices, "received": data.received_invoices})
           setFinishedLoading(true)
         }
       })
@@ -53,8 +51,8 @@ export const MyInvoices = (props) => {
       >
         My Invoices
       </Typography>
-      {!finishedLoading && <img src={Loading} style={{ height: "100px", width: "133px" }}></img>}
-      {finishedLoading && (invoices.length == 0 ? (
+      {!finishedLoading && <img src={Loading} style={{ height: "100px", width: "133px" }} alt="loading invoices"></img>}
+      {finishedLoading && ( (invoices.created.length === 0 && invoices.received.length === 0) ? (
         <React.Fragment>
           <Typography variant='h3' sx={cardHeader}>
             No invoices to display yet. Try creating one.

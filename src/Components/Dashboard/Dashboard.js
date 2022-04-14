@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Navbar from './Navbar'
 import Sidebar from './Sidebar/Sidebar'
+import { success } from './styles'
 
 function DashboardContents() {
   const [open, setOpen] = useState(true)
@@ -9,7 +10,7 @@ function DashboardContents() {
   }
 
   useEffect(()=>{
-    document.body.style.backgroundColor = "#F8FFFE"
+    document.body.style.backgroundColor = success.backgroundColorLight
   }, [])
   
   return (

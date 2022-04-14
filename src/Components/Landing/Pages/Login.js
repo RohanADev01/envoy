@@ -41,49 +41,79 @@ function Login(props) {
     event.preventDefault()
     resetAlerts()
 
+    // Get form data
     const data = new FormData(event.currentTarget)
-
     const email = data.get('email')
     const password = data.get('password')
 
-    let body = { email, password }
+    // Get user details
+    const user_details_url = backend_base_url + 'user/details'
+    let user_details_body = { email }
 
-    const login_url = backend_base_url + 'login'
-
-    trackPromise(
-      axios({
-        method: 'POST',
-        url: login_url,
-        data: body,
+    const get_user_data = trackPromise(axios({
+      method: 'POST',
+      url: user_details_url,
+      data: user_details_body
+    })
+      .then((data) => {
+        return data
       })
-        .then((data) => {
-          let msg = data.data.msg
-          let token = data.data.token
-
-          setAlertContent(msg)
-
-          if (msg === `${email} is now logged in`) {
-            setSuccessAlert(true)
-            setTimeout(function () {
-              console.log('Login Successful')
-              // Persist user session and redirect to user dashboard here
-              localStorage.setItem('user', token)
-              localStorage.setItem('email', email)
-              auth.login(token, email)
-              navigate('/dashboard')
-            }, 500)
-          } else {
-            setFailAlert(true)
-          }
-        })
-        .catch((error) => {
-          console.log(error)
-          setAlertContent(
-            'An unknown error occured, please try again another time.'
-          )
-          setFailAlert(true)
-        })
+      .catch((error) => {
+        setAlertContent(
+          'Unable to retrieve data'
+        )
+        setFailAlert(true)
+      })
     )
+
+    // When call is finished, start user login with retrieved details
+    const retrieve_user_data = async () => {
+      let response = await get_user_data;
+      let retreived_data = response.data
+
+      // Login user
+      const login_url = backend_base_url + 'login'
+      let login_body = { email, password }
+
+      trackPromise(
+        axios({
+          method: 'POST',
+          url: login_url,
+          data: login_body,
+        })
+          .then((data) => {
+            let msg = data.data.msg
+            let token = data.data.token
+            setAlertContent(msg)
+
+            if (msg === `${email} is now logged in`) {
+              setSuccessAlert(true)
+              setTimeout(function () {
+                // Persist user session and redirect to user dashboard here
+                localStorage.setItem('user', token)
+                localStorage.setItem('email', email)
+                localStorage.setItem('firstname', retreived_data.firstname)
+                localStorage.setItem('lastname', retreived_data.lastname)
+                localStorage.setItem('hex_color', retreived_data.color)
+                auth.login(token, email)
+                navigate('/dashboard')
+              }, 500)
+            } else {
+              setFailAlert(true)
+            }
+          })
+          .catch((error) => {
+            console.log(error)
+            setAlertContent(
+              'An unknown error occured, please try again another time.'
+            )
+            setFailAlert(true)
+          })
+      )
+    }
+
+    retrieve_user_data();
+
   }
 
   const resetAlerts = (event) => {

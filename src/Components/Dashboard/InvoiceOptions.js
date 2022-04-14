@@ -1,13 +1,10 @@
 import React from 'react'
-import Card from '@mui/material/Card'
-import CardActions from '@mui/material/CardActions'
-import CardContent from '@mui/material/CardContent'
 import Button from '@mui/material/Button'
-import Typography from '@mui/material/Typography'
 import InvoicePopUpRaw from './InvoicePopUpRaw'
 import { TableCell } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete';
 import { IconButton } from '@mui/material'
+import { tag2 } from './styles'
 
 export default function InvoiceOptions(props) {
   // FOR RAW INVOICES
@@ -56,7 +53,7 @@ export default function InvoiceOptions(props) {
       {/* FOR DELETING INVOICES (INCOMPLETE) */}
       <TableCell sx={props.styleObj}>
         <IconButton>
-          <DeleteIcon color="error" />
+          <DeleteIcon sx={{color: tag2.backgroundColor}} />
         </IconButton>
       </TableCell>
     </>
