@@ -18,11 +18,13 @@ const Team = () => {
     const [creatingTeam, setCreatingTeam] = useState(false)
     const [existsTeam, setExistsTeam] = useState(false)
     const [teamName, setTeamName] = useState('')
+    const [teamOwner, setTeamOwner] = useState(false)
 
     const { promiseInProgress } = usePromiseTracker()
 
     const [membersList, updateMembersList] = useState([])
     const token = localStorage.getItem('user')
+    const email = localStorage.getItem('email')
 
     // check if user is already in the team, and set existsTeam to true to render team members/invoices list
     const reloadTeamList = () => {
@@ -47,9 +49,14 @@ const Team = () => {
                 .catch((err) => console.log(err))
         )
     }
-    
+
     useEffect(() => {
-        reloadTeamList()    
+        reloadTeamList()
+        membersList.forEach(user => {
+            if (user.email === email && user.role === 'Owner') {
+                setTeamOwner(true)
+            }
+        })
     }, [])
 
     function handleCreateTeam() {
@@ -143,7 +150,7 @@ const Team = () => {
                     </Card>
                 )
             ) : (
-                <TeamContent teamName={teamName} membersList={membersList} reloadTeamList={reloadTeamList}/>
+                <TeamContent teamName={teamName} membersList={membersList} reloadTeamList={reloadTeamList} teamOwner={teamOwner} />
             ))}
         </>
     )

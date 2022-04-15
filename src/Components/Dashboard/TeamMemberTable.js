@@ -58,6 +58,8 @@ const TeamMemberTable = (props) => {
         )
     }
 
+    const alertMessage = !props.teamOwner ? "Only Team Owner can add new members" : ""
+
     return (
         <>
             <Grid container spacing={4}>
@@ -80,8 +82,8 @@ const TeamMemberTable = (props) => {
                                     <Container sx={{ m: "32px 0", pb: 3 }}>
                                         <Typography sx={{ ...cardHeader, p: 0 }} variant='h5'>Invite Team Member</Typography>
                                         <Box component="form" onSubmit={handleInviteSubmit}>
-                                            <TextField required variant='standard' label="Invitee Email" name="inviteEmail" id="inviteEmail" />
-                                            <IconButton type="submit">
+                                            <TextField disabled={!props.teamOwner} required helperText={alertMessage} title={alertMessage} variant='standard' label="Invitee Email" name="inviteEmail" id="inviteEmail" />
+                                            <IconButton disabled={!props.teamOwner} title={alertMessage} type="submit">
                                                 <Add />
                                             </IconButton>
                                         </Box>
