@@ -146,9 +146,7 @@ function Navbar(props) {
                 style={{ zIndex: 1302 }}
               >
                 <MenuItem>
-                  {props.userProfileState['profileFirstName'] && props.userProfileState['profileLastName']
-                    ? `Logged in as ${props.userProfileState['profileFirstName']} ${props.userProfileState['profileLastName']}`
-                    : `Logged in as ${props.userProfileState['profileEmail']}`}
+                  <em>{`Logged in as ${props.userProfileState['profileEmail']}`}</em>
                 </MenuItem>
                 <MenuItem onClick={handleLogout}>
                   <ListItemIcon>
