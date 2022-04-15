@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react'
-import { Drawer, Divider, Typography } from '@mui/material'
+import React, { useState } from 'react'
+import { Drawer, Typography } from '@mui/material'
+import { useLocation } from 'react-router-dom'
 
 import IconButton from '@mui/material/IconButton'
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
@@ -7,6 +8,7 @@ import InboxIcon from '@mui/icons-material/MoveToInbox'
 import NoteAddIcon from '@mui/icons-material/NoteAdd'
 import { Dashboard } from '@mui/icons-material'
 import PersonIcon from '@mui/icons-material/Person';
+import GroupsIcon from '@mui/icons-material/Groups';
 
 import DrawerList from './DrawerItems'
 import { Main, drawerWidth, DrawerHeader, SidebarHeader } from './Styles'
@@ -14,12 +16,13 @@ import { Activity } from '../Pages/Activity'
 import { CreateInvoice } from '../Pages/CreateInvoice'
 import { MyInvoices } from '../Pages/MyInvoices'
 import Profile from '../Pages/Profile'
+import Team from '../Pages/Team'
 
 function Sidebar(props) {
   const [activeLink, changeLinkState] = useState({
-    activeItem: { icon: <Dashboard />, text: 'Activity', route: '/dashboard/' },
+    activeItem: { icon: <Dashboard />, text: 'My Activity', route: '/dashboard' },
     objects: [
-      { icon: <Dashboard />, text: 'Activity', route: '/dashboard/' },
+      { icon: <Dashboard />, text: 'My Activity', route: '/dashboard' },
       {
         icon: <NoteAddIcon />,
         text: 'Create Invoice',
@@ -34,9 +37,16 @@ function Sidebar(props) {
         icon: <PersonIcon />,
         text: 'My Profile',
         route: '/dashboard/profile'
+      },
+      {
+        icon: <GroupsIcon />,
+        text: 'My Teams',
+        route: '/dashboard/team'
       }
     ],
   })
+
+  const location = useLocation()
 
   return (
     <React.Fragment>
@@ -66,13 +76,13 @@ function Sidebar(props) {
 
       <Main open={props.sideBarState}>
         <DrawerHeader />
-        {activeLink.activeItem.route === '/dashboard/' && <Activity userProfileState={props.userProfileState} />}
+        {(location.pathname === '/dashboard' || location.pathname === '/dashboard/') && <Activity userProfileState={props.userProfileState} />}
 
-        {activeLink.activeItem.route === '/dashboard/create' && (
+        {location.pathname === '/dashboard/create' && (
           <CreateInvoice />
         )}
 
-        {activeLink.activeItem.route === '/dashboard/invoices' && (
+        {location.pathname === '/dashboard/invoices' && (
           <MyInvoices activeLink={activeLink} changeLinkState={changeLinkState} item={{
             icon: <NoteAddIcon />,
             text: 'Create Invoice',
@@ -80,8 +90,12 @@ function Sidebar(props) {
           }} />
         )}
 
-        {activeLink.activeItem.route === '/dashboard/profile' && (
+        {location.pathname === '/dashboard/profile' && (
           <Profile userProfileState={props.userProfileState} />
+        )}
+
+        {location.pathname === '/dashboard/team' && (
+          <Team />
         )}
       </Main>
     </React.Fragment>

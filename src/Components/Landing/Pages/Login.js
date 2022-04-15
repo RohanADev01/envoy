@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { Navigate, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { trackPromise } from 'react-promise-tracker'
-import { useAuthDataContext } from '../UserAuth'
 
 import LogoDark from '../../../assets/LogoDark.svg'
 
@@ -34,8 +33,6 @@ function Login(props) {
   const [alertFail, setFailAlert] = useState(false)
   const [alertSuccess, setSuccessAlert] = useState(false)
   const [alertContent, setAlertContent] = useState('')
-
-  const auth = useAuthDataContext()
 
   const handleSubmit = (event) => {
     event.preventDefault()
@@ -95,7 +92,6 @@ function Login(props) {
                 localStorage.setItem('firstname', retreived_data.firstname)
                 localStorage.setItem('lastname', retreived_data.lastname)
                 localStorage.setItem('hex_color', retreived_data.color)
-                auth.login(token, email)
                 navigate('/dashboard')
               }, 500)
             } else {

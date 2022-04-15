@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { Navigate, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { trackPromise } from 'react-promise-tracker'
-import { useAuthDataContext } from '../UserAuth'
 
 import LogoDark from '../../../assets/LogoDark.svg'
 
@@ -35,8 +34,6 @@ function SignUp(props) {
   const [alertSuccess, setSuccessAlert] = useState(false)
   const [alertContent, setAlertContent] = useState('')
 
-  const auth = useAuthDataContext()
-
   const handleSubmit = (event) => {
     event.preventDefault()
     resetAlerts()
@@ -61,20 +58,21 @@ function SignUp(props) {
         .then((data) => {
           let msg = data.data.msg
           let token = data.data.token
+          let hex_color = data.data.hex_color
 
+          setSuccessAlert(true)
           setAlertContent(msg)
 
           if (msg === `User ${email} registered and logged in`) {
-            setSuccessAlert(true)
             setTimeout(function () {
-              console.log('Signup Successful')
+              console.log('Signup Successful', data)
               // Persist user session and redirect to user dashboard
-              localStorage.setItem('user', token)
               localStorage.setItem('email', email)
               localStorage.setItem('firstname', firstname)
               localStorage.setItem('lastname', lastname)
+              localStorage.setItem('user', token)
+              localStorage.setItem('hex_color', hex_color)
               localStorage.setItem('registered', 'true')
-              auth.register(token, email, firstname, lastname)
               navigate('/dashboard')
             }, 500)
           } else {
