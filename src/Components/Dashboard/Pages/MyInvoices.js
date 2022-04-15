@@ -4,7 +4,6 @@ import { backend_base_url } from '../../../Constants'
 import { cardHeader, pageTitle } from '../styles'
 import { InvoiceDataTable } from '../InvoiceDataTable'
 import { useNavigate } from 'react-router-dom'
-import { Navigate } from 'react-router'
 import Loading from '../../../assets/Loading.gif'
 
 export const MyInvoices = (props) => {
