@@ -4,7 +4,7 @@ import InvoicePopUpRaw from './InvoicePopUpRaw'
 import { TableCell } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete';
 import { IconButton } from '@mui/material'
-import { tag2 } from './styles'
+import { grey_icons } from './styles'
 import InvoicePopUpSend from './InvoicePopUpSend';
 
 export default function InvoiceOptions(props) {
@@ -68,7 +68,7 @@ export default function InvoiceOptions(props) {
       {/* FOR DELETING INVOICES (INCOMPLETE) */}
       <TableCell sx={props.styleObj}>
         <IconButton>
-          <DeleteIcon sx={{ color: tag2.backgroundColor }} />
+          <DeleteIcon sx={{ color: grey_icons.color }} />
         </IconButton>
       </TableCell>
     </>
