@@ -12,7 +12,6 @@ import Loading from '../../assets/Loading.gif'
 const InvoicePopUpSend = (props) => {
     const { onClose, open, name, content } = props
     const { promiseInProgress } = usePromiseTracker()
-    const token = localStorage.getItem('user')
 
     const handleSendInvoice = (event) => {
         event.preventDefault()
@@ -22,6 +21,7 @@ const InvoicePopUpSend = (props) => {
         const invoiceTitle = data.get('invoiceTitle')
         const recipientEmail = data.get('recipientEmail')
         const mailContent = data.get('mailContent')
+        const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNDkxMzgyMzYxM2UzYTBjNjU2ZmQ4NiIsImVtYWlsIjoic2VuZzIwMjFlY2xhaXJAZ21haWwuY29tIiwiaWF0IjoxNjQ4OTU2NTQxfQ.MMog2AH6wNo7RRW5M3oy_0WGA4Kl5oj7rv0p6CrpXVw"
         const file = content
         let body = { token, invoiceTitle, mailContent, recipientEmail, file }
 
@@ -35,10 +35,15 @@ const InvoicePopUpSend = (props) => {
             })
                 .then((data) => {
                     console.log(data)
-                    toast(data)
+                    if (data.data.response_code === 200) {
+                        toast(`Email sent to ${recipientEmail}`)
+                    } else {
+                        toast("ERROR!! Please check your input is correct and try again!")
+                    }
                 })
                 .catch((error) => {
                     console.log(error)
+                    toast("Could not connect to server.")
                 })
         )
     }
@@ -53,21 +58,21 @@ const InvoicePopUpSend = (props) => {
                     <Grid item>
                         <DialogTitle sx={{ ...statsBig, p: 0, m: 0 }}>Enter details here</DialogTitle>
                     </Grid>
-                    <Grid item>
+                    <Grid item style={{width:"50%"}}>
                         <Box component="form" onSubmit={handleSendInvoice}>
-                            <Grid container display="flex" justifyContent="center" alignItems="center" flexDirection="column">
-                                <Grid item xs={12}>
-                                    <TextField variant='standard' required label="Invoice Title" name="invoiceTitle" id="invoiceTitle" />
-                                </Grid>
+                            <Grid container display="flex" justifyContent="center" alignItems="center" flexDirection="column" spacing={2}>
                                 <Grid item xs={12}>
                                     <TextField variant='standard' required label="Recipient Email" name="recipientEmail" id="recipientEmail" />
                                 </Grid>
                                 <Grid item xs={12}>
-                                    <TextField variant='standard' required label="Message" name="mailContent" id="mailContent" />
+                                    <TextField variant='filled' required label="Subject" name="invoiceTitle" id="invoiceTitle" />
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <TextField multiline rows={2} variant='filled' required label="Message" name="mailContent" id="mailContent" />
                                 </Grid>
                                 <Grid item xs={12}>
                                     {promiseInProgress && <img src={Loading} style={{ height: "100px", width: "133px" }} alt="loading invoices"></img>}
-                                    {!promiseInProgress && <Button type="submit" sx={{ ...btnStyle, mt: 2 }}>Send Invoice</Button>}
+                                    {!promiseInProgress && <Button type="submit" sx={{ ...btnStyle }}>Send Invoice</Button>}
                                 </Grid>
                             </Grid>
                         </Box>
