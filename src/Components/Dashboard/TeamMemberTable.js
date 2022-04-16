@@ -80,7 +80,7 @@ const TeamMemberTable = (props) => {
                                 <React.Fragment>
                                     <UserTable data={props.membersList} />
                                     <Container sx={{ m: "32px 0", pb: 3 }}>
-                                        <Typography sx={{ ...cardHeader, p: 0 }} variant='h5'>Invite Team Member</Typography>
+                                        <Typography sx={{ ...cardHeader, p: 0 }} variant='h5'>Invite Team Members</Typography>
                                         <Box component="form" onSubmit={handleInviteSubmit}>
                                             <TextField disabled={!props.teamOwner} required helperText={alertMessage} title={alertMessage} variant='standard' label="Invitee Email" name="inviteEmail" id="inviteEmail" />
                                             <IconButton disabled={!props.teamOwner} title={alertMessage} type="submit">
