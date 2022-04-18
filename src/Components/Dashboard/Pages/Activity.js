@@ -197,24 +197,6 @@ export const Activity = (props) => {
                     </Grid>
                   </Grid>
                 </div>
-                <Grid container direction='row' alignItems='center'>
-                  {/* <Grid item xs={4}>
-                <Typography color='text' noWrap sx={statsSmallHeader}>
-                  Amount
-                </Typography>
-                <Typography size='md' sx={statsSmall}>
-                  860
-                </Typography>
-              </Grid> */}
-                  <Grid item xs={4}>
-                    <Typography color='text' noWrap sx={statsSmallHeader}>
-                      Growth Rate
-                    </Typography>
-                    <Typography size='md' sx={statsSmall}>
-                      3.25%
-                    </Typography>
-                  </Grid>
-                </Grid>
               </Widget>
             </Grid>
             {/* Montly Earnings */}
@@ -261,24 +243,6 @@ export const Activity = (props) => {
                     </Grid>
                   </Grid>
                 </div>
-                <Grid container direction='row' alignItems='center'>
-                  {/* <Grid item xs={4}>
-                <Typography color='text' noWrap sx={statsSmallHeader}>
-                  Amount
-                </Typography>
-                <Typography size='md' sx={statsSmall}>
-                  860
-                </Typography>
-              </Grid> */}
-                  <Grid item xs={4}>
-                    <Typography color='text' noWrap sx={statsSmallHeader}>
-                      Growth Rate
-                    </Typography>
-                    <Typography size='md' sx={statsSmall}>
-                      3.25%
-                    </Typography>
-                  </Grid>
-                </Grid>
               </Widget>
             </Grid>
             {/* Annual Earning */}
@@ -325,24 +289,6 @@ export const Activity = (props) => {
                     </Grid>
                   </Grid>
                 </div>
-                <Grid container direction='row' alignItems='center'>
-                  {/* <Grid item xs={4}>
-                <Typography color='text' noWrap sx={statsSmallHeader}>
-                  Amount
-                </Typography>
-                <Typography size='md' sx={statsSmall}>
-                  860
-                </Typography>
-              </Grid> */}
-                  <Grid item xs={4}>
-                    <Typography color='text' noWrap sx={statsSmallHeader}>
-                      Growth Rate
-                    </Typography>
-                    <Typography size='md' sx={statsSmall}>
-                      3.25%
-                    </Typography>
-                  </Grid>
-                </Grid>
               </Widget>
             </Grid>
             {/* Invoices Created */}
