@@ -39,38 +39,105 @@ import {
 } from '../../Dashboard/InvoiceActivity/ActivityData'
 import { trackPromise, usePromiseTracker } from 'react-promise-tracker'
 import Loading from '../../../assets/Loading.gif'
+import { Dashboard } from '@mui/icons-material'
+import { backend_base_url } from '../../../Constants'
+import axios from 'axios'
 
 export const Activity = (props) => {
+  const [finishedLoading, setFinishedLoading] = useState(false)
+  const { promiseInProgress } = usePromiseTracker()
+  console.log("Hello reached activity page")
 
   //  Function to get all user stats
 
   let userData = {}
-
-  const [finishedLoading, setFinishedLoading] = useState(false)
+  const token = localStorage.getItem('user')
 
   const retrieve_user_stats_data = async () => {
     let response = ''
+    let url = ''
+    let config = {
+      headers: {
+        token,
+      },
+    }
 
-    response = await get_total_received
-    userData = { ...userData, "total_received": response.data.num_received_inv }
+    url = backend_base_url + 'stats/received'
+    response = await trackPromise(
+      axios
+        .get(url, config)
+        .then((response) => {
+          console.log(response)
+          userData = { ...userData, "total_received": response.data.num_received_inv }
+        })
+        .catch((error) => {
+          return error
+        })
+    )
 
-    response = await get_total_created
-    userData = { ...userData, "total_created": response.data.num_created_inv }
+    url = backend_base_url + 'stats/created'
+    response = await trackPromise(
+      axios
+        .get(url, config)
+        .then((response) => {
+          console.log("resp? ", response)
+          userData = { ...userData, "total_created": response.data.num_created_inv }
+        })
+        .catch((error) => {
+          return error
+        })
+    )
 
-    response = await get_today_stats
-    userData = { ...userData, "day_earns": response.data.day_earns }
-    userData = { ...userData, "last_five_days": response.data.last_five_days }
+    url = backend_base_url + 'stats/day'
+    response = await trackPromise(
+      axios
+        .get(url, config)
+        .then((response) => {
+          userData = { ...userData, "day_earns": response.data.day_earns }
+          userData = { ...userData, "last_five_days": response.data.last_five_days }
+        })
+        .catch((error) => {
+          return error
+        })
+    )
 
-    response = await get_month_stats
-    userData = { ...userData, "month_earns": response.data.month_earns }
-    userData = { ...userData, "last_five_months": response.data.last_five_months }
+    url = backend_base_url + 'stats/month'
+    response = await trackPromise(
+      axios
+        .get(url, config)
+        .then((response) => {
+          userData = { ...userData, "month_earns": response.data.month_earns }
+          userData = { ...userData, "last_five_months": response.data.last_five_months }
+        })
+        .catch((error) => {
+          return error
+        })
+    )
 
-    response = await get_year_stats
-    userData = { ...userData, "year_earns": response.data.year_earns }
-    userData = { ...userData, "last_five_years": response.data.last_five_years }
+    url = backend_base_url + 'stats/year'
+    response = await trackPromise(
+      axios
+        .get(url, config)
+        .then((response) => {
+          userData = { ...userData, "year_earns": response.data.year_earns }
+          userData = { ...userData, "last_five_years": response.data.last_five_years }
+        })
+        .catch((error) => {
+          return error
+        })
+    )
 
-    response = await get_past_thirty_stats
-    userData = { ...userData, "last_thirty_days": response.data.last_thirty_days }
+    url = backend_base_url + 'stats/thirtydays'
+    response = await trackPromise(
+      axios
+        .get(url, config)
+        .then((response) => {
+          userData = { ...userData, "last_thirty_days": response.data.last_thirty_days }
+        })
+        .catch((error) => {
+          return error
+        })
+    )
 
     return userData
   }
@@ -116,17 +183,13 @@ export const Activity = (props) => {
   // Calling functions to retreive and update state with data
 
   useEffect(() => {
-    setFinishedLoading(false)
-
     trackPromise(
-      retrieve_user_stats_data().then((data) => {
+    retrieve_user_stats_data()
+      .then((data) => {
         setFinishedLoading(data)
       })
     )
   }, [])
-
-
-  const { promiseInProgress } = usePromiseTracker()
 
   return (
     <div>

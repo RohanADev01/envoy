@@ -4,7 +4,7 @@ import TeamMemberTable from './TeamMemberTable'
 const TeamContent = (props) => {
   return (
     <React.Fragment>
-      <TeamMemberTable teamName={props.teamName} membersList={props.membersList} reloadTeamList={props.reloadTeamList} teamOwner={props.teamOwner} />
+      <TeamMemberTable teamName={props.teamName} membersList={props.membersList} reloadTeamList={props.reloadTeamList} teamFunctions={props.teamFunctions} />
     </React.Fragment>
   )
 }

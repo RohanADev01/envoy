@@ -76,7 +76,7 @@ function Sidebar(props) {
 
       <Main open={props.sideBarState}>
         <DrawerHeader />
-        {(location.pathname === '/dashboard' || location.pathname === '/dashboard/') && <Activity userProfileState={props.userProfileState} />}
+        {(location.pathname === '/dashboard' || location.pathname === '/dashboard/') ? <Activity userProfileState={props.userProfileState} activeLink={activeLink} changeLinkState={changeLinkState} /> : null}
 
         {location.pathname === '/dashboard/create' && (
           <CreateInvoice />
