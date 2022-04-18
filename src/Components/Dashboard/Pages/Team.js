@@ -78,6 +78,7 @@ const Team = () => {
                         setCreatingTeam(false)
                         setTeamName(team_name)
                         setExistsTeam(true)
+                        reloadTeamList()
                     }
                 })
                 .catch((err) => console.log(err))
@@ -137,7 +138,6 @@ const Team = () => {
                                     variant='contained'
                                     sx={{ mt: 3, ...btnStyle }}
                                 >
-                                    {' '}
                                     Create team
                                 </Button>
                             </Box>
