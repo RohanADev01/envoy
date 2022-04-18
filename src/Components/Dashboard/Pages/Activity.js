@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Grid, Typography } from '@mui/material'
 import {
   card,
   cardHeader,
+  error,
   fullHeightBody,
   hint,
   pageTitle,
@@ -40,90 +41,92 @@ import { trackPromise, usePromiseTracker } from 'react-promise-tracker'
 import Loading from '../../../assets/Loading.gif'
 
 export const Activity = (props) => {
-  // #######################################################################
-  // ###### CHANGE TO ACTUAL DATA POINTS FROM API CALL ONCE FINISHED #######
-  // #######################################################################
 
-  function getRandomData(length, min, max, multiplier = 10, maxDiff = 10) {
-    var array = new Array(length).fill()
-    let lastValue
+  //  Function to get all user stats
 
-    return array.map((item, index) => {
-      let randomValue = Math.floor(Math.random() * multiplier + 1)
+  let userData = {}
 
-      while (
-        randomValue <= min ||
-        randomValue >= max ||
-        (lastValue && randomValue - lastValue > maxDiff)
-      ) {
-        randomValue = Math.floor(Math.random() * multiplier + 1)
-      }
-
-      lastValue = randomValue
-
-      return { value: randomValue }
-    })
-  }
-
-  function getMainChartData() {
-    var resultArray = []
-    var earnings = getRandomData(30, 1500, 7500, 7500, 1500)
-
-    resultArray.push({
-      Earnings: 4000,
-    })
-    for (let i = 1; i < earnings.length; i++) {
-      resultArray.push({
-        Earnings: earnings[i].value,
-      })
-    }
-
-    return resultArray
-  }
-
-  const mainChartData = getMainChartData()
-
-  // #######################################################################
-
-  const user_stats_data = {}
+  const [finishedLoading, setFinishedLoading] = useState(false)
 
   const retrieve_user_stats_data = async () => {
     let response = ''
 
-    // let response = await get_total_sent
-    // console.log(response)
-
     response = await get_total_received
-    user_stats_data.total_received = response.data.num_received_inv
+    userData = { ...userData, "total_received": response.data.num_received_inv }
 
     response = await get_total_created
-    user_stats_data.total_created = response.data.num_created_inv
+    userData = { ...userData, "total_created": response.data.num_created_inv }
 
     response = await get_today_stats
-    user_stats_data.day_earns = response.data.day_earns
-    user_stats_data.last_five_days = response.data.last_five_days
+    userData = { ...userData, "day_earns": response.data.day_earns }
+    userData = { ...userData, "last_five_days": response.data.last_five_days }
 
     response = await get_month_stats
-    user_stats_data.month_earns = response.data.month_earns
-    user_stats_data.last_five_months = response.data.last_five_months
+    userData = { ...userData, "month_earns": response.data.month_earns }
+    userData = { ...userData, "last_five_months": response.data.last_five_months }
 
     response = await get_year_stats
-    user_stats_data.year_earns = response.data.year_earns
-    user_stats_data.last_five_years = response.data.last_five_years
+    userData = { ...userData, "year_earns": response.data.year_earns }
+    userData = { ...userData, "last_five_years": response.data.last_five_years }
 
     response = await get_past_thirty_stats
-    user_stats_data.last_thirty_days = response.data.last_thirty_days
+    userData = { ...userData, "last_thirty_days": response.data.last_thirty_days }
 
-    return user_stats_data
+    return userData
   }
 
+  //  Function for getting all chart data
+
+  const mainChartData = []
+  const graphDataKey = "Number of invoices handled"
+  function getMainChartData(thirtydays_data) {
+    console.log(thirtydays_data)
+    var resultArray = []
+
+    for (let i = 0; i < thirtydays_data.length; i++) {
+      resultArray.push({
+        "Number of invoices handled": thirtydays_data[i],
+      })
+    }
+
+    console.log(resultArray)
+    return resultArray
+  }
+
+  //  Function for getting graph Y-Axis points
+
+  function get_graph_ticks(data_max) {
+    var high, med
+
+    if (data_max < 20) {
+      high = Math.ceil(data_max / 2) * 2
+      high = (high % 2 == 0) ? high : high + 1
+      med = high / 2
+    } else if (data_max < 50) {
+      high = Math.ceil(data_max / 5) * 5
+      high = (high % 2 == 0) ? high : high + 1
+      med = high / 2
+    } else {
+      high = Math.ceil(data_max / 10) * 10
+      high = (high % 2 == 0) ? high : high + 1
+      med = high / 2
+    }
+
+    return [0, med, high]
+  }
+
+  // Calling functions to retreive and update state with data
+
   useEffect(() => {
+    setFinishedLoading(false)
+
     trackPromise(
       retrieve_user_stats_data().then((data) => {
-        console.log(data)
+        setFinishedLoading(data)
       })
     )
   }, [])
+
 
   const { promiseInProgress } = usePromiseTracker()
 
@@ -135,7 +138,6 @@ export const Activity = (props) => {
         fontFamily='Montserrat'
         sx={pageTitle}
       >
-        {/* Temporary, can change to show just name once route added to backend for getting name on login */}
         {'Welcome' +
           (localStorage.getItem('registered') ? ' to Envoy, ' : ' back, ') +
           (props.userProfileState['profileFirstName'] &&
@@ -150,10 +152,10 @@ export const Activity = (props) => {
           alt='loading invoices'
         />
       )}
-      {!promiseInProgress && (
+      {!promiseInProgress && finishedLoading && (
         <React.Fragment>
           <Grid container spacing={5}>
-            {/* Today's Earnings */}
+            {/* Number of invoices today */}
             <Grid item lg={4} md={6} xs={12}>
               <Widget
                 title="Today's Earnings"
@@ -171,7 +173,7 @@ export const Activity = (props) => {
                         noWrap
                         sx={statsBig}
                       >
-                        {user_stats_data.day_earns}
+                        {finishedLoading.day_earns}
                       </Typography>
                     </Grid>
                     <Grid item xs={6}>
@@ -179,17 +181,17 @@ export const Activity = (props) => {
                         width={100}
                         height={30}
                         data={[
-                          { value: 10 },
-                          { value: 15 },
-                          { value: 10 },
-                          { value: 17 },
-                          { value: 18 },
+                          { value: finishedLoading.last_five_days[4] },
+                          { value: finishedLoading.last_five_days[3] },
+                          { value: finishedLoading.last_five_days[2] },
+                          { value: finishedLoading.last_five_days[1] },
+                          { value: finishedLoading.last_five_days[0] },
                         ]}
                       >
                         <Line
                           type='natural'
                           dataKey='value'
-                          stroke={success.backgroundColor}
+                          stroke={finishedLoading.last_five_days[0] < finishedLoading.last_five_days[1] ? error.backgroundColor : success.backgroundColor}
                           strokeWidth={2}
                           dot={true}
                         />
@@ -202,7 +204,7 @@ export const Activity = (props) => {
             {/* Montly Earnings */}
             <Grid item lg={4} md={6} xs={12}>
               <Widget
-                title='Monthly Earnings'
+                title='Number of invoices this month'
                 upperTitle
                 bodyClass={fullHeightBody}
                 className={card}
@@ -217,7 +219,7 @@ export const Activity = (props) => {
                         noWrap
                         sx={statsBig}
                       >
-                        {user_stats_data.month_earns}
+                        {finishedLoading.month_earns}
                       </Typography>
                     </Grid>
                     <Grid item xs={6}>
@@ -225,17 +227,17 @@ export const Activity = (props) => {
                         width={100}
                         height={30}
                         data={[
-                          { value: 0 },
-                          { value: 10 },
-                          { value: 0 },
-                          { value: 0 },
-                          { value: 0 },
+                          { value: finishedLoading.last_five_months[4] },
+                          { value: finishedLoading.last_five_months[3] },
+                          { value: finishedLoading.last_five_months[2] },
+                          { value: finishedLoading.last_five_months[1] },
+                          { value: finishedLoading.last_five_months[0] },
                         ]}
                       >
                         <Line
                           type='natural'
                           dataKey='value'
-                          stroke={success.backgroundColor}
+                          stroke={finishedLoading.last_five_months[0] < finishedLoading.last_five_months[1] ? error.backgroundColor : success.backgroundColor}
                           strokeWidth={2}
                           dot={true}
                         />
@@ -248,7 +250,7 @@ export const Activity = (props) => {
             {/* Annual Earning */}
             <Grid item lg={4} md={6} xs={12}>
               <Widget
-                title='Annual Earnings'
+                title='Number of invoices this year'
                 upperTitle
                 bodyClass={fullHeightBody}
                 className={card}
@@ -263,7 +265,7 @@ export const Activity = (props) => {
                         noWrap
                         sx={statsBig}
                       >
-                        {user_stats_data.year_earns}
+                        {finishedLoading.year_earns}
                       </Typography>
                     </Grid>
                     <Grid item xs={6}>
@@ -271,17 +273,17 @@ export const Activity = (props) => {
                         width={100}
                         height={30}
                         data={[
-                          { value: 10 },
-                          { value: 15 },
-                          { value: 10 },
-                          { value: 17 },
-                          { value: 18 },
+                          { value: finishedLoading.last_five_years[4] },
+                          { value: finishedLoading.last_five_years[3] },
+                          { value: finishedLoading.last_five_years[2] },
+                          { value: finishedLoading.last_five_years[1] },
+                          { value: finishedLoading.last_five_years[0] },
                         ]}
                       >
                         <Line
                           type='natural'
                           dataKey='value'
-                          stroke={success.backgroundColor}
+                          stroke={finishedLoading.last_five_years[0] < finishedLoading.last_five_years[1] ? error.backgroundColor : success.backgroundColor}
                           strokeWidth={2}
                           dot={true}
                         />
@@ -309,7 +311,7 @@ export const Activity = (props) => {
                         noWrap
                         sx={statsBig}
                       >
-                        12
+                        {finishedLoading.total_created}
                       </Typography>
                     </Grid>
                   </Grid>
@@ -334,7 +336,7 @@ export const Activity = (props) => {
                         noWrap
                         sx={statsBig}
                       >
-                        12
+                        {finishedLoading.total_received}
                       </Typography>
                     </Grid>
                   </Grid>
@@ -342,25 +344,6 @@ export const Activity = (props) => {
               </Widget>
             </Grid>
             {/* Invoices Sent */}
-            {/* <Grid item lg={4} md={6} xs={12}>
-              <Widget
-                title='Total Invoices Sent'
-                upperTitle
-                bodyClass={fullHeightBody}
-                className={card}
-                icon={<CallMadeIcon fontSize='medium' />}
-              >
-                <div style={visitsNumberContainer}>
-                  <Grid container item alignItems='center'>
-                    <Grid item xs={6}>
-                      <Typography size='xl' weight='medium' noWrap sx={statsBig}>
-                        12
-                      </Typography>
-                    </Grid>
-                  </Grid>
-                </div>
-              </Widget>
-            </Grid> */}
 
             {/* GRAPH */}
             <Grid item xs={12}>
@@ -374,15 +357,16 @@ export const Activity = (props) => {
                 }
               >
                 <Typography variant='h5' sx={statsSmallHeader}>
-                  {'Earnings ($)'}
+                  {`${graphDataKey}`}
                 </Typography>
                 <ResponsiveContainer width='100%' minWidth={500} height={350}>
                   <ComposedChart
                     margin={{ top: 0, right: -15, bottom: 0 }}
-                    data={mainChartData}
+                    data={getMainChartData(finishedLoading.last_thirty_days)}
                   >
                     <YAxis
-                      ticks={[0, 2500, 3000, 4000, 5000, 7500]}
+                      // ticks={[0, 5, 10]}
+                      ticks={get_graph_ticks(Math.max(...finishedLoading.last_thirty_days))}
                       tick={{ fill: hint.color + '80', fontSize: 14 }}
                       stroke={hint.color + '80'}
                       tickLine={true}
@@ -396,7 +380,7 @@ export const Activity = (props) => {
                     <Tooltip />
                     <Area
                       type='monotone'
-                      dataKey='Earnings'
+                      dataKey={graphDataKey}
                       dot={{
                         stroke: success.backgroundColor,
                         strokeWidth: 2,
