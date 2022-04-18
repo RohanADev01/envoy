@@ -82,7 +82,7 @@ export const Activity = (props) => {
         {'Welcome' +
           (localStorage.getItem('registered') ? ' to Envoy, ' : ' back, ') +
           (props.userProfileState['profileFirstName'] &&
-          props.userProfileState['profileLastName']
+            props.userProfileState['profileLastName']
             ? `${props.userProfileState['profileFirstName']} ${props.userProfileState['profileLastName']}`
             : `${props.userProfileState['profileEmail']}`)}
       </Typography>

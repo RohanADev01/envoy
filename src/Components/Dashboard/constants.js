@@ -3,6 +3,7 @@ import { Button } from '@mui/material'
 import { usePromiseTracker } from "react-promise-tracker"
 import loadingImage from '../../assets/Loading.gif'
 import { toast } from "react-toastify"
+import { btnStyle } from "./styles"
 
 // Login functions
 const SubmitContentCreateInvoice = (props) => {
@@ -13,7 +14,7 @@ const SubmitContentCreateInvoice = (props) => {
                 fullWidth
                 variant='contained'
                 fontFamily='Montserrat'
-                sx={{ mt: 3, mb: 2 }}
+                sx={{ mt: 3, mb: 2, ...btnStyle }}
             >
                 Create Invoice
             </Button>

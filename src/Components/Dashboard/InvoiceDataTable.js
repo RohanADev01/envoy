@@ -22,7 +22,7 @@ export const InvoiceDataTable = (props) => {
             <Grid container spacing={4}>
                 <Grid item xs={12}>
                     <Widget title="Recent Invoice Activity" upperTitle noBodyPadding body>
-                        <InvoiceTableComponent data={props.tableData} />
+                        <InvoiceTableComponent data={props.tableData} invoiceStates={props.invoiceStates} />
                     </Widget>
                 </Grid>
             </Grid>
@@ -31,8 +31,10 @@ export const InvoiceDataTable = (props) => {
 }
 
 
-function InvoiceTableComponent({ data }) {
-    var keys = ["CUSTOMER NAME", "SIZE", "TIME CREATED", "SOURCE", "delete"]
+function InvoiceTableComponent(props) {
+    const data = props.data
+
+    var keys = ["CUSTOMER", "SIZE", "TIME CREATED", "SOURCE", "delete"]
 
     return (
         <>
@@ -45,24 +47,25 @@ function InvoiceTableComponent({ data }) {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {data.created.map(({ customer_name, size, timestamp, content }, idx) => (
+                    {data.created.map(({ invoice_id, customer_name, size, timestamp, content }, idx) => (
                         <TableRow key={idx}>
                             <TableCell className="pl-3 fw-normal" sx={tableContent}>{customer_name}</TableCell>
                             <TableCell sx={tableContent}>{`${size} bytes`}</TableCell>
                             <TableCell sx={tableContent}>{timestamp}</TableCell>
                             <TableCell sx={tableContent}>
-                                {/* <Chip label={status} style={status === "Sent" ? success : (status === "Pending" ? warning : secondary)} /> */}
                                 <Chip label="created" style={tag1} />
                             </TableCell>
                             <InvoiceOptions
+                                invoice_id={invoice_id}
                                 customerName={customer_name}
                                 timestamp={timestamp}
                                 size={size}
                                 content={content}
-                                styleObj={tableContent} />
+                                styleObj={tableContent}
+                                invoiceStates={props.invoiceStates} />
                         </TableRow>
                     ))}
-                    {data.received.map(({ customer_name, size, timestamp, content }, idx) => (
+                    {data.received.map(({ invoice_id, customer_name, size, timestamp, content }, idx) => (
                         <TableRow key={idx}>
                             <TableCell className="pl-3 fw-normal" sx={tableContent}>{customer_name}</TableCell>
                             <TableCell sx={tableContent}>{`${size} bytes`}</TableCell>
@@ -72,11 +75,13 @@ function InvoiceTableComponent({ data }) {
                                 <Chip label="received" style={tag2} />
                             </TableCell>
                             <InvoiceOptions
+                                invoice_id={invoice_id}
                                 customerName={customer_name}
                                 timestamp={timestamp}
                                 size={size}
                                 content={content}
-                                styleObj={tableContent} />
+                                styleObj={tableContent}
+                                invoiceStates={props.invoiceStates} />
                         </TableRow>
                     ))}
                 </TableBody>

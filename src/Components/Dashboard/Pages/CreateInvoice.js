@@ -14,6 +14,9 @@ export const CreateInvoice = () => {
     const [alertSuccess, setSuccessAlert] = useState(false);
     const [alertContent, setAlertContent] = useState('');
 
+    const token = localStorage.getItem('user')
+    const email = localStorage.getItem('email')
+
     const handleSubmit = (event) => {
         event.preventDefault();
         resetAlerts();
@@ -21,7 +24,7 @@ export const CreateInvoice = () => {
         const data = new FormData(event.currentTarget);
 
         let body_details = {
-            "token": auth.user,
+            token,
             "invoice_data": CreateInvoiceBodyPreFilled
         };
 
@@ -69,7 +72,7 @@ export const CreateInvoice = () => {
                     let msg = data.data.msg
                     setAlertContent(msg)
 
-                    if (msg === `Successfully created and stored invoice for ${auth.email}`) {
+                    if (msg === `Successfully created and stored invoice for ${email}`) {
                         setSuccessAlert(true)
                     } else {
                         setFailAlert(true)
@@ -96,7 +99,7 @@ export const CreateInvoice = () => {
                 Create Invoice
             </Typography>
             <Box component="form" onChange={resetAlerts} onSubmit={handleSubmit} sx={{ mt: 3 }}>
-                <CreateInvoiceItems alertSuccess={alertSuccess}/>
+                <CreateInvoiceItems alertSuccess={alertSuccess} />
 
                 <FailAlert alertFail={alertFail} alertContent={alertContent} />
                 <SuccessAlert alertSuccess={alertSuccess} alertContent={alertContent} />

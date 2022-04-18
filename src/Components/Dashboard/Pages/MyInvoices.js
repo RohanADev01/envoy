@@ -4,13 +4,13 @@ import { backend_base_url } from '../../../Constants'
 import { cardHeader, pageTitle } from '../styles'
 import { InvoiceDataTable } from '../InvoiceDataTable'
 import { useNavigate } from 'react-router-dom'
-import { Navigate } from 'react-router'
 import Loading from '../../../assets/Loading.gif'
 
 export const MyInvoices = (props) => {
-  const [invoices, setInvoiceList] = useState({"created": [], "received": []})
+  const [invoices, setInvoiceList] = useState({ "created": [], "received": [] })
   const [finishedLoading, setFinishedLoading] = useState(true)
-  const token = auth.user
+  const [deletedInvoice, setRefreshInvoices] = useState(false)
+  const token = localStorage.getItem('user')
 
   useEffect(() => {
     let isMounted = true
@@ -25,12 +25,12 @@ export const MyInvoices = (props) => {
       .then((res) => res.json())
       .then((data) => {
         if (isMounted) {
-          setInvoiceList({"created": data.created_invoices, "received": data.received_invoices})
+          setInvoiceList({ "created": data.created_invoices, "received": data.received_invoices })
           setFinishedLoading(true)
         }
       })
     return () => { isMounted = false };
-  }, [])
+  }, [deletedInvoice])
 
   const navigate = useNavigate()
   function handleLinkChange() {
@@ -40,7 +40,6 @@ export const MyInvoices = (props) => {
 
   return (
     <>
-      {props.activeLink.activeItem.route === '/dashboard/create' && <Navigate to='/dashboard/create' />}
       <Typography
         component='h1'
         fontSize='1.8rem'
@@ -50,7 +49,7 @@ export const MyInvoices = (props) => {
         My Invoices
       </Typography>
       {!finishedLoading && <img src={Loading} style={{ height: "100px", width: "133px" }} alt="loading invoices"></img>}
-      {finishedLoading && ( (invoices.created.length === 0 && invoices.received.length === 0) ? (
+      {finishedLoading && ((invoices.created.length === 0 && invoices.received.length === 0) ? (
         <React.Fragment>
           <Typography variant='h3' sx={cardHeader}>
             No invoices to display yet. Try creating one.
@@ -58,7 +57,7 @@ export const MyInvoices = (props) => {
           <Button variant="contained" onClick={handleLinkChange} sx={{ textTransform: "none", color: "#F3FFFE", backgroundColor: "#2A9D8F", '&:hover': { backgroundColor: '#2A9D8F' } }}>Create Invoice</Button>
         </React.Fragment>
       ) : (
-        <InvoiceDataTable tableData={invoices} />
+        <InvoiceDataTable tableData={invoices} invoiceStates={{ setRefreshInvoices }} />
       ))
       }
     </>

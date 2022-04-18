@@ -92,7 +92,6 @@ function Login(props) {
                 localStorage.setItem('firstname', retreived_data.firstname)
                 localStorage.setItem('lastname', retreived_data.lastname)
                 localStorage.setItem('hex_color', retreived_data.color)
-                auth.login(token, email)
                 navigate('/dashboard')
               }, 500)
             } else {
