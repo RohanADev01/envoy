@@ -17,7 +17,7 @@ import { backend_base_url } from '../../Constants'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
-import UserAvatar from './UserAvatar'
+import UserAvatar from './UserProfile/UserAvatar'
 
 const drawerWidth = 240
 

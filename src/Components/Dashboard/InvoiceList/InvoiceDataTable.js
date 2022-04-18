@@ -1,7 +1,7 @@
 import { Grid } from '@mui/material'
 import React from 'react'
-import Widget from './Widget'
-import "./InvoiceDataTable.css";
+import Widget from '../Widget'
+import './InvoiceDataTable.css'
 
 // invoice table component imports
 import {
@@ -12,8 +12,8 @@ import {
     TableCell,
     Chip
 } from "@mui/material";
-import { tableContent, tag1, tag2 } from "./styles";
-import './Table.css'
+import { tableContent, tag1, tag2 } from "../styles";
+import '../Table.css'
 import InvoiceOptions from './InvoiceOptions';
 
 export const InvoiceDataTable = (props) => {

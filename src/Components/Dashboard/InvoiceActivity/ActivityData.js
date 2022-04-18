@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { trackPromise } from 'react-promise-tracker'
-import { backend_base_url } from '../../Constants'
+import { backend_base_url } from '../../../Constants'
 
 const token = localStorage.getItem('user')
 

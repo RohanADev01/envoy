@@ -11,7 +11,7 @@ import React, { useEffect, useState } from 'react'
 import { trackPromise, usePromiseTracker } from 'react-promise-tracker'
 import { backend_base_url } from '../../../Constants'
 import { btnStyle, cardHeader, pageTitle, statsSmall } from '../styles'
-import TeamContent from '../TeamContent'
+import TeamContent from '../UserTeams/TeamContent'
 import Loading from '../../../assets/Loading.gif'
 
 const Team = () => {

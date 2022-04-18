@@ -3,11 +3,11 @@ import { Typography, Box } from '@mui/material'
 import { trackPromise } from 'react-promise-tracker'
 import axios from 'axios'
 import { backend_base_url } from '../../../Constants'
-import { CreateInvoiceItems } from '../CreateInvoiceItems'
+import { CreateInvoiceItems } from '../InvoiceCreate/CreateInvoiceItems'
 import { FailAlert, SuccessAlert } from '../../Landing/Constants'
 import { LoadingIndicatorCreateInvoice } from '../constants'
 import { pageTitle } from '../styles'
-import { CreateInvoiceInputFields, CreateInvoiceBodyPreFilled } from '../CreateInvoiceFields'
+import { CreateInvoiceInputFields, CreateInvoiceBodyPreFilled } from '../InvoiceCreate/CreateInvoiceFields'
 
 export const CreateInvoice = () => {
     const [alertFail, setFailAlert] = useState(false);

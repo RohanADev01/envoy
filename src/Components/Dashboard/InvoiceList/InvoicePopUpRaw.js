@@ -3,7 +3,7 @@ import DialogTitle from '@mui/material/DialogTitle'
 import Dialog from '@mui/material/Dialog'
 import { dialogContainer, dialogInnerContainer } from './InvoicePopUp-tempStyles'
 import { Container, Grid, IconButton, Typography } from '@mui/material'
-import { pageTitle, statsSmall } from './styles'
+import { pageTitle, statsSmall } from '../styles'
 import FileDownloadIcon from '@mui/icons-material/FileDownload';
 
 export default function InvoicePopUpRaw(props) {

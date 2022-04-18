@@ -36,7 +36,7 @@ import {
   get_total_received,
   // get_total_sent,
   get_year_stats,
-} from '../ActivityData'
+} from '../../Dashboard/InvoiceActivity/ActivityData'
 import { trackPromise, usePromiseTracker } from 'react-promise-tracker'
 import Loading from '../../../assets/Loading.gif'
 
@@ -80,7 +80,6 @@ export const Activity = (props) => {
   const mainChartData = []
   const graphDataKey = "Number of invoices handled"
   function getMainChartData(thirtydays_data) {
-    console.log(thirtydays_data)
     var resultArray = []
 
     for (let i = 0; i < thirtydays_data.length; i++) {
@@ -89,7 +88,6 @@ export const Activity = (props) => {
       })
     }
 
-    console.log(resultArray)
     return resultArray
   }
 

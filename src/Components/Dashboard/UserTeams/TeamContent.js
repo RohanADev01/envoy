@@ -1,6 +1,4 @@
-import { Typography } from '@mui/material'
 import React from 'react'
-import { statsBig, statsSmall, statsSmallHeader } from './styles'
 import TeamMemberTable from './TeamMemberTable'
 
 const TeamContent = (props) => {
