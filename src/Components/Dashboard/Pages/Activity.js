@@ -119,10 +119,9 @@ export const Activity = (props) => {
 
   useEffect(() => {
     trackPromise(
-      retrieve_user_stats_data()
-        .then((data) => {
-          console.log(data)
-        })
+      retrieve_user_stats_data().then((data) => {
+        console.log(data)
+      })
     )
   }, [])
 
@@ -140,12 +139,18 @@ export const Activity = (props) => {
         {'Welcome' +
           (localStorage.getItem('registered') ? ' to Envoy, ' : ' back, ') +
           (props.userProfileState['profileFirstName'] &&
-            props.userProfileState['profileLastName']
+          props.userProfileState['profileLastName']
             ? `${props.userProfileState['profileFirstName']} ${props.userProfileState['profileLastName']}`
             : `${props.userProfileState['profileEmail']}`)}
       </Typography>
-      {promiseInProgress && <img src={Loading} style={{ height: "100px", width: "133px" }} alt="loading invoices" />}
-      {!promiseInProgress &&
+      {promiseInProgress && (
+        <img
+          src={Loading}
+          style={{ height: '100px', width: '133px' }}
+          alt='loading invoices'
+        />
+      )}
+      {!promiseInProgress && (
         <React.Fragment>
           <Grid container spacing={5}>
             {/* Today's Earnings */}
@@ -160,7 +165,12 @@ export const Activity = (props) => {
                 <div style={visitsNumberContainer}>
                   <Grid container item alignItems='center'>
                     <Grid item xs={6}>
-                      <Typography size='xl' weight='medium' noWrap sx={statsBig}>
+                      <Typography
+                        size='xl'
+                        weight='medium'
+                        noWrap
+                        sx={statsBig}
+                      >
                         $12, 678
                       </Typography>
                     </Grid>
@@ -219,7 +229,12 @@ export const Activity = (props) => {
                 <div style={visitsNumberContainer}>
                   <Grid container item alignItems='center'>
                     <Grid item xs={6}>
-                      <Typography size='xl' weight='medium' noWrap sx={statsBig}>
+                      <Typography
+                        size='xl'
+                        weight='medium'
+                        noWrap
+                        sx={statsBig}
+                      >
                         $12, 678
                       </Typography>
                     </Grid>
@@ -278,7 +293,12 @@ export const Activity = (props) => {
                 <div style={visitsNumberContainer}>
                   <Grid container item alignItems='center'>
                     <Grid item xs={6}>
-                      <Typography size='xl' weight='medium' noWrap sx={statsBig}>
+                      <Typography
+                        size='xl'
+                        weight='medium'
+                        noWrap
+                        sx={statsBig}
+                      >
                         $12, 678
                       </Typography>
                     </Grid>
@@ -337,31 +357,15 @@ export const Activity = (props) => {
                 <div style={visitsNumberContainer}>
                   <Grid container item alignItems='center'>
                     <Grid item xs={6}>
-                      <Typography size='xl' weight='medium' noWrap sx={statsBig}>
+                      <Typography
+                        size='xl'
+                        weight='medium'
+                        noWrap
+                        sx={statsBig}
+                      >
                         12
                       </Typography>
                     </Grid>
-                    {/* <Grid item xs={6}>
-                  <LineChart
-                    width={100}
-                    height={30}
-                    data={[
-                      { value: 10 },
-                      { value: 15 },
-                      { value: 10 },
-                      { value: 17 },
-                      { value: 18 },
-                    ]}
-                  >
-                    <Line
-                      type='natural'
-                      dataKey='value'
-                      stroke={success.backgroundColor}
-                      strokeWidth={2}
-                      dot={true}
-                    />
-                  </LineChart>
-                </Grid> */}
                   </Grid>
                 </div>
               </Widget>
@@ -378,37 +382,21 @@ export const Activity = (props) => {
                 <div style={visitsNumberContainer}>
                   <Grid container item alignItems='center'>
                     <Grid item xs={6}>
-                      <Typography size='xl' weight='medium' noWrap sx={statsBig}>
+                      <Typography
+                        size='xl'
+                        weight='medium'
+                        noWrap
+                        sx={statsBig}
+                      >
                         12
                       </Typography>
                     </Grid>
-                    {/* <Grid item xs={6}>
-                  <LineChart
-                    width={100}
-                    height={30}
-                    data={[
-                      { value: 10 },
-                      { value: 15 },
-                      { value: 10 },
-                      { value: 17 },
-                      { value: 18 },
-                    ]}
-                  >
-                    <Line
-                      type='natural'
-                      dataKey='value'
-                      stroke={success.backgroundColor}
-                      strokeWidth={2}
-                      dot={true}
-                    />
-                  </LineChart>
-                </Grid> */}
                   </Grid>
                 </div>
               </Widget>
             </Grid>
             {/* Invoices Sent */}
-            <Grid item lg={4} md={6} xs={12}>
+            {/* <Grid item lg={4} md={6} xs={12}>
               <Widget
                 title='Total Invoices Sent'
                 upperTitle
@@ -423,31 +411,10 @@ export const Activity = (props) => {
                         12
                       </Typography>
                     </Grid>
-                    {/* <Grid item xs={6}>
-                  <LineChart
-                    width={100}
-                    height={30}
-                    data={[
-                      { value: 10 },
-                      { value: 15 },
-                      { value: 10 },
-                      { value: 17 },
-                      { value: 18 },
-                    ]}
-                  >
-                    <Line
-                      type='natural'
-                      dataKey='value'
-                      stroke={success.backgroundColor}
-                      strokeWidth={2}
-                      dot={true}
-                    />
-                  </LineChart>
-                </Grid> */}
                   </Grid>
                 </div>
               </Widget>
-            </Grid>
+            </Grid> */}
 
             {/* GRAPH */}
             <Grid item xs={12}>
@@ -510,7 +477,7 @@ export const Activity = (props) => {
             </Grid>
           </Grid>
         </React.Fragment>
-      }
+      )}
     </div>
   )
 }
