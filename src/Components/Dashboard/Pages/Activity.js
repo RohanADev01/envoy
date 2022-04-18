@@ -202,7 +202,7 @@ export const Activity = (props) => {
             {/* Montly Earnings */}
             <Grid item lg={4} md={6} xs={12}>
               <Widget
-                title='Number of invoices this month'
+                title='Monthly Earnings'
                 upperTitle
                 bodyClass={fullHeightBody}
                 className={card}
@@ -248,7 +248,7 @@ export const Activity = (props) => {
             {/* Annual Earning */}
             <Grid item lg={4} md={6} xs={12}>
               <Widget
-                title='Number of invoices this year'
+                title='Annual Earnings'
                 upperTitle
                 bodyClass={fullHeightBody}
                 className={card}
@@ -355,7 +355,7 @@ export const Activity = (props) => {
                 }
               >
                 <Typography variant='h5' sx={statsSmallHeader}>
-                  {`${graphDataKey}`}
+                  {`Earnings ($)`}
                 </Typography>
                 <ResponsiveContainer width='100%' minWidth={500} height={350}>
                   <ComposedChart
