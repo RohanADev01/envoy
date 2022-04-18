@@ -1,8 +1,8 @@
 import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { trackPromise, usePromiseTracker } from 'react-promise-tracker'
-import { backend_base_url } from '../../Constants'
-import loadingImage from '../../assets/Loading.gif'
+import { backend_base_url } from '../../../Constants'
+import loadingImage from '../../../assets/Loading.gif'
 
 // invoice table component imports
 import {
@@ -15,15 +15,14 @@ import {
     Avatar,
     Grid,
     Typography,
-    Button,
     Box,
     TextField,
     IconButton,
     Container,
 } from '@mui/material'
-import { tableContent, tag1, tag2, warning, statsSmallHeader, btnStyle, cardHeader } from './styles'
-import './Table.css'
-import Widget from './Widget'
+import { tableContent, tag1, tag2, warning, statsSmallHeader, cardHeader } from '../styles'
+import '../Table.css'
+import Widget from '../Widget'
 import { Add } from '@mui/icons-material'
 import { toast } from 'react-toastify'
 

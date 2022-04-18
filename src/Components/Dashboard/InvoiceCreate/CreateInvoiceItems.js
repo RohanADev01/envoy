@@ -9,9 +9,9 @@ import {
     IconButton
 } from '@mui/material'
 import { ExpandMore } from '@mui/icons-material'
-import { statsSmall } from './styles'
+import { statsSmall } from '../styles'
 import HelpIcon from '@mui/icons-material/Help';
-import { WarningAlert } from '../Landing/Constants';
+import { WarningAlert } from '../../Landing/Constants';
 
 let newDate = new Date()
 let date = newDate.getDate();

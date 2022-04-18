@@ -3,9 +3,9 @@ import axios from 'axios'
 import React from 'react'
 import { trackPromise, usePromiseTracker } from 'react-promise-tracker'
 import { toast } from 'react-toastify'
-import { backend_base_url } from '../../Constants'
+import { backend_base_url } from '../../../Constants'
 import { dialogContainer } from './InvoicePopUp-tempStyles'
-import { btnStyle, deleteBtnStyle, pageTitle } from './styles'
+import { btnStyle, deleteBtnStyle, pageTitle } from '../styles'
 
 const InvoiceDelete = (props) => {
     const { onClose, open, id, invoiceStates } = props

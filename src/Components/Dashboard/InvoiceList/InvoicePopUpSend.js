@@ -1,13 +1,13 @@
 import { Button, Container, Dialog, DialogTitle, Grid, TextField } from '@mui/material'
 import React from 'react'
 import { toast } from 'react-toastify'
-import { backend_base_url } from '../../Constants'
+import { backend_base_url } from '../../../Constants'
 import { dialogContainer, dialogInnerContainer } from './InvoicePopUp-tempStyles'
-import { btnStyle, pageTitle, statsBig, statsSmall } from './styles'
+import { btnStyle, pageTitle, statsBig, statsSmall } from '../styles'
 import axios from 'axios'
 import { trackPromise, usePromiseTracker } from 'react-promise-tracker'
 import { Box } from '@mui/system'
-import Loading from '../../assets/Loading.gif'
+import Loading from '../../../assets/Loading.gif'
 
 const InvoicePopUpSend = (props) => {
     const { onClose, open, name, content } = props

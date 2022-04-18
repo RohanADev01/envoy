@@ -4,9 +4,10 @@ import InvoicePopUpRaw from './InvoicePopUpRaw'
 import { TableCell } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete';
 import { IconButton } from '@mui/material'
-import { btnStyle, btnStyle2, grey_icons, success } from './styles'
+import { btnStyle, btnStyle2, grey_icons, success } from '../styles'
 import InvoicePopUpSend from './InvoicePopUpSend';
 import InvoiceDelete from './InvoiceDelete';
+import axios from 'axios';
 
 export default function InvoiceOptions(props) {
   // FOR RAW INVOICES
@@ -27,16 +28,28 @@ export default function InvoiceOptions(props) {
     setDeleteDialog(true)
   }
 
-  // PLACEHOLDER SINCE RENDER AND DELETE IS INCOMPLETE
-  function emptyFunction() {
-    return
-  }
-
   // Close Dialogs
   const handleClose = () => {
     setOpenRawDialog(false)
     setOpenSendDialog(false)
     setDeleteDialog(false)
+  }
+
+  // download ZIP file for invoice PDF
+  const downloadInvoicePDF = () => {
+    const id = 95
+    axios.get('https://e-invoice-rendering-brownie.herokuapp.com/invoice/rendering/download', { params: { file_id: id, file_type: "PDF" } })
+      .then((data) => {
+        console.log(data)
+      })
+    // const element = document.createElement("a");
+    // const file = new Blob([content], {
+    //   type: "application/zip"
+    // });
+    // element.href = URL.createObjectURL(file);
+    // element.download = `${id}.zip`;
+    // document.body.appendChild(element);
+    // element.click();
   }
 
   return (
@@ -56,7 +69,7 @@ export default function InvoiceOptions(props) {
 
       {/* FOR RENDERING PDF INVOICES (INCOMPLETE) */}
       <TableCell sx={props.styleObj}>
-        <Button sx={btnStyle2} variant="standard" size='small' onClick={emptyFunction}>{" View PDF "}</Button>
+        <Button sx={btnStyle2} variant="standard" size='small' onClick={downloadInvoicePDF}>{" View PDF "}</Button>
       </TableCell>
       {/* add something similar to openRawDialog for rendering and download pdf as well */}
 

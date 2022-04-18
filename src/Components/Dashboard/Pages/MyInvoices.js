@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { Button, Typography } from '@mui/material'
 import { backend_base_url } from '../../../Constants'
 import { cardHeader, pageTitle } from '../styles'
-import { InvoiceDataTable } from '../InvoiceDataTable'
 import { useNavigate } from 'react-router-dom'
 import Loading from '../../../assets/Loading.gif'
+import { InvoiceDataTable } from '../InvoiceList/InvoiceDataTable'
 
 export const MyInvoices = (props) => {
   const [invoices, setInvoiceList] = useState({ "created": [], "received": [] })

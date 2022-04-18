@@ -1,12 +1,11 @@
 import React from 'react'
 import { styled } from '@mui/material/styles'
-import { Box, Toolbar, Menu, MenuItem, Avatar } from '@mui/material'
+import { Box, Toolbar, Menu, MenuItem } from '@mui/material'
 import MuiAppBar from '@mui/material/AppBar'
 
 import { IconButton } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
-import AccountCircle from '@mui/icons-material/AccountCircle'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import Logout from '@mui/icons-material/Logout'
 
@@ -18,7 +17,7 @@ import { backend_base_url } from '../../Constants'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
-import UserAvatar from './UserAvatar'
+import UserAvatar from './UserProfile/UserAvatar'
 
 const drawerWidth = 240
 
