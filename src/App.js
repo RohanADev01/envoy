@@ -15,6 +15,7 @@ function App() {
         <Route path='login' element={<Login />} />
         <Route element={<ProtectedRoute />}>
           <Route path='dashboard' element={<DashboardContents />}>
+            <Route path='' element={<Outlet />} />
             <Route path='create' element={<Outlet />} />
             <Route path='invoices' element={<Outlet />} />
             <Route path='profile' element={<Outlet />} />
