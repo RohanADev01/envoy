@@ -4,6 +4,7 @@ export const warning = { color: 'white', backgroundColor: "#FFC260" }
 export const secondary = { color: 'white', backgroundColor: "#FF5C93" }
 export const tag1 = { color: 'white', backgroundColor: "#1AB4BC" }
 export const tag2 = { color: 'white', backgroundColor: "#9C1ABC" }
+export const grey_icons = { color: '#808080' }
 export const hint = { color: '#264653' }
 
 // general font and color
@@ -15,6 +16,21 @@ export const btnStyle = {
     color: '#F3FFFE',
     backgroundColor: '#2A9D8F',
     '&:hover': { backgroundColor: '#2A9D8F' },
+}
+
+export const btnStyle2 = {
+    textTransform: "none",
+    color: success.backgroundColor,
+    outlineColor: success.backgroundColor,
+    backgroundColor: success.backgroundColorLight,
+    '&:hover': {}
+}
+
+export const deleteBtnStyle = {
+    textTransform: 'none',
+    color: '#fff',
+    backgroundColor: '#E73040',
+    '&:hover': { backgroundColor: '#E73040' },
 }
 
 // Widget

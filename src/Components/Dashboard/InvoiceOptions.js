@@ -4,8 +4,9 @@ import InvoicePopUpRaw from './InvoicePopUpRaw'
 import { TableCell } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete';
 import { IconButton } from '@mui/material'
-import { tag2 } from './styles'
+import { btnStyle, btnStyle2, grey_icons, success } from './styles'
 import InvoicePopUpSend from './InvoicePopUpSend';
+import InvoiceDelete from './InvoiceDelete';
 
 export default function InvoiceOptions(props) {
   // FOR RAW INVOICES
@@ -20,6 +21,12 @@ export default function InvoiceOptions(props) {
     setOpenSendDialog(true)
   }
 
+  // FOR DELETING INVOICES
+  const [deleteDialog, setDeleteDialog] = useState(false)
+  function handleDelete() {
+    setDeleteDialog(true)
+  }
+
   // PLACEHOLDER SINCE RENDER AND DELETE IS INCOMPLETE
   function emptyFunction() {
     return
@@ -29,13 +36,14 @@ export default function InvoiceOptions(props) {
   const handleClose = () => {
     setOpenRawDialog(false)
     setOpenSendDialog(false)
+    setDeleteDialog(false)
   }
 
   return (
     <>
       <TableCell sx={props.styleObj}>
         {/* FOR SHOWING RAW INVOICES */}
-        <Button size='small' onClick={handleOpen}>{" View Raw XML "}</Button>
+        <Button sx={btnStyle2} variant="standard" size='small' onClick={handleOpen}>{" View Raw XML "}</Button>
       </TableCell>
       {openRawDialog ? (
         <InvoicePopUpRaw
@@ -48,13 +56,13 @@ export default function InvoiceOptions(props) {
 
       {/* FOR RENDERING PDF INVOICES (INCOMPLETE) */}
       <TableCell sx={props.styleObj}>
-        <Button size='small' onClick={emptyFunction}>{" View PDF "}</Button>
+        <Button sx={btnStyle2} variant="standard" size='small' onClick={emptyFunction}>{" View PDF "}</Button>
       </TableCell>
       {/* add something similar to openRawDialog for rendering and download pdf as well */}
 
       {/* FOR SENDING INVOICES */}
       <TableCell sx={props.styleObj}>
-        <Button size='small' onClick={handleOpenSend}>{" Send Invoice "}</Button>
+        <Button sx={btnStyle2} variant="standard" size='small' onClick={handleOpenSend}>{" Send Invoice "}</Button>
       </TableCell>
       {openSendDialog ? (
         <InvoicePopUpSend
@@ -65,12 +73,19 @@ export default function InvoiceOptions(props) {
         />
       ) : null}
 
-      {/* FOR DELETING INVOICES (INCOMPLETE) */}
+      {/* FOR DELETING INVOICES */}
       <TableCell sx={props.styleObj}>
-        <IconButton>
-          <DeleteIcon sx={{ color: tag2.backgroundColor }} />
+        <IconButton onClick={handleDelete}>
+          <DeleteIcon sx={{ color: grey_icons.color }} />
         </IconButton>
       </TableCell>
+      {deleteDialog ? (
+        <InvoiceDelete
+          onClose={handleClose}
+          open={deleteDialog}
+          id={props.invoice_id}
+          invoiceStates={props.invoiceStates} />
+      ) : null}
     </>
   )
 }
