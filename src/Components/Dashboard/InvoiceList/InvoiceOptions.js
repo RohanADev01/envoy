@@ -8,6 +8,8 @@ import { btnStyle, btnStyle2, grey_icons, success } from '../styles'
 import InvoicePopUpSend from './InvoicePopUpSend';
 import InvoiceDelete from './InvoiceDelete';
 import axios from 'axios';
+import { backend_base_url } from '../../../Constants';
+import { trackPromise, usePromiseTracker } from 'react-promise-tracker';
 
 export default function InvoiceOptions(props) {
   // FOR RAW INVOICES
@@ -35,28 +37,39 @@ export default function InvoiceOptions(props) {
     setDeleteDialog(false)
   }
 
-  // download ZIP file for invoice PDF
-  const downloadInvoicePDF = () => {
-    const id = 95
-    axios.get('https://e-invoice-rendering-brownie.herokuapp.com/invoice/rendering/download', { params: { file_id: id, file_type: "PDF" } })
+  // download HTML file for invoice Render
+  const token = localStorage.getItem('user')
+  const { promiseInProgress } = usePromiseTracker()
+
+  const downloadRenderedInvoice = () => {
+    let render_url = backend_base_url + 'invoice/render'
+    let body = {}
+    let config = {
+      headers: {
+        token,
+        "invoice_id": props.invoice_id
+      }
+    }
+
+    trackPromise(axios.post(render_url, body, config)
       .then((data) => {
-        console.log(data)
+        const element = document.createElement("a");
+        const file = new Blob([data.data.content], {
+          type: "text/HTML"
+        });
+        element.href = URL.createObjectURL(file);
+        element.download = `${props.customerName}.html`;
+        document.body.appendChild(element);
+        element.click();
       })
-    // const element = document.createElement("a");
-    // const file = new Blob([content], {
-    //   type: "application/zip"
-    // });
-    // element.href = URL.createObjectURL(file);
-    // element.download = `${id}.zip`;
-    // document.body.appendChild(element);
-    // element.click();
+    )
   }
 
   return (
     <>
+      {/* FOR SHOWING RAW INVOICES */}
       <TableCell sx={props.styleObj}>
-        {/* FOR SHOWING RAW INVOICES */}
-        <Button sx={btnStyle2} variant="standard" size='small' onClick={handleOpen}>{" View Raw XML "}</Button>
+        <Button sx={btnStyle2} variant="standard" size='small' onClick={handleOpen}>View Raw XML</Button>
       </TableCell>
       {openRawDialog ? (
         <InvoicePopUpRaw
@@ -67,15 +80,14 @@ export default function InvoiceOptions(props) {
         />
       ) : null}
 
-      {/* FOR RENDERING PDF INVOICES (INCOMPLETE) */}
+      {/* FOR RENDERING HTMl INVOICES */}
       <TableCell sx={props.styleObj}>
-        <Button sx={btnStyle2} variant="standard" size='small' onClick={downloadInvoicePDF}>{" View PDF "}</Button>
+        <Button sx={btnStyle2} variant="standard" size='small' onClick={downloadRenderedInvoice} disabled={promiseInProgress}>Download Invoice</Button>
       </TableCell>
-      {/* add something similar to openRawDialog for rendering and download pdf as well */}
 
       {/* FOR SENDING INVOICES */}
       <TableCell sx={props.styleObj}>
-        <Button sx={btnStyle2} variant="standard" size='small' onClick={handleOpenSend}>{" Send Invoice "}</Button>
+        <Button sx={btnStyle2} variant="standard" size='small' onClick={handleOpenSend}>Send Invoice</Button>
       </TableCell>
       {openSendDialog ? (
         <InvoicePopUpSend
