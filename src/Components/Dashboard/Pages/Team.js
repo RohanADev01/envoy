@@ -52,11 +52,6 @@ const Team = () => {
 
     useEffect(() => {
         reloadTeamList()
-        membersList.forEach(user => {
-            if (user.email === email && user.role === 'Owner') {
-                setTeamOwner(true)
-            }
-        })
     }, [])
 
     function handleCreateTeam() {
@@ -150,7 +145,7 @@ const Team = () => {
                     </Card>
                 )
             ) : (
-                <TeamContent teamName={teamName} membersList={membersList} reloadTeamList={reloadTeamList} teamOwner={teamOwner} />
+                <TeamContent teamName={teamName} membersList={membersList} reloadTeamList={reloadTeamList} teamFunctions={{teamOwner, setTeamOwner}} />
             ))}
         </>
     )

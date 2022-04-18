@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { trackPromise, usePromiseTracker } from 'react-promise-tracker'
 import { backend_base_url } from '../../../Constants'
 import loadingImage from '../../../assets/Loading.gif'
@@ -29,6 +29,7 @@ import { toast } from 'react-toastify'
 const TeamMemberTable = (props) => {
     const { promiseInProgress } = usePromiseTracker()
     const token = localStorage.getItem('user')
+    const email = localStorage.getItem('email')
 
     const handleInviteSubmit = (event) => {
         event.preventDefault();
@@ -57,7 +58,15 @@ const TeamMemberTable = (props) => {
         )
     }
 
-    const alertMessage = !props.teamOwner ? "Only Team Owner can add new members" : ""
+    useEffect(() => {
+        props.membersList.forEach(user => {
+            if (user.email === email && user.role === 'Owner') {
+                props.teamFunctions.setTeamOwner(true)
+            }
+        })
+    })
+
+    const alertMessage = !props.teamFunctions.teamOwner ? "Only Team Owner can add new members" : ""
 
     return (
         <>
@@ -81,8 +90,8 @@ const TeamMemberTable = (props) => {
                                     <Container sx={{ m: "32px 0", pb: 3 }}>
                                         <Typography sx={{ ...cardHeader, p: 0 }} variant='h5'>Invite Team Members</Typography>
                                         <Box component="form" onSubmit={handleInviteSubmit}>
-                                            <TextField disabled={!props.teamOwner} required helperText={alertMessage} title={alertMessage} variant='standard' label="Invitee Email" name="inviteEmail" id="inviteEmail" />
-                                            <IconButton disabled={!props.teamOwner} title={alertMessage} type="submit">
+                                            <TextField disabled={!props.teamFunctions.teamOwner} required helperText={alertMessage} title={alertMessage} variant='standard' label="Invitee Email" name="inviteEmail" id="inviteEmail" />
+                                            <IconButton disabled={!props.teamFunctions.teamOwner} title={alertMessage} type="submit">
                                                 <Add />
                                             </IconButton>
                                         </Box>
