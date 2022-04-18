@@ -39,7 +39,6 @@ const InvoiceDelete = (props) => {
         )
 
         let response = await delete_invoice
-        console.log(response)
         if (response.data === `Successfully deleted invoice ${id}`) {
             toast('Successfully deleted invoice!')
             invoiceStates.setRefreshInvoices(true)
