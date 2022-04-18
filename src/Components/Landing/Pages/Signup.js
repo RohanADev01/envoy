@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom'
 import { trackPromise } from 'react-promise-tracker'
-import { useAuthDataContext } from '../UserAuth'
 
 import LogoDark from '../../../assets/LogoDark.svg'
 
@@ -34,8 +33,6 @@ function SignUp(props) {
   const [alertFail, setFailAlert] = useState(false)
   const [alertSuccess, setSuccessAlert] = useState(false)
   const [alertContent, setAlertContent] = useState('')
-
-  const auth = useAuthDataContext()
 
   const handleSubmit = (event) => {
     event.preventDefault()

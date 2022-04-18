@@ -1,17 +1,15 @@
 import React from 'react'
 import { styled } from '@mui/material/styles'
-import { Box, Toolbar, Menu, MenuItem, Avatar } from '@mui/material'
+import { Box, Toolbar, Menu, MenuItem } from '@mui/material'
 import MuiAppBar from '@mui/material/AppBar'
 
 import { IconButton } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
-import AccountCircle from '@mui/icons-material/AccountCircle'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import Logout from '@mui/icons-material/Logout'
 
 import LogoLight from '../../assets/LogoLight.svg'
-import { useAuthDataContext } from '../Landing/UserAuth'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { trackPromise } from 'react-promise-tracker'
@@ -46,8 +44,6 @@ function Navbar(props) {
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget)
   }
-
-  const auth = useAuthDataContext()
 
   const navigate = useNavigate()
   const handleLogout = () => {

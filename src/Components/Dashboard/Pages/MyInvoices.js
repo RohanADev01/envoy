@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Typography } from '@mui/material'
 import { backend_base_url } from '../../../Constants'
-import { useAuthDataContext } from '../../Landing/UserAuth'
 import { cardHeader, pageTitle } from '../styles'
 import { InvoiceDataTable } from '../InvoiceDataTable'
 import { useNavigate } from 'react-router-dom'
@@ -11,7 +10,6 @@ import Loading from '../../../assets/Loading.gif'
 export const MyInvoices = (props) => {
   const [invoices, setInvoiceList] = useState({"created": [], "received": []})
   const [finishedLoading, setFinishedLoading] = useState(true)
-  const auth = useAuthDataContext()
   const token = auth.user
 
   useEffect(() => {

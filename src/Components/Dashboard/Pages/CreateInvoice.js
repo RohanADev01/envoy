@@ -4,7 +4,6 @@ import { trackPromise } from 'react-promise-tracker'
 import axios from 'axios'
 import { backend_base_url } from '../../../Constants'
 import { CreateInvoiceItems } from '../CreateInvoiceItems'
-import { useAuthDataContext } from '../../Landing/UserAuth'
 import { FailAlert, SuccessAlert } from '../../Landing/Constants'
 import { LoadingIndicatorCreateInvoice } from '../constants'
 import { pageTitle } from '../styles'
@@ -14,8 +13,6 @@ export const CreateInvoice = () => {
     const [alertFail, setFailAlert] = useState(false);
     const [alertSuccess, setSuccessAlert] = useState(false);
     const [alertContent, setAlertContent] = useState('');
-
-    const auth = useAuthDataContext();
 
     const handleSubmit = (event) => {
         event.preventDefault();
