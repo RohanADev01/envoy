@@ -53,12 +53,12 @@ const InvoicePopUpSend = (props) => {
             <Container sx={dialogInnerContainer}>
                 <Grid container display="flex" justifyContent="center" alignItems="center" flexDirection="column">
                     <Grid item>
-                        <DialogTitle sx={{ ...pageTitle, pb: 0, mb: 0 }}>{`Send invoice created for customer: ${name}`}</DialogTitle>
+                        <DialogTitle sx={pageTitle}>{`Send invoice created for customer: ${name}`}</DialogTitle>
                     </Grid>
                     <Grid item>
                         <DialogTitle sx={{ ...statsBig, p: 0, m: 0 }}>Enter details here</DialogTitle>
                     </Grid>
-                    <Grid item style={{width:"50%"}}>
+                    <Grid item style={{ width: "50%" }}>
                         <Box component="form" onSubmit={handleSendInvoice}>
                             <Grid container display="flex" justifyContent="center" alignItems="center" flexDirection="column" spacing={2}>
                                 <Grid item xs={12}>

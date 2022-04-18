@@ -9,6 +9,7 @@ import Loading from '../../../assets/Loading.gif'
 export const MyInvoices = (props) => {
   const [invoices, setInvoiceList] = useState({ "created": [], "received": [] })
   const [finishedLoading, setFinishedLoading] = useState(true)
+  const [deletedInvoice, setRefreshInvoices] = useState(false)
   const token = localStorage.getItem('user')
 
   useEffect(() => {
@@ -29,7 +30,7 @@ export const MyInvoices = (props) => {
         }
       })
     return () => { isMounted = false };
-  }, [])
+  }, [deletedInvoice])
 
   const navigate = useNavigate()
   function handleLinkChange() {
@@ -56,7 +57,7 @@ export const MyInvoices = (props) => {
           <Button variant="contained" onClick={handleLinkChange} sx={{ textTransform: "none", color: "#F3FFFE", backgroundColor: "#2A9D8F", '&:hover': { backgroundColor: '#2A9D8F' } }}>Create Invoice</Button>
         </React.Fragment>
       ) : (
-        <InvoiceDataTable tableData={invoices} />
+        <InvoiceDataTable tableData={invoices} invoiceStates={{ setRefreshInvoices }} />
       ))
       }
     </>

@@ -18,6 +18,21 @@ export const btnStyle = {
     '&:hover': { backgroundColor: '#2A9D8F' },
 }
 
+export const btnStyle2 = {
+    textTransform: "none",
+    color: success.backgroundColor,
+    outlineColor: success.backgroundColor,
+    backgroundColor: success.backgroundColorLight,
+    '&:hover': {}
+}
+
+export const deleteBtnStyle = {
+    textTransform: 'none',
+    color: '#fff',
+    backgroundColor: '#E73040',
+    '&:hover': { backgroundColor: '#E73040' },
+}
+
 // Widget
 export const tableContent = { color: fonts.color, fontFamily: fonts.family, fontSize: "0.95rem", fontWeight: "500", lineHeight: "1.5rem", padding: "16px 16px 16px 24px" }
 export const cardHeader = { color: "#7b7b7b", fontFamily: fonts.family, fontSize: "1.285rem", fontWeight: "400", lineHeight: "1.334", padding: "16px 16px 16px 0px" }
