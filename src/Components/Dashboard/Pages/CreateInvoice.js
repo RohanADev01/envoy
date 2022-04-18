@@ -4,7 +4,6 @@ import { trackPromise } from 'react-promise-tracker'
 import axios from 'axios'
 import { backend_base_url } from '../../../Constants'
 import { CreateInvoiceItems } from '../CreateInvoiceItems'
-import { useAuthDataContext } from '../../Landing/UserAuth'
 import { FailAlert, SuccessAlert } from '../../Landing/Constants'
 import { LoadingIndicatorCreateInvoice } from '../constants'
 import { pageTitle } from '../styles'
@@ -15,7 +14,8 @@ export const CreateInvoice = () => {
     const [alertSuccess, setSuccessAlert] = useState(false);
     const [alertContent, setAlertContent] = useState('');
 
-    const auth = useAuthDataContext();
+    const token = localStorage.getItem('user')
+    const email = localStorage.getItem('email')
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -24,7 +24,7 @@ export const CreateInvoice = () => {
         const data = new FormData(event.currentTarget);
 
         let body_details = {
-            "token": auth.user,
+            token,
             "invoice_data": CreateInvoiceBodyPreFilled
         };
 
@@ -72,7 +72,7 @@ export const CreateInvoice = () => {
                     let msg = data.data.msg
                     setAlertContent(msg)
 
-                    if (msg === `Successfully created and stored invoice for ${auth.email}`) {
+                    if (msg === `Successfully created and stored invoice for ${email}`) {
                         setSuccessAlert(true)
                     } else {
                         setFailAlert(true)
@@ -99,7 +99,7 @@ export const CreateInvoice = () => {
                 Create Invoice
             </Typography>
             <Box component="form" onChange={resetAlerts} onSubmit={handleSubmit} sx={{ mt: 3 }}>
-                <CreateInvoiceItems alertSuccess={alertSuccess}/>
+                <CreateInvoiceItems alertSuccess={alertSuccess} />
 
                 <FailAlert alertFail={alertFail} alertContent={alertContent} />
                 <SuccessAlert alertSuccess={alertSuccess} alertContent={alertContent} />

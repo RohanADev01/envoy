@@ -9,6 +9,14 @@ export const hint = { color: '#264653' }
 // general font and color
 const fonts = { color: "#264653", family: "Roboto, Helvetica, Arial" }
 
+// general button
+export const btnStyle = {
+    textTransform: 'none',
+    color: '#F3FFFE',
+    backgroundColor: '#2A9D8F',
+    '&:hover': { backgroundColor: '#2A9D8F' },
+}
+
 // Widget
 export const tableContent = { color: fonts.color, fontFamily: fonts.family, fontSize: "0.95rem", fontWeight: "500", lineHeight: "1.5rem", padding: "16px 16px 16px 24px" }
 export const cardHeader = { color: "#7b7b7b", fontFamily: fonts.family, fontSize: "1.285rem", fontWeight: "400", lineHeight: "1.334", padding: "16px 16px 16px 0px" }

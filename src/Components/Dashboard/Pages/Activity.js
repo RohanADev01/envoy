@@ -1,6 +1,5 @@
 import React from 'react'
 import { Grid, Typography } from '@mui/material'
-import { useAuthDataContext } from '../../Landing/UserAuth'
 import {
   card,
   cardHeader,
@@ -30,8 +29,6 @@ import CallReceivedIcon from '@mui/icons-material/CallReceived'
 import CallMadeIcon from '@mui/icons-material/CallMade'
 
 export const Activity = (props) => {
-  const auth = useAuthDataContext()
-
   // #######################################################################
   // ###### CHANGE TO ACTUAL DATA POINTS FROM API CALL ONCE FINISHED #######
   // #######################################################################
@@ -85,7 +82,7 @@ export const Activity = (props) => {
         {'Welcome' +
           (localStorage.getItem('registered') ? ' to Envoy, ' : ' back, ') +
           (props.userProfileState['profileFirstName'] &&
-          props.userProfileState['profileLastName']
+            props.userProfileState['profileLastName']
             ? `${props.userProfileState['profileFirstName']} ${props.userProfileState['profileLastName']}`
             : `${props.userProfileState['profileEmail']}`)}
       </Typography>
