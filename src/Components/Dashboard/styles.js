@@ -1,6 +1,7 @@
 // export const success = { color: 'white', backgroundColor: "#3CD4A0" }
 export const success = { color: 'white', backgroundColor: "#2A9D8F", backgroundColorLight: '#F8FFFE' }
 export const warning = { color: 'white', backgroundColor: "#FFC260" }
+export const error = { color: 'white', backgroundColor: "#E73040" }
 export const secondary = { color: 'white', backgroundColor: "#FF5C93" }
 export const tag1 = { color: 'white', backgroundColor: "#1AB4BC" }
 export const tag2 = { color: 'white', backgroundColor: "#9C1ABC" }
